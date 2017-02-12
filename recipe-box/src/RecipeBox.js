@@ -16,27 +16,16 @@ class RecipeBox extends Component {
     };
   }
   render() {
-    const blueStyle = {
-      color: blue500,
-      borderColor: blue500
-    };
     const dialogActions = [
-      <FlatButton
-        label="Cancel"
-        style={blueStyle}
-      />,
-      <FlatButton
-        label="Add"
-        style={blueStyle}
-        keyboardFocused={true}
-      />,
+      <FlatButton label="Cancel" />,
+      <FlatButton label="Add" keyboardFocused={true} />,
     ];
     return (
       <div className="recipebox" style={{backgroundColor: green900}}>
         <Paper className="box">
 
         </Paper>
-        <FloatingActionButton className="fab" backgroundColor={blue500}
+        <FloatingActionButton className="fab" secondary={true} backgroundColor={blue500}
           onClick={() => this.setState({ dialogOpen: true })}>
           <ContentAdd />
         </FloatingActionButton>
@@ -49,15 +38,11 @@ class RecipeBox extends Component {
             floatingLabelText="Recipe name"
             hintText="Spaghetti"
             fullWidth={true}
-            underlineFocusStyle={blueStyle}
-            floatingLabelFocusStyle={blueStyle}
           />
           <TextField
             floatingLabelText="Ingredients"
             hintText="Noodles,Tomato Sauce,(Optional) Meatballs"
             fullWidth={true}
-            underlineFocusStyle={blueStyle}
-            floatingLabelFocusStyle={blueStyle}
           />
         </Dialog>
       </div>
