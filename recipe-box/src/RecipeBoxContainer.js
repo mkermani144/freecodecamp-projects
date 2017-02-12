@@ -4,9 +4,13 @@ import RecipeBox from './RecipeBox';
 class RecipeBoxContainer extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      recipes: {}
-    };
+    this.state = JSON.parse(localStorage.getItem('state')) || {recipes: {}};
+  }
+  componentDidMount() {
+    localStorage.state = JSON.stringify(this.state);
+  }
+  componentDidUpdate() {
+    localStorage.state = JSON.stringify(this.state);
   }
   render() {
     return <RecipeBox newRecipeHandler={this.newRecipeHandler} recipes={this.state.recipes}/>;
