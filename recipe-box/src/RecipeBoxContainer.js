@@ -9,11 +9,10 @@ class RecipeBoxContainer extends Component {
     };
   }
   render() {
-    return <RecipeBox newRecipeHandler={this.newRecipeHandler} />;
+    return <RecipeBox newRecipeHandler={this.newRecipeHandler} recipes={this.state.recipes}/>;
   }
   newRecipeHandler = (name, ingredients) => {
     this.setState((prev) => {prev.recipes[name] = ingredients.split(',')});
-    console.log(this.state);
   }
 }
 
