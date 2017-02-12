@@ -12,13 +12,22 @@ class RecipeBox extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      dialogOpen: false
+      dialogOpen: false,
+      dialogRecipeName: '',
+      dialogRecipeIngredients: ''
     };
   }
   render() {
     const dialogActions = [
       <FlatButton label="Cancel" />,
-      <FlatButton label="Add" keyboardFocused={true} />,
+      <FlatButton label="Add" keyboardFocused={true}
+        onClick={() => {
+          this.props.newRecipeHandler(this.state.dialogRecipeName, this.state.dialogRecipeIngredients);
+          this.setState({
+            dialogOpen: false
+          });
+        }
+        }/>,
     ];
     return (
       <div className="recipebox" style={{backgroundColor: green900}}>
@@ -38,15 +47,29 @@ class RecipeBox extends Component {
             floatingLabelText="Recipe name"
             hintText="Spaghetti"
             fullWidth={true}
+            value={this.state.dialogRecipeName}
+            onChange={this.handleRecipeNameChange}
           />
           <TextField
             floatingLabelText="Ingredients"
             hintText="Noodles,Tomato Sauce,(Optional) Meatballs"
             fullWidth={true}
+            value={this.state.dialogRecipeIngredients}
+            onChange={this.handleRecipeIngredientsChange}
           />
         </Dialog>
       </div>
     );
+  }
+  handleRecipeNameChange = (e) => {
+    this.setState({
+      dialogRecipeName: e.target.value
+    });
+  }
+  handleRecipeIngredientsChange = (e) => {
+    this.setState({
+      dialogRecipeIngredients: e.target.value
+    });
   }
 }
 
