@@ -13,10 +13,12 @@ class RecipeBoxContainer extends Component {
     localStorage.state = JSON.stringify(this.state);
   }
   render() {
-    return <RecipeBox newRecipeHandler={this.newRecipeHandler} recipes={this.state.recipes}/>;
+    return <RecipeBox recipeChangeHandler={this.recipeChangeHandler} recipes={this.state.recipes}/>;
   }
-  newRecipeHandler = (name, ingredients) => {
-    this.setState((prev) => {prev.recipes[name] = ingredients.split(',')});
+  recipeChangeHandler = (mode, name, ingredients) => {
+    if (mode === 'n' || mode === 'e') {
+      this.setState((prev) => {prev.recipes[name] = ingredients.split(',')});
+    }
   }
 }
 

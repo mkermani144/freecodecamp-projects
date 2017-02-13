@@ -21,6 +21,8 @@ class RecipeBox extends Component {
       dialogOpen: false,
       dialogRecipeName: '',
       dialogRecipeIngredients: '',
+      changeMode: null,
+      currentRecipe: null,
       actionsVisible: false,
       toolbarStyle: {
         backgroundColor: green500
@@ -32,7 +34,7 @@ class RecipeBox extends Component {
       <FlatButton label="Cancel" onClick={() => this.setState({dialogOpen: false})}/>,
       <FlatButton label="Add" keyboardFocused={true}
         onClick={() => {
-          this.props.newRecipeHandler(this.state.dialogRecipeName, this.state.dialogRecipeIngredients);
+          this.props.recipeChangeHandler(this.state.changeMode, this.state.dialogRecipeName, this.state.dialogRecipeIngredients);
           this.setState({
               dialogOpen: false,
               dialogRecipeName: '',
@@ -54,12 +56,13 @@ class RecipeBox extends Component {
            nestedItems={ingredients}
            key={k++}
            onClick={
-             () => {
+             (e) => {
                this.setState({
                  actionsVisible: true,
                  toolbarStyle: {
                    backgroundColor: green50
-                 }
+                 },
+                 currentRecipe: e.target.innerHTML
                });
              }
            } />
@@ -86,7 +89,18 @@ class RecipeBox extends Component {
             <ActionDelete />
           </IconButton>
           <IconButton iconStyle={actionStyle}>
-            <ImageEdit />
+            <ImageEdit onClick={() => {
+              this.setState({
+                dialogOpen: true,
+                changeMode: 'e',
+                dialogRecipeName: this.state.currentRecipe,
+                dialogRecipeIngredients: this.props.recipes[this.state.currentRecipe],
+                toolbarStyle: {
+                  backgroundColor: green500
+                },
+                actionsVisible: false
+              });
+            }} />
           </IconButton>
         </ToolbarGroup>
       );
@@ -116,7 +130,7 @@ class RecipeBox extends Component {
           </List>
         </Paper>
         <FloatingActionButton className="fab" secondary={true} backgroundColor={blue500}
-          onClick={() => this.setState({ dialogOpen: true })}>
+          onClick={() => this.setState({ dialogOpen: true, changeMode: 'n' })}>
           <ContentAdd />
         </FloatingActionButton>
         <Dialog open={this.state.dialogOpen}
