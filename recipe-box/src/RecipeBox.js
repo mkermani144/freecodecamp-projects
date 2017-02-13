@@ -48,7 +48,7 @@ class RecipeBox extends Component {
     for (let i in this.props.recipes) {
       if (i) {
         const ingredients = [];
-        this.props.recipes[i].forEach((el, index) => {
+        this.props.recipes[i].split(',').forEach((el, index) => {
           ingredients.push(<ListItem primaryText={el} disabled={true} key={index} />);
         });
         recipes.push(
@@ -96,7 +96,6 @@ class RecipeBox extends Component {
                 },
                 actionsVisible: false
               }, () => {
-                console.log(this.state.changeMode);
                 this.props.recipeChangeHandler(this.state.changeMode, this.state.dialogRecipeName, null);
               });
             }} />

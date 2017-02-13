@@ -17,7 +17,7 @@ class RecipeBoxContainer extends Component {
   }
   recipeChangeHandler = (mode, name, ingredients) => {
     if (mode === 'n' || mode === 'e') {
-      this.setState((prev) => {prev.recipes[name] = ingredients.split(',');});
+      this.setState((prev) => {prev.recipes[name] = ingredients;});
     } else if (mode === 'd') {
       this.setState((prev) => {delete prev.recipes[name];});
     }
