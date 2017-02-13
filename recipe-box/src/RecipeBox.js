@@ -86,7 +86,17 @@ class RecipeBox extends Component {
       actions = (
         <ToolbarGroup lastChild={true}>
           <IconButton iconStyle={actionStyle}>
-            <ActionDelete />
+            <ActionDelete onClick={() => {
+              this.setState({
+                changeMode: 'd',
+                dialogRecipeName: this.state.currentRecipe,
+                toolbarStyle: {
+                  backgroundColor: green500
+                },
+                actionsVisible: false
+              });
+              this.props.recipeChangeHandler(this.state.changeMode, this.state.dialogRecipeName, null);
+            }} />
           </IconButton>
           <IconButton iconStyle={actionStyle}>
             <ImageEdit onClick={() => {
