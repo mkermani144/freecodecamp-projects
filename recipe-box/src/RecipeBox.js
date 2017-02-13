@@ -11,7 +11,7 @@ import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import TextField from 'material-ui/TextField';
 import {List, ListItem} from 'material-ui/List';
-import { green500, green900, blue500, grey600 } from 'material-ui/styles/colors';
+import { green50, green500, green900, blue500, grey600 } from 'material-ui/styles/colors';
 import './RecipeBox.css';
 
 class RecipeBox extends Component {
@@ -58,7 +58,7 @@ class RecipeBox extends Component {
                this.setState({
                  actionsVisible: true,
                  toolbarStyle: {
-                   backgroundColor: 'white'
+                   backgroundColor: green50
                  }
                });
              }
@@ -75,7 +75,7 @@ class RecipeBox extends Component {
     if (this.state.actionsVisible === false) {
       title = (
         <ToolbarGroup>
-          <ToolbarTitle text="Recipes" style={{color: 'white'}} />
+          <ToolbarTitle text="Recipes" style={{color: green50}} />
         </ToolbarGroup>
       );
     }
