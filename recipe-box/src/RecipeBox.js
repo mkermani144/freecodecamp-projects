@@ -32,7 +32,7 @@ class RecipeBox extends Component {
   render() {
     const dialogActions = [
       <FlatButton label="Cancel" onClick={() => this.setState({dialogOpen: false})}/>,
-      <FlatButton label="Add" keyboardFocused={true}
+      <FlatButton label={this.state.changeMode === 'e'? 'Update' : 'Add'} keyboardFocused={true}
         onClick={() => {
           this.props.recipeChangeHandler(this.state.changeMode, this.state.dialogRecipeName, this.state.dialogRecipeIngredients);
           this.setState({
@@ -56,13 +56,13 @@ class RecipeBox extends Component {
            nestedItems={ingredients}
            key={k++}
            onClick={
-             (e) => {
+             () => {
                this.setState({
                  actionsVisible: true,
                  toolbarStyle: {
                    backgroundColor: green50
                  },
-                 currentRecipe: e.target.innerHTML
+                 currentRecipe: i
                });
              }
            } />
@@ -90,25 +90,31 @@ class RecipeBox extends Component {
               this.setState({
                 changeMode: 'd',
                 dialogRecipeName: this.state.currentRecipe,
-                toolbarStyle: {
-                  backgroundColor: green500
-                },
-                actionsVisible: false
-              });
-              this.props.recipeChangeHandler(this.state.changeMode, this.state.dialogRecipeName, null);
-            }} />
-          </IconButton>
-          <IconButton iconStyle={actionStyle}>
-            <ImageEdit onClick={() => {
-              this.setState({
-                dialogOpen: true,
-                changeMode: 'e',
-                dialogRecipeName: this.state.currentRecipe,
                 dialogRecipeIngredients: this.props.recipes[this.state.currentRecipe],
                 toolbarStyle: {
                   backgroundColor: green500
                 },
                 actionsVisible: false
+              }, () => {
+                console.log(this.state.changeMode);
+                this.props.recipeChangeHandler(this.state.changeMode, this.state.dialogRecipeName, null);
+              });
+            }} />
+          </IconButton>
+          <IconButton iconStyle={actionStyle}>
+            <ImageEdit onClick={() => {
+              this.setState({
+                changeMode: 'e'
+              }, () => {
+                this.setState({
+                  dialogOpen: true,
+                  dialogRecipeName: this.state.currentRecipe,
+                  dialogRecipeIngredients: this.props.recipes[this.state.currentRecipe],
+                  toolbarStyle: {
+                    backgroundColor: green500
+                  },
+                  actionsVisible: false
+                })
               });
             }} />
           </IconButton>
@@ -140,7 +146,7 @@ class RecipeBox extends Component {
           </List>
         </Paper>
         <FloatingActionButton className="fab" secondary={true} backgroundColor={blue500}
-          onClick={() => this.setState({ dialogOpen: true, changeMode: 'n' })}>
+          onClick={() => this.setState({ changeMode: 'n', dialogRecipeName: '', dialogRecipeIngredients: '' }, () => this.setState({ dialogOpen: true }))}>
           <ContentAdd />
         </FloatingActionButton>
         <Dialog open={this.state.dialogOpen}
