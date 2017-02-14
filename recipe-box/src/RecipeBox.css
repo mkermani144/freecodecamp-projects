@@ -1,0 +1,21 @@
+.recipebox {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.Toolbar {
+  transition-duration: .23s;
+}
+.box {
+  width: 60vw;
+  height: 80vh;
+  background-color: #DCEDC8 !important;
+}
+.fab {
+  position: absolute;
+  right: 30px;
+  bottom: 30px;
+}
