@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
+import './Cell.css';
 
 class Cell extends Component {
-  constructor() {
-
+  render() {
+    return <div className="cell" onClick={this.props.onClick}/>;
   }
 }
 
