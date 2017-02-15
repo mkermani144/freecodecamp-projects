@@ -16,6 +16,6 @@ describe('<BoardContainer />', () => {
   });
   it('sends state to it\'s child', () => {
     const wrapper = shallow(<BoardContainer states={states}/>);
-    expect(wrapper.childAt(1).prop('states')).toBeTruthy();
+    expect(wrapper.childAt(0).prop('states')).toBeTruthy();
   });
 });
