@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 
 class BoardContainer extends Component {
   constructor() {
-
+    super();
   }
   randomArray = () => {
-    array = [];
+    const array = [];
     for (let i = 0; i < 10; i++) {
       array[i] = [];
       for (let j = 0; j < 10; j++) {
