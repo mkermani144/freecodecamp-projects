@@ -9,10 +9,10 @@ class BoardContainer extends Component {
     };
   }
   render() {
-    return <div><Board states={this.state.states} onClick={this.handleClick} /></div>;
+    return <Board states={this.state.states} onClick={this.handleClick} />;
   }
   handleClick = (e) => {
-    
+
   }
   randomArray = () => {
     const array = [];

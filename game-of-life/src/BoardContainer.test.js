@@ -10,12 +10,12 @@ describe('<BoardContainer />', () => {
   it('renders without crashing', () => {
     shallow(<BoardContainer />);
   });
-  it('has only one child', () => {
+  it('has no children', () => {
     const wrapper = shallow(<BoardContainer states={states}/>);
-    expect(wrapper.children()).toHaveLength(1);
+    expect(wrapper.children()).toHaveLength(0);
   });
-  it('sends state to it\'s child', () => {
+  it('has states property', () => {
     const wrapper = shallow(<BoardContainer states={states}/>);
-    expect(wrapper.childAt(0).prop('states')).toBeTruthy();
+    expect(wrapper.prop('states')).toBeTruthy();
   });
 });
