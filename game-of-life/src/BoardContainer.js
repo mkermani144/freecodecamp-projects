@@ -11,16 +11,15 @@ class BoardContainer extends Component {
   render() {
     return <Board states={this.state.states} onClick={this.handleClick} />;
   }
-  handleClick = (e) => {
-
+  handleClick = (key) => {
+    this.setState((prev) => {
+      prev.states[key] = +!prev.states[key];
+    });
   }
   randomArray = () => {
     const array = [];
-    for (let i = 0; i < 10; i++) {
-      array[i] = [];
-      for (let j = 0; j < 10; j++) {
-        array[i][j] = Math.floor(Math.random() + .5);
-      }
+    for (let i = 0; i < 1600; i++) {
+      array[i] = Math.floor(Math.random() + .4);
     }
     return array;
   }
