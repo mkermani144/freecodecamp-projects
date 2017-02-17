@@ -7,39 +7,15 @@ describe('<App />', () => {
     shallow(<App />);
   });
   it('has a board within', () => {
-    const action = {
-      command: 'start',
-      speed: 1,
-      auto: true
-    };
-    const wrapper = mount(<App action={action} reportGenerationMumber={undefined} />);
+    const wrapper = mount(<App mustPlay={1} reportGenerationMumber={undefined} />);
     expect(wrapper.find('.board')).toHaveLength(1);
   });
-  it('has a toggle', () => {
-    const action = {
-      command: 'start',
-      speed: 1,
-      auto: true
-    };
-    const wrapper = mount(<App action={action} reportGenerationMumber={undefined} />);
-    expect(wrapper.find('.toggle')).toHaveLength(1);
-  });
   it('has three buttons', () => {
-    const action = {
-      command: 'start',
-      speed: 1,
-      auto: true
-    };
-    const wrapper = mount(<App action={action} reportGenerationMumber={undefined} />);
-    expect(wrapper.find('Button')).toHaveLength(3);
+    const wrapper = mount(<App mustPlay={1} reportGenerationMumber={undefined} />);
+    expect(wrapper.find('button')).toHaveLength(3);
   });
   it('has generation textfield', () => {
-    const action = {
-      command: 'start',
-      speed: 1,
-      auto: true
-    };
-    const wrapper = mount(<App action={action} reportGenerationMumber={undefined} />);
+    const wrapper = mount(<App mustPlay={1} reportGenerationMumber={undefined} />);
     expect(wrapper.find('.generationNumber')).toHaveLength(1);
   });
 });

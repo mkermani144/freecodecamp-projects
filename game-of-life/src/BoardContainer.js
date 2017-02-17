@@ -13,8 +13,14 @@ class BoardContainer extends Component {
   }
   render() {
     clearTimeout(this.timeout);
-    if (this.props.action.auto) {
-      const timeout = setTimeout(this.update, 1000);
+    if (this.props.mustPlay === 3) {
+      const timeout = setTimeout(this.clear, 10);
+      this.timeout = timeout;
+    } else if (this.props.mustPlay === 2) {
+      const timeout = setTimeout(this.update, 10);
+      this.timeout = timeout;
+    } else if (this.props.mustPlay) {
+      const timeout = setTimeout(this.update, 100);
       this.timeout = timeout;
     }
     return <Board states={this.state.states} onClick={this.handleClick} />;
@@ -30,6 +36,15 @@ class BoardContainer extends Component {
       array[i] = Math.floor(Math.random() + .4);
     }
     return array;
+  }
+  clear = () => {
+    const nextGeneration = [];
+    for (let i = 0; i < 1600; i++) {
+      nextGeneration[i] = 0;
+    }
+    this.setState({
+      states: nextGeneration
+    });
   }
   update = () => {
     const nextGeneration = [];
@@ -61,6 +76,10 @@ class BoardContainer extends Component {
     }
     this.setState({
       states: nextGeneration
+    }, () => {
+      if (this.props.mustPlay === 2) {
+        this.props.reportPlay();
+      }
     });
   }
 }
