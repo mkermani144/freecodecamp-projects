@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 import App from './App';
 
 describe('<App />', () => {
@@ -12,8 +12,8 @@ describe('<App />', () => {
       speed: 1,
       auto: true
     };
-    const wrapper = shallow(<App action={'start'} reportGenerationMumber={undefined} />);
-    expect(wrapper.containsMatchingElement(<div class=".board" />)).toBeTrue();
+    const wrapper = mount(<App action={action} reportGenerationMumber={undefined} />);
+    expect(wrapper.find('.board')).toHaveLength(1);
   });
   it('has a toggle', () => {
     const action = {
@@ -21,8 +21,8 @@ describe('<App />', () => {
       speed: 1,
       auto: true
     };
-    const wrapper = shallow(<App action={'start'} reportGenerationMumber={undefined} />);
-    expect(wrapper.containsMatchingElement('.toggle')).toBeTrue();
+    const wrapper = mount(<App action={action} reportGenerationMumber={undefined} />);
+    expect(wrapper.find('.toggle')).toHaveLength(1);
   });
   it('has three buttons', () => {
     const action = {
@@ -30,8 +30,8 @@ describe('<App />', () => {
       speed: 1,
       auto: true
     };
-    const wrapper = shallow(<App action={'start'} reportGenerationMumber={undefined} />);
-    expect(wrapper.find(<Button />)).toHaveLength(3);
+    const wrapper = mount(<App action={action} reportGenerationMumber={undefined} />);
+    expect(wrapper.find('Button')).toHaveLength(3);
   });
   it('has generation textfield', () => {
     const action = {
@@ -39,7 +39,7 @@ describe('<App />', () => {
       speed: 1,
       auto: true
     };
-    const wrapper = shallow(<App action={'start'} reportGenerationMumber={undefined} />);
-    expect(wrapper.containsMatchingElement(<div className="generationNumber" />)).toBeTrue();
+    const wrapper = mount(<App action={action} reportGenerationMumber={undefined} />);
+    expect(wrapper.find('.generationNumber')).toHaveLength(1);
   });
 });
