@@ -13,7 +13,8 @@ class App extends Component {
     super();
     this.state = {
       mustPlay: 1,
-      pauseOrPlay: 'pause'
+      pauseOrPlay: 'pause',
+      generation: 0
     };
   }
   render() {
@@ -44,7 +45,18 @@ class App extends Component {
     return (
       <MuiThemeProvider>
         <div className="App">
-          <BoardContainer mustPlay={this.state.mustPlay} reportPlay={() => {this.setState({mustPlay: 0})}}/>
+          <div className="generationNumber">Generation: {this.state.generation}</div>
+          <BoardContainer
+            mustPlay={this.state.mustPlay}
+            reportPlay={(clear) => {
+              this.setState((prev) => {
+                return {
+                  mustPlay: !clear,
+                  generation: prev.generation + 1
+                }
+              });
+            }}
+          />
           <IconButton disabled={this.state.pauseOrPlay === 'pause'} tooltip='next'>
             <ImageNavigateNext onClick={() => this.setState({mustPlay: 2})} />
           </IconButton>

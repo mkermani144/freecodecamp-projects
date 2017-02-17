@@ -77,9 +77,7 @@ class BoardContainer extends Component {
     this.setState({
       states: nextGeneration
     }, () => {
-      if (this.props.mustPlay === 2) {
-        this.props.reportPlay();
-      }
+      this.props.reportPlay(this.props.mustPlay - 1);
     });
   }
 }
