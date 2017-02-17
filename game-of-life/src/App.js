@@ -21,7 +21,7 @@ class App extends Component {
     let pauseOrPlay;
     if (this.state.pauseOrPlay === 'pause') {
       pauseOrPlay = (
-        <IconButton tooltip='pause'>
+        <IconButton>
           <AvPause onClick={() => {
             this.setState({
               mustPlay: 0,
@@ -32,7 +32,7 @@ class App extends Component {
       );
     } else {
       pauseOrPlay = (
-        <IconButton tooltip='play'>
+        <IconButton>
           <AvPlayArrow onClick={() => {
             this.setState({
               mustPlay: 1,
@@ -45,6 +45,7 @@ class App extends Component {
     return (
       <MuiThemeProvider>
         <div className="App">
+          <p>Game of <strong>Life</strong></p>
           <div className="generationNumber">Generation: {this.state.generation}</div>
           <BoardContainer
             mustPlay={this.state.mustPlay}
@@ -57,10 +58,12 @@ class App extends Component {
               });
             }}
           />
-          <IconButton disabled={this.state.pauseOrPlay === 'pause'} tooltip='next'>
-            <ImageNavigateNext onClick={() => this.setState({mustPlay: 2})} />
-          </IconButton>
-          {pauseOrPlay}
+          <div className="controls">
+            <IconButton disabled={this.state.pauseOrPlay === 'pause'}>
+              <ImageNavigateNext onClick={() => this.setState({mustPlay: 2})} />
+            </IconButton>
+            {pauseOrPlay}
+          </div>
           <RaisedButton label="Clear" secondary={true} onClick={() => {this.setState({mustPlay: 3})}}/>
         </div>
       </MuiThemeProvider>
