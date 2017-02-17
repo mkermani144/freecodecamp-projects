@@ -2,14 +2,21 @@ import React, { Component } from 'react';
 import Board from './Board';
 
 class BoardContainer extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       states: this.randomArray()
     };
-    setInterval(this.update, 1000);
+  }
+  componentWillUnmount() {
+    clearTimeout(this.timeout);
   }
   render() {
+    clearTimeout(this.timeout);
+    if (this.props.action.auto) {
+      const timeout = setTimeout(this.update, 1000);
+      this.timeout = timeout;
+    }
     return <Board states={this.state.states} onClick={this.handleClick} />;
   }
   handleClick = (key) => {
