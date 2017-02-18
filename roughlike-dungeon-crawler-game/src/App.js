@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
-import './App.css';
+import BattlefieldContainer from './BattlefieldContainer';
+import HudContainer from './HudContainer';
+import Title from './Title';
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-
+      <div>
+        <Title />
+        <HudContainer />
+        <BattlefieldContainer />
       </div>
     );
   }

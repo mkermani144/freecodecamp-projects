@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 
-class Cell extends Component {
+class Title extends Component {
   render() {
     return null;
   }
 }
 
-export default Cell;
+export default Title;
