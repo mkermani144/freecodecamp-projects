@@ -1,0 +1,183 @@
+import _ from 'lodash';
+import graphlib, { Graph } from 'graphlib';
+// import graphlib from 'graphlib';
+
+function initMap() {
+  let map = _.chunk(_.fill(Array(20604), 0), 102);
+  _.fill(map[0], -1);
+  _.fill(map[201], -1);
+  map = _.unzip(map);
+  _.fill(map[0], -1);
+  _.fill(map[101], -1);
+  map = _.unzip(map);
+  return map;
+}
+
+function initRooms(map, roomNum) {
+  const rooms = [];
+  let i = roomNum;
+  while (i) {
+    const x = _.random(40, 160);
+    const y = _.random(20, 80);
+    const goodPosition = _.every([map[x - 1][y - 1], map[x - 1][y], map[x - 1][y + 1],
+                                  map[x][y - 1], map[x][y], map[x][y + 1],
+                                  map[x + 1][y - 1], map[x + 1][y], map[x + 1][y + 1]],
+                                  arg => arg === 0);
+    if (goodPosition) {
+      _.fill(map[x - 1], 1, y - 1, y + 2);
+      _.fill(map[x], 1, y - 1, y + 2);
+      _.fill(map[x + 1], 1, y - 1, y + 2);
+      map[x - 1][0] = map[x - 1][101] = -1;
+      map[x][0] = map[x][101] = -1;
+      map[x + 1][0] = map[x + 1][101] = -1;
+
+      i -= 1;
+
+      rooms.push({
+        start: {
+          x: x - 1,
+          y: y - 1,
+        },
+        end: {
+          x: x + 1,
+          y: y + 1,
+        },
+        horizontal: true,
+        vertical: true,
+        bidirectional: true,
+      });
+    }
+  }
+  return rooms;
+}
+
+function findCellRoom(rooms, x, y) {
+  let room = null;
+  rooms.forEach((el, index) => {
+    if (x >= el.start.x && x <= el.end.x && y >= el.start.y && y <= el.end.y) {
+      room = index;
+    }
+  });
+  return room;
+}
+
+function findNeighbours(map, rooms, id) {
+  const startX = rooms[id].start.x;
+  const endX = rooms[id].end.x;
+  const startY = rooms[id].start.y;
+  const endY = rooms[id].end.y;
+  const neighbours = [];
+  for (let i = startX; i <= endX; i += 1) {
+    if (map[i][startY - 2]) {
+      neighbours.push(findCellRoom(rooms, i, startY - 2));
+    }
+    if (map[i][endY + 2]) {
+      neighbours.push(findCellRoom(rooms, i, endY + 2));
+    }
+  }
+  for (let i = startY; i <= endY; i += 1) {
+    if (map[startX - 2][i]) {
+      neighbours.push(findCellRoom(rooms, startX - 2, i));
+    }
+    if (map[endX + 2][i]) {
+      neighbours.push(findCellRoom(rooms, endX + 2, i));
+    }
+  }
+  return _.uniq(neighbours);
+}
+
+function thereIsAPath(map, rooms) {
+  const graph = new Graph({ directed: false });
+  rooms.forEach((el, index) => {
+    graph.setNode(index);
+  });
+  rooms.forEach((el, index) => {
+    findNeighbours(map, rooms, index).forEach((el2) => {
+      graph.setEdge(index, el2);
+    });
+  });
+  return graphlib.alg.components(graph).length === 1;
+}
+
+export default function createMap() {
+  let map = initMap();
+  const rooms = initRooms(map, 15);
+  const cheatEslint = true;
+  while (cheatEslint) {
+    const randomRoomNum = _.random(14);
+    const randomRoomStart = rooms[randomRoomNum].start;
+    const randomRoomEnd = rooms[randomRoomNum].end;
+    if (randomRoomEnd.x - randomRoomStart.x > 40 || randomRoomEnd.y - randomRoomStart.y > 40) {
+      continue;
+    }
+    const growthMode = _.sample(['right', 'left', 'top', 'down']);
+    switch (growthMode) {
+    case 'right': {
+      const neighbourColN = [];
+      const pushNeighbours = (el) => {
+        neighbourColN.push(map[randomRoomEnd.x + 2][randomRoomStart.y + el]);
+      };
+      _.range((randomRoomEnd.y - randomRoomStart.y) + 1).forEach(pushNeighbours);
+      if (_.every(neighbourColN, el => el === 0)) {
+        _.fill(map[randomRoomEnd.x + 1], 1, randomRoomStart.y, randomRoomEnd.y + 1);
+        rooms[randomRoomNum].end.x += 1;
+      } else if (_.some(neighbourColN, el => el === 1)) {
+        rooms[randomRoomNum][growthMode] = false;
+      }
+      break;
+    }
+    case 'left': {
+      const neighbourColP = [];
+      const pushNeighbours = (el) => {
+        neighbourColP.push(map[randomRoomStart.x - 2][randomRoomStart.y + el]);
+      };
+      _.range((randomRoomEnd.y - randomRoomStart.y) + 1).forEach(pushNeighbours);
+      if (_.every(neighbourColP, el => el === 0)) {
+        _.fill(map[randomRoomStart.x - 1], 1, randomRoomStart.y, randomRoomEnd.y + 1);
+        rooms[randomRoomNum].start.x -= 1;
+      } else if (_.some(neighbourColP, el => el === 1)) {
+        rooms[randomRoomNum][growthMode] = false;
+      }
+      break;
+    }
+    case 'down': {
+      const neighbourColU = [];
+      const pushNeighbours = (el) => {
+        neighbourColU.push(map[randomRoomStart.x + el][randomRoomEnd.y + 2]);
+      };
+      _.range((randomRoomEnd.x - randomRoomStart.x) + 1).forEach(pushNeighbours);
+      if (_.every(neighbourColU, el => el === 0)) {
+        map = _.unzip(map);
+        _.fill(map[randomRoomEnd.y + 1], 1, randomRoomStart.x, randomRoomEnd.x + 1);
+        map = _.unzip(map);
+        rooms[randomRoomNum].end.y += 1;
+      } else if (_.some(neighbourColU, el => el === 1)) {
+        rooms[randomRoomNum][growthMode] = false;
+      }
+      break;
+    }
+    case 'top': {
+      const neighbourColO = [];
+      const pushNeighbours = (el) => {
+        neighbourColO.push(map[randomRoomStart.x + el][randomRoomStart.y - 2]);
+      };
+      _.range((randomRoomEnd.x - randomRoomStart.x) + 1).forEach(pushNeighbours);
+      if (_.every(neighbourColO, el => el === 0)) {
+        map = _.unzip(map);
+        _.fill(map[randomRoomStart.y - 1], 1, randomRoomStart.x, randomRoomEnd.x + 1);
+        map = _.unzip(map);
+        rooms[randomRoomNum].start.y -= 1;
+      } else if (_.some(neighbourColO, el => el === 1)) {
+        rooms[randomRoomNum][growthMode] = false;
+      }
+      break;
+    }
+    default:
+      break;
+    }
+    if (thereIsAPath(map, rooms)) {
+      break;
+    }
+  }
+  return map;
+}
