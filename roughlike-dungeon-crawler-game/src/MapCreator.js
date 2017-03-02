@@ -1,6 +1,5 @@
 import _ from 'lodash';
 import graphlib, { Graph } from 'graphlib';
-// import graphlib from 'graphlib';
 
 function initMap() {
   let map = _.chunk(_.fill(Array(20604), 0), 102);
@@ -41,10 +40,7 @@ function initRooms(map, roomNum) {
         end: {
           x: x + 1,
           y: y + 1,
-        },
-        horizontal: true,
-        vertical: true,
-        bidirectional: true,
+        }
       });
     }
   }
@@ -99,6 +95,109 @@ function thereIsAPath(map, rooms) {
   return graphlib.alg.components(graph).length === 1;
 }
 
+function getBorder(map, rooms, id) {
+  const startX = rooms[id].start.x;
+  const endX = rooms[id].end.x;
+  const startY = rooms[id].start.y;
+  const endY = rooms[id].end.y;
+  const border = [];
+  const sub = [];
+  let state = map[startX][startY - 2];
+  let hasDoors = false;
+  _.range(startX, endX + 1).forEach((el, index) => {
+    if(map[startX + index][startY - 2] === 1) {
+      if (map[startX + index][startY - 1]) {
+        hasDoors = true;
+      }
+      sub.push({x: startX + index, y: startY - 1});
+    } else {
+      if (sub.length) {
+        if (!hasDoors) {
+          border.push(_.clone(sub));
+        }
+        hasDoors = false;
+        sub.length = 0;
+      }
+    }
+  });
+  if (sub.length) {
+    if (!hasDoors) {
+      border.push(_.clone(sub));
+    }
+    hasDoors = false;
+    sub.length = 0;
+  }
+  _.range(startX, endX + 1).forEach((el, index) => {
+    if(map[startX + index][endY + 2] === 1) {
+      if (map[startX + index][endY + 1]) {
+        hasDoors = true;
+      }
+      sub.push({x: startX + index, y: endY + 1});
+    } else {
+      if (sub.length) {
+        if (!hasDoors) {
+          border.push(_.clone(sub));
+        }
+        hasDoors = false;
+        sub.length = 0;
+      }
+    }
+  });
+  if (sub.length) {
+    if (!hasDoors) {
+      border.push(_.clone(sub));
+    }
+    hasDoors = false;
+    sub.length = 0;
+  }
+  _.range(startY, endY + 1).forEach((el, index) => {
+    if(map[startX - 2][startY + index] === 1) {
+      if (map[startX - 1][startY + index]) {
+        hasDoors = true;
+      }
+      sub.push({x: startX - 1, y: startY + index});
+    } else {
+      if (sub.length) {
+        if (!hasDoors) {
+          border.push(_.clone(sub));
+        }
+        hasDoors = false;
+        sub.length = 0;
+      }
+    }
+  });
+  if (sub.length) {
+    if (!hasDoors) {
+      border.push(_.clone(sub));
+    }
+    hasDoors = false;
+    sub.length = 0;
+  }
+  _.range(startY, endY + 1).forEach((el, index) => {
+    if(map[endX + 2][startY + index] === 1) {
+      if (map[endX + 1][startY + index]) {
+        hasDoors = true;
+      }
+      sub.push({x: endX + 1, y: startY + index});
+    } else {
+      if (sub.length) {
+        if (!hasDoors) {
+          border.push(_.clone(sub));
+        }
+        hasDoors = false;
+        sub.length = 0;
+      }
+    }
+  });
+  if (sub.length) {
+    if (!hasDoors) {
+      border.push(_.clone(sub));
+    }
+  }
+  console.log(startX, startY, border);
+  return border;
+}
+
 export default function createMap() {
   let map = initMap();
   const rooms = initRooms(map, 15);
@@ -121,8 +220,6 @@ export default function createMap() {
       if (_.every(neighbourColN, el => el === 0)) {
         _.fill(map[randomRoomEnd.x + 1], 1, randomRoomStart.y, randomRoomEnd.y + 1);
         rooms[randomRoomNum].end.x += 1;
-      } else if (_.some(neighbourColN, el => el === 1)) {
-        rooms[randomRoomNum][growthMode] = false;
       }
       break;
     }
@@ -135,8 +232,6 @@ export default function createMap() {
       if (_.every(neighbourColP, el => el === 0)) {
         _.fill(map[randomRoomStart.x - 1], 1, randomRoomStart.y, randomRoomEnd.y + 1);
         rooms[randomRoomNum].start.x -= 1;
-      } else if (_.some(neighbourColP, el => el === 1)) {
-        rooms[randomRoomNum][growthMode] = false;
       }
       break;
     }
@@ -151,8 +246,6 @@ export default function createMap() {
         _.fill(map[randomRoomEnd.y + 1], 1, randomRoomStart.x, randomRoomEnd.x + 1);
         map = _.unzip(map);
         rooms[randomRoomNum].end.y += 1;
-      } else if (_.some(neighbourColU, el => el === 1)) {
-        rooms[randomRoomNum][growthMode] = false;
       }
       break;
     }
@@ -167,8 +260,6 @@ export default function createMap() {
         _.fill(map[randomRoomStart.y - 1], 1, randomRoomStart.x, randomRoomEnd.x + 1);
         map = _.unzip(map);
         rooms[randomRoomNum].start.y -= 1;
-      } else if (_.some(neighbourColO, el => el === 1)) {
-        rooms[randomRoomNum][growthMode] = false;
       }
       break;
     }
@@ -179,5 +270,14 @@ export default function createMap() {
       break;
     }
   }
+  rooms.forEach((el, index) => {
+    const border = getBorder(map, rooms, index);
+    if (border.length) {
+      border.forEach((el) => {
+        const choice = _.sample(el);
+        map[choice.x][choice.y] = 1;
+      })
+    }
+  });
   return map;
 }
