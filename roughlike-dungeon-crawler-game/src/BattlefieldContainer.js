@@ -8,6 +8,10 @@ class BattlefieldContainer extends Component {
   constructor() {
     super();
     this.cellsInfo = [createMap()];
+    this.playerPos = {
+      x: 0,
+      y: 0
+    };
     this.dirtyBattlefield();
   }
   render() {
@@ -19,7 +23,8 @@ class BattlefieldContainer extends Component {
       3: 'green',
       4: 'orange',
       5: 'pink',
-      6: 'purple'
+      6: 'purple',
+      7: 'blue'
     };
     return <Battlefield cellColors={flatten(unzip(this.cellsInfo[0])).map(type => typeToColor[type])}/>;
   }
@@ -31,6 +36,12 @@ class BattlefieldContainer extends Component {
         if (this.cellsInfo[dungeon][row][column] === 1) {
           this.cellsInfo[dungeon][row][column] = type;
           iterateNum--;
+          if (type === 7) {
+            return {
+              x: row,
+              y: column
+            };
+          }
         }
       }
     }
@@ -39,6 +50,8 @@ class BattlefieldContainer extends Component {
     const shuffleWeapon = (dungeon) => base(dungeon, 4, 1);
     const shuffleLineOfSightEnhancer = (dungeon) => base(dungeon, 5, 1);
     const shufflePortal = (dungeon) => base(dungeon, 6, 1);
+    const shufflePlayer = (dungeon) => base(dungeon, 7, 1);
+    this.playerPos = shufflePlayer(0);
     for (let dungeon = 0; dungeon < 1; dungeon++) {
       shuffleEnemies(dungeon);
       shuffleHealthItems(dungeon);
