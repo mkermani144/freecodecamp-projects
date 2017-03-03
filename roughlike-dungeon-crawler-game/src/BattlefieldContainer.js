@@ -12,6 +12,7 @@ class BattlefieldContainer extends Component {
       x: 0,
       y: 0
     };
+    this.lineOfSight = 10;
     this.dirtyBattlefield();
   }
   render() {
@@ -26,7 +27,18 @@ class BattlefieldContainer extends Component {
       6: 'purple',
       7: 'blue'
     };
-    return <Battlefield cellColors={flatten(unzip(this.cellsInfo[0])).map(type => typeToColor[type])}/>;
+    const submap = [];
+    for (let i = 0; i <= 100; i++) {
+      submap[i] = [];
+      for (let j = 0; j <= 50; j++) {
+        if ((i - 50) * (i - 50) + (j - 25) * (j - 25) < this.lineOfSight * this.lineOfSight) {
+          submap[i][j] = this.cellsInfo[0][i + (this.playerPos.x - 50)][j + (this.playerPos.y - 25)];
+        } else {
+          submap[i][j] = -1;
+        }
+      }
+    }
+    return <Battlefield cellColors={flatten(unzip(submap)).map(type => typeToColor[type])}/>;
   }
   dirtyBattlefield = () => {
     const base = (dungeon, type, iterateNum) => {
