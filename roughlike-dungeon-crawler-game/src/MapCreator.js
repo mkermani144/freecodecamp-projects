@@ -194,7 +194,6 @@ function getBorder(map, rooms, id) {
       border.push(_.clone(sub));
     }
   }
-  console.log(startX, startY, border);
   return border;
 }
 
