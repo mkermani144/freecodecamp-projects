@@ -78,77 +78,54 @@ class BattlefieldContainer extends Component {
     }
   }
   handleKeydown = (event) => {
-    this.state.cellsInfo[0][this.state.playerPos.x][this.state.playerPos.y] = 1;
     switch (event.keyCode) {
       case 37:
-        this.setState((prev) => {
-          return {
-            playerPos: {
-              x: prev.playerPos.x - 1,
-              y: prev.playerPos.y
-            }
-          };
-        }, () => {
-          this.setState((prev) => {
-            prev.cellsInfo[0][this.state.playerPos.x][this.state.playerPos.y] = 7;
-            return {
-              cellsInfo: prev.cellsInfo
-            };
-          })
+        this.handleMove({
+          x: this.state.playerPos.x - 1,
+          y: this.state.playerPos.y
         });
         break;
       case 38:
-        this.setState((prev) => {
-          return {
-            playerPos: {
-              x: prev.playerPos.x,
-              y: prev.playerPos.y - 1
-            }
-          };
-        }, () => {
-          this.setState((prev) => {
-            prev.cellsInfo[0][this.state.playerPos.x][this.state.playerPos.y] = 7;
-            return {
-              cellsInfo: prev.cellsInfo
-            };
-          })
+        this.handleMove({
+          x: this.state.playerPos.x,
+          y: this.state.playerPos.y - 1
         });
         break;
       case 39:
-        this.setState((prev) => {
-          return {
-            playerPos: {
-              x: prev.playerPos.x + 1,
-              y: prev.playerPos.y
-            }
-          };
-        }, () => {
-          this.setState((prev) => {
-            prev.cellsInfo[0][this.state.playerPos.x][this.state.playerPos.y] = 7;
-            return {
-              cellsInfo: prev.cellsInfo
-            };
-          })
+        this.handleMove({
+          x: this.state.playerPos.x + 1,
+          y: this.state.playerPos.y
         });
         break;
       case 40:
-        this.setState((prev) => {
-          return {
-            playerPos: {
-              x: prev.playerPos.x,
-              y: prev.playerPos.y + 1
-            }
-          };
-        }, () => {
-          this.setState((prev) => {
-            prev.cellsInfo[0][this.state.playerPos.x][this.state.playerPos.y] = 7;
-            return {
-              cellsInfo: prev.cellsInfo
-            };
-          })
+        this.handleMove({
+          x: this.state.playerPos.x,
+          y: this.state.playerPos.y + 1
         });
         break;
       default:
+    }
+  }
+  handleMove = ({x, y}) => {
+    switch (this.state.cellsInfo[0][x][y]) {
+      case 1:
+        this.setState((prev) => {
+          prev.cellsInfo[0][this.state.playerPos.x][this.state.playerPos.y] = 1;
+          prev.cellsInfo[0][x][y] = 7;
+          return {
+            cellsInfo: prev.cellsInfo,
+            playerPos: {
+              x,
+              y
+            }
+          };
+        });
+        break;
+      case 2:
+
+        break;
+      default:
+
     }
   }
 }
