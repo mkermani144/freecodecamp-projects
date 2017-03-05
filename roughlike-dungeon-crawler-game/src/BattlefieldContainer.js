@@ -167,6 +167,17 @@ class BattlefieldContainer extends Component {
           });
         }
         break;
+      case 3:
+        const healthItem = this.state.items[this.state.dungeon][[x, y]];
+        this.setState(prev => {
+          console.log(this.state.playerHealth);
+          prev.cellsInfo[this.state.dungeon][this.state.playerPos.x][this.state.playerPos.y] = 1;
+          prev.cellsInfo[this.state.dungeon][x][y] = 7;
+          prev.playerHealth += healthItem.heal;
+          prev.playerPos = {x, y};
+          return prev;
+        });
+        break;
       default:
 
     }
