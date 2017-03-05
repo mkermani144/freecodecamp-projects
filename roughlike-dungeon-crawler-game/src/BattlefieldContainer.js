@@ -133,7 +133,7 @@ class BattlefieldContainer extends Component {
         break;
       case 2:
         const enemy = this.state.enemyInfo[this.state.dungeon][[x, y]];
-        if(this.state.playerDamage > enemy.health) {
+        if(this.pureDamage() > enemy.health) {
           this.setState(prev => {
             prev.cellsInfo[this.state.dungeon][this.state.playerPos.x][this.state.playerPos.y] = 1;
             prev.cellsInfo[this.state.dungeon][x][y] = 7;
@@ -143,8 +143,8 @@ class BattlefieldContainer extends Component {
           });
         } else {
           this.setState(prev => {
-            prev.enemyInfo[this.state.dungeon][[x, y]].health -= this.state.playerDamage;
-            prev.playerHealth -= this.state.dungeon * 10 + 12 - (Math.floor(Math.random() * 5));
+            prev.enemyInfo[this.state.dungeon][[x, y]].health -= this.pureDamage();
+            prev.playerHealth -= this.state.dungeon * 20 + 12 - (Math.floor(Math.random() * 5));
           });
         }
         break;
@@ -177,6 +177,23 @@ class BattlefieldContainer extends Component {
         break;
       default:
 
+    }
+  }
+  pureDamage = () => {
+    return this.state.playerDamage + this.currentLevel() * 10 + 5 - Math.floor(Math.random() * 11);
+  }
+  currentLevel = () => {
+    let xp = this.state.playerXP;
+    if (xp < 100) {
+      return 1;
+    } else if (xp < 250) {
+      return 2;
+    } else if (xp < 500) {
+      return 3;
+    } else if (xp < 1000) {
+      return 4;
+    } else {
+      return 5;
     }
   }
 }
