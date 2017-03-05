@@ -14,7 +14,7 @@ class BattlefieldContainer extends Component {
       },
       cellsInfo: [createMap()],
       dungeon: 0,
-      items: [{}, {}, {}, {}, {}],
+      enemyInfo: [{}, {}, {}, {}, {}],
       playerHealth: 100,
       playerXP: 0,
       playerDamage: 10,
@@ -57,29 +57,10 @@ class BattlefieldContainer extends Component {
         const column = Math.floor(Math.random() * 100);
         if (this.state.cellsInfo[dungeon][row][column] === 1) {
           this.state.cellsInfo[dungeon][row][column] = type;
-          switch (type) {
-            case 2:
-              this.state.items[dungeon][[row, column]] = {
-                health: dungeon * 25 + 25,
-                damage: dungeon * 10 + 12 - (Math.floor(Math.random() * 5))
-              }
-              break;
-            case 3:
-              this.state.items[dungeon][[row, column]] = {
-                heal: dungeon * 25 + 25
-              }
-              break;
-            case 4:
-              this.state.items[dungeon][[row, column]] = {
-                damageIncrease: 25
-              }
-              break;
-            case 5:
-              this.state.items[dungeon][[row, column]] = {
-                lineOfSightEnhance: 5
-              }
-              break;
-            default:
+          if (type === 2) {
+            this.state.enemyInfo[dungeon][[row, column]] = {
+              health: dungeon * 25 + 25
+            }
           }
           iterateNum--;
           if (type === 7) {
@@ -151,7 +132,7 @@ class BattlefieldContainer extends Component {
         });
         break;
       case 2:
-        const enemy = this.state.items[this.state.dungeon][[x, y]];
+        const enemy = this.state.enemyInfo[this.state.dungeon][[x, y]];
         if(this.state.playerDamage > enemy.health) {
           this.setState(prev => {
             prev.cellsInfo[this.state.dungeon][this.state.playerPos.x][this.state.playerPos.y] = 1;
@@ -162,37 +143,34 @@ class BattlefieldContainer extends Component {
           });
         } else {
           this.setState(prev => {
-            prev.items[this.state.dungeon][[x, y]].health -= this.state.playerDamage;
-            prev.playerHealth -= enemy.damage;
+            prev.enemyInfo[this.state.dungeon][[x, y]].health -= this.state.playerDamage;
+            prev.playerHealth -= this.state.dungeon * 10 + 12 - (Math.floor(Math.random() * 5));
           });
         }
         break;
       case 3:
-        const healthItem = this.state.items[this.state.dungeon][[x, y]];
         this.setState(prev => {
           prev.cellsInfo[this.state.dungeon][this.state.playerPos.x][this.state.playerPos.y] = 1;
           prev.cellsInfo[this.state.dungeon][x][y] = 7;
-          prev.playerHealth += healthItem.heal;
+          prev.playerHealth += this.state.dungeon * 25 + 25;
           prev.playerPos = {x, y};
           return prev;
         });
         break;
       case 4:
-        const weapon = this.state.items[this.state.dungeon][[x, y]];
         this.setState(prev => {
           prev.cellsInfo[this.state.dungeon][this.state.playerPos.x][this.state.playerPos.y] = 1;
           prev.cellsInfo[this.state.dungeon][x][y] = 7;
-          prev.playerDamage += weapon.damageIncrease;
+          prev.playerDamage += this.state.dungeon * 25 + 25;
           prev.playerPos = {x, y};
           return prev;
         });
         break;
       case 5:
-        const lineOfSightEnhancer = this.state.items[this.state.dungeon][[x, y]];
         this.setState(prev => {
           prev.cellsInfo[this.state.dungeon][this.state.playerPos.x][this.state.playerPos.y] = 1;
           prev.cellsInfo[this.state.dungeon][x][y] = 7;
-          prev.lineOfSight += lineOfSightEnhancer.lineOfSightEnhance;
+          prev.lineOfSight += 5;
           prev.playerPos = {x, y};
           return prev;
         });
