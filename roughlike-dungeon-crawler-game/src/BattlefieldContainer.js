@@ -12,7 +12,12 @@ class BattlefieldContainer extends Component {
         x: 0,
         y: 0
       },
-      cellsInfo: [createMap()]
+      cellsInfo: [createMap()],
+      dungeon: 0,
+      items: [{}, {}, {}, {}, {}],
+      playerHealth: 100,
+      playerXP: 0,
+      playerDamage: 10
     };
     this.lineOfSight = 10;
     this.dirtyBattlefield();
@@ -37,7 +42,7 @@ class BattlefieldContainer extends Component {
       submap[i] = [];
       for (let j = 0; j <= 50; j++) {
         if ((i - 50) * (i - 50) + (j - 25) * (j - 25) < this.lineOfSight * this.lineOfSight) {
-          submap[i][j] = this.state.cellsInfo[0][i + (this.state.playerPos.x - 50)][j + (this.state.playerPos.y - 25)];
+          submap[i][j] = this.state.cellsInfo[this.state.dungeon][i + (this.state.playerPos.x - 50)][j + (this.state.playerPos.y - 25)];
         } else {
           submap[i][j] = -1;
         }
@@ -52,6 +57,30 @@ class BattlefieldContainer extends Component {
         const column = Math.floor(Math.random() * 100);
         if (this.state.cellsInfo[dungeon][row][column] === 1) {
           this.state.cellsInfo[dungeon][row][column] = type;
+          switch (type) {
+            case 2:
+              this.state.items[dungeon][[row, column]] = {
+                health: dungeon * 25 + 25,
+                damage: dungeon * 10 + 12 - (Math.floor(Math.random() * 5))
+              }
+              break;
+            case 3:
+              this.state.items[dungeon][[row, column]] = {
+                heal: dungeon * 25 + 25
+              }
+              break;
+            case 4:
+              this.state.items[dungeon][[row, column]] = {
+                damageIncrease: 25
+              }
+              break;
+            case 5:
+              this.state.items[dungeon][[row, column]] = {
+                lineOfSightEnhance: 5
+              }
+              break;
+            default:
+          }
           iterateNum--;
           if (type === 7) {
             return {
@@ -110,8 +139,8 @@ class BattlefieldContainer extends Component {
     switch (this.state.cellsInfo[0][x][y]) {
       case 1:
         this.setState((prev) => {
-          prev.cellsInfo[0][this.state.playerPos.x][this.state.playerPos.y] = 1;
-          prev.cellsInfo[0][x][y] = 7;
+          prev.cellsInfo[this.state.dungeon][this.state.playerPos.x][this.state.playerPos.y] = 1;
+          prev.cellsInfo[this.state.dungeon][x][y] = 7;
           return {
             cellsInfo: prev.cellsInfo,
             playerPos: {
@@ -122,7 +151,21 @@ class BattlefieldContainer extends Component {
         });
         break;
       case 2:
-
+        const enemy = this.state.items[this.state.dungeon][[x, y]];
+        if(this.state.playerDamage > enemy.health) {
+          this.setState(prev => {
+            prev.cellsInfo[this.state.dungeon][this.state.playerPos.x][this.state.playerPos.y] = 1;
+            prev.cellsInfo[this.state.dungeon][x][y] = 7;
+            prev.playerXP += 20 + 20 * this.state.dungeon;
+            prev.playerPos = {x, y};
+            return prev;
+          });
+        } else {
+          this.setState(prev => {
+            prev.items[this.state.dungeon][[x, y]].health -= this.state.playerDamage;
+            prev.playerHealth -= enemy.damage;
+          });
+        }
         break;
       default:
 
