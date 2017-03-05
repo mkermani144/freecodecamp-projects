@@ -17,9 +17,9 @@ class BattlefieldContainer extends Component {
       items: [{}, {}, {}, {}, {}],
       playerHealth: 100,
       playerXP: 0,
-      playerDamage: 10
+      playerDamage: 10,
+      lineOfSight: 10
     };
-    this.lineOfSight = 10;
     this.dirtyBattlefield();
   }
   componentDidMount() {
@@ -41,7 +41,7 @@ class BattlefieldContainer extends Component {
     for (let i = 0; i <= 100; i++) {
       submap[i] = [];
       for (let j = 0; j <= 50; j++) {
-        if ((i - 50) * (i - 50) + (j - 25) * (j - 25) < this.lineOfSight * this.lineOfSight) {
+        if ((i - 50) * (i - 50) + (j - 25) * (j - 25) < this.state.lineOfSight * this.state.lineOfSight) {
           submap[i][j] = this.state.cellsInfo[this.state.dungeon][i + (this.state.playerPos.x - 50)][j + (this.state.playerPos.y - 25)];
         } else {
           submap[i][j] = -1;
@@ -183,6 +183,16 @@ class BattlefieldContainer extends Component {
           prev.cellsInfo[this.state.dungeon][this.state.playerPos.x][this.state.playerPos.y] = 1;
           prev.cellsInfo[this.state.dungeon][x][y] = 7;
           prev.playerDamage += weapon.damageIncrease;
+          prev.playerPos = {x, y};
+          return prev;
+        });
+        break;
+      case 5:
+        const lineOfSightEnhancer = this.state.items[this.state.dungeon][[x, y]];
+        this.setState(prev => {
+          prev.cellsInfo[this.state.dungeon][this.state.playerPos.x][this.state.playerPos.y] = 1;
+          prev.cellsInfo[this.state.dungeon][x][y] = 7;
+          prev.lineOfSight += lineOfSightEnhancer.lineOfSightEnhance;
           prev.playerPos = {x, y};
           return prev;
         });
