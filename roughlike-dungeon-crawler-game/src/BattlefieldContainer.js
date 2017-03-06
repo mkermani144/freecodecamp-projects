@@ -12,7 +12,7 @@ class BattlefieldContainer extends Component {
         x: 0,
         y: 0
       },
-      cellsInfo: [createMap()],
+      cellsInfo: [createMap(), createMap(), createMap(), createMap(), createMap()],
       dungeon: 0,
       enemyInfo: [{}, {}, {}, {}, {}],
       playerHealth: 100,
@@ -38,6 +38,7 @@ class BattlefieldContainer extends Component {
       7: 'blue'
     };
     const submap = [];
+    console.log(this.state);
     for (let i = 0; i <= 100; i++) {
       submap[i] = [];
       for (let j = 0; j <= 50; j++) {
@@ -53,8 +54,8 @@ class BattlefieldContainer extends Component {
   dirtyBattlefield = () => {
     const base = (dungeon, type, iterateNum) => {
       while (iterateNum) {
-        const row = Math.floor(Math.random() * 200);
-        const column = Math.floor(Math.random() * 100);
+        let row = Math.floor(Math.random() * 200);
+        let column = Math.floor(Math.random() * 100);
         if (this.state.cellsInfo[dungeon][row][column] === 1) {
           this.state.cellsInfo[dungeon][row][column] = type;
           if (type === 2) {
@@ -79,12 +80,14 @@ class BattlefieldContainer extends Component {
     const shufflePortal = (dungeon) => base(dungeon, 6, 1);
     const shufflePlayer = (dungeon) => base(dungeon, 7, 1);
     this.state.playerPos = shufflePlayer(0);
-    for (let dungeon = 0; dungeon < 1; dungeon++) {
+    for (let dungeon = 0; dungeon < 5; dungeon++) {
       shuffleEnemies(dungeon);
       shuffleHealthItems(dungeon);
       shuffleWeapon(dungeon);
       shuffleLineOfSightEnhancer(dungeon);
-      shufflePortal(dungeon);
+      if (dungeon !== 4) {
+        shufflePortal(dungeon);
+      }
     }
   }
   handleKeydown = (event) => {
@@ -117,7 +120,7 @@ class BattlefieldContainer extends Component {
     }
   }
   handleMove = ({x, y}) => {
-    switch (this.state.cellsInfo[0][x][y]) {
+    switch (this.state.cellsInfo[this.state.dungeon][x][y]) {
       case 1:
         this.setState((prev) => {
           prev.cellsInfo[this.state.dungeon][this.state.playerPos.x][this.state.playerPos.y] = 1;
@@ -173,6 +176,27 @@ class BattlefieldContainer extends Component {
           prev.lineOfSight += 5;
           prev.playerPos = {x, y};
           return prev;
+        });
+        break;
+      case 6:
+        this.setState(prev => {
+          prev.dungeon+= 1;
+          prev.playerPos = {x, y};
+          return prev;
+        }, () => {
+          let notPlaced = true;
+          while (notPlaced) {
+            const row = Math.floor(Math.random() * 200);
+            const column = Math.floor(Math.random() * 100);
+            if (this.state.cellsInfo[this.state.dungeon][row][column] === 1) {
+              this.setState(prev => {
+                prev.cellsInfo[this.state.dungeon][row][column] = 7;
+                prev.playerPos = {x: row, y: column};
+                return prev;
+              });
+              notPlaced = false;
+            }
+          }
         });
         break;
       default:
