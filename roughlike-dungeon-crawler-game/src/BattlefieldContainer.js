@@ -141,6 +141,8 @@ class BattlefieldContainer extends Component {
             prev.cellsInfo[this.state.dungeon][this.state.playerPos.x][this.state.playerPos.y] = 1;
             prev.cellsInfo[this.state.dungeon][x][y] = 7;
             prev.playerXP += 20 + 20 * this.state.dungeon;
+            this.props.xpUpdate(prev.playerXP);
+            this.props.levelUpdate(this.currentLevel(prev.playerXP));
             prev.playerPos = {x, y};
             return prev;
           });
@@ -148,6 +150,7 @@ class BattlefieldContainer extends Component {
           this.setState(prev => {
             prev.enemyInfo[this.state.dungeon][[x, y]].health -= this.pureDamage();
             prev.playerHealth -= this.state.dungeon * 20 + 12 - (Math.floor(Math.random() * 5));
+            this.props.healthUpdate(prev.playerHealth);
           });
         }
         break;
@@ -157,6 +160,7 @@ class BattlefieldContainer extends Component {
           prev.cellsInfo[this.state.dungeon][x][y] = 7;
           prev.playerHealth += this.state.dungeon * 25 + 25;
           prev.playerPos = {x, y};
+          this.props.healthUpdate(prev.playerHealth);
           return prev;
         });
         break;
@@ -166,6 +170,7 @@ class BattlefieldContainer extends Component {
           prev.cellsInfo[this.state.dungeon][x][y] = 7;
           prev.playerDamage += this.state.dungeon * 25 + 25;
           prev.playerPos = {x, y};
+          this.props.damageUpdate(prev.playerDamage);
           return prev;
         });
         break;
@@ -182,6 +187,7 @@ class BattlefieldContainer extends Component {
         this.setState(prev => {
           prev.dungeon+= 1;
           prev.playerPos = {x, y};
+          this.props.dungeonUpdate(prev.dungeon);
           return prev;
         }, () => {
           let notPlaced = true;
