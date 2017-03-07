@@ -160,6 +160,9 @@ class BattlefieldContainer extends Component {
           this.setState(prev => {
             prev.enemyInfo[this.state.dungeon][[x, y]].health -= this.pureDamage();
             prev.playerHealth -= this.state.dungeon * 20 + 12 - (Math.floor(Math.random() * 5));
+            if (prev.playerHealth <= 0) {
+              this.props.finishGame('You should become stronger! :(');
+            }
             this.props.healthUpdate(prev.playerHealth);
           });
         }
@@ -167,11 +170,14 @@ class BattlefieldContainer extends Component {
       case 10:
         const boss = this.state.enemyInfo[this.state.dungeon][[x, y]];
         if(this.pureDamage() > boss.health) {
-          this.props.win();
+          this.props.finishGame('You are victorios!');
         } else {
           this.setState(prev => {
             prev.enemyInfo[this.state.dungeon][[x, y]].health -= this.pureDamage();
             prev.playerHealth -= 200 - (Math.floor(Math.random() * 5));
+            if (prev.playerHealth <= 0) {
+              this.props.finishGame('Killing the boss isn\'t so easy! :(');
+            }
             this.props.healthUpdate(prev.playerHealth);
           });
         }
