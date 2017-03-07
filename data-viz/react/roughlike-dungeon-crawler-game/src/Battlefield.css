@@ -1,0 +1,6 @@
+.battlefield {
+  display: flex;
+  flex-flow: row wrap;
+  width: 1010px;
+  height: 510px;
+}

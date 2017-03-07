@@ -1,0 +1,7 @@
+.hud {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  font-family: 'Press Start 2P', cursive;
+  color: cyan;
+}
