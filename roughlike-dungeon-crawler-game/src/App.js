@@ -36,7 +36,7 @@ class App extends Component {
     }
     else {
       let style;
-      if (this.state.gameFinished === 'You are victorios') {
+      if (this.state.gameFinished === 'You are victorios!') {
         style = {
           fontFamily: '\'Press Start 2P\', cursive',
           color: 'green'

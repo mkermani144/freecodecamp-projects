@@ -16,8 +16,8 @@ function initRooms(map, roomNum) {
   const rooms = [];
   let i = roomNum;
   while (i) {
-    const x = _.random(40, 160);
-    const y = _.random(20, 80);
+    const x = _.random(70, 130);
+    const y = _.random(30, 70);
     const goodPosition = _.every([map[x - 1][y - 1], map[x - 1][y], map[x - 1][y + 1],
                                   map[x][y - 1], map[x][y], map[x][y + 1],
                                   map[x + 1][y - 1], map[x + 1][y], map[x + 1][y + 1]],
@@ -205,7 +205,7 @@ export default function createMap() {
     const randomRoomNum = _.random(14);
     const randomRoomStart = rooms[randomRoomNum].start;
     const randomRoomEnd = rooms[randomRoomNum].end;
-    if (randomRoomEnd.x - randomRoomStart.x > 40 || randomRoomEnd.y - randomRoomStart.y > 40) {
+    if (randomRoomEnd.x - randomRoomStart.x > 25 || randomRoomEnd.y - randomRoomStart.y > 25) {
       continue;
     }
     const growthMode = _.sample(['right', 'left', 'top', 'down']);
