@@ -66,7 +66,7 @@ class BattlefieldContainer extends Component {
           }
           if (type === 2) {
             this.state.enemyInfo[dungeon][[row, column]] = {
-              health: dungeon * 25 + 25
+              health: dungeon * 35 + 50
             };
           }
           iterateNum--;
@@ -159,7 +159,7 @@ class BattlefieldContainer extends Component {
         } else {
           this.setState(prev => {
             prev.enemyInfo[this.state.dungeon][[x, y]].health -= this.pureDamage();
-            prev.playerHealth -= this.state.dungeon * 20 + 12 - (Math.floor(Math.random() * 5));
+            prev.playerHealth -= this.state.dungeon * 40 + 12 - (Math.floor(Math.random() * 5));
             if (prev.playerHealth <= 0) {
               this.props.finishGame('You should become stronger! :(');
             }
@@ -174,7 +174,7 @@ class BattlefieldContainer extends Component {
         } else {
           this.setState(prev => {
             prev.enemyInfo[this.state.dungeon][[x, y]].health -= this.pureDamage();
-            prev.playerHealth -= 200 - (Math.floor(Math.random() * 5));
+            prev.playerHealth -= 250 - (Math.floor(Math.random() * 5));
             if (prev.playerHealth <= 0) {
               this.props.finishGame('Killing the boss isn\'t so easy! :(');
             }
@@ -186,7 +186,7 @@ class BattlefieldContainer extends Component {
         this.setState(prev => {
           prev.cellsInfo[this.state.dungeon][this.state.playerPos.x][this.state.playerPos.y] = 1;
           prev.cellsInfo[this.state.dungeon][x][y] = 7;
-          prev.playerHealth += this.state.dungeon * 25 + 25;
+          prev.playerHealth += this.state.dungeon * 15 + 25;
           prev.playerPos = {x, y};
           this.props.healthUpdate(prev.playerHealth);
           return prev;
@@ -196,7 +196,7 @@ class BattlefieldContainer extends Component {
         this.setState(prev => {
           prev.cellsInfo[this.state.dungeon][this.state.playerPos.x][this.state.playerPos.y] = 1;
           prev.cellsInfo[this.state.dungeon][x][y] = 7;
-          prev.playerDamage += this.state.dungeon * 25 + 25;
+          prev.playerDamage += this.state.dungeon * 15 + 25;
           prev.playerPos = {x, y};
           this.props.damageUpdate(prev.playerDamage);
           return prev;
