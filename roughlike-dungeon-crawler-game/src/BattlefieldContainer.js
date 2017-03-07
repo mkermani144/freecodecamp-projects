@@ -35,7 +35,8 @@ class BattlefieldContainer extends Component {
       4: 'orange',
       5: 'pink',
       6: 'purple',
-      7: 'blue'
+      7: 'blue',
+      10: '#aa0000'
     };
     const submap = [];
     console.log(this.state);
@@ -58,10 +59,15 @@ class BattlefieldContainer extends Component {
         let column = Math.floor(Math.random() * 100);
         if (this.state.cellsInfo[dungeon][row][column] === 1) {
           this.state.cellsInfo[dungeon][row][column] = type;
+          if (type === 10) {
+            this.state.enemyInfo[dungeon][[row, column]] = {
+              health: 500
+            };
+          }
           if (type === 2) {
             this.state.enemyInfo[dungeon][[row, column]] = {
               health: dungeon * 25 + 25
-            }
+            };
           }
           iterateNum--;
           if (type === 7) {
@@ -74,6 +80,7 @@ class BattlefieldContainer extends Component {
       }
     }
     const shuffleEnemies = (dungeon) => base(dungeon, 2, 7);
+    const shuffleBoss = (dungeon) => base(dungeon, 10, 1);
     const shuffleHealthItems = (dungeon) => base(dungeon, 3, 7);
     const shuffleWeapon = (dungeon) => base(dungeon, 4, 1);
     const shuffleLineOfSightEnhancer = (dungeon) => base(dungeon, 5, 1);
@@ -87,6 +94,9 @@ class BattlefieldContainer extends Component {
       shuffleLineOfSightEnhancer(dungeon);
       if (dungeon !== 4) {
         shufflePortal(dungeon);
+      }
+      if (dungeon === 4) {
+        shuffleBoss(dungeon);
       }
     }
   }
@@ -150,6 +160,18 @@ class BattlefieldContainer extends Component {
           this.setState(prev => {
             prev.enemyInfo[this.state.dungeon][[x, y]].health -= this.pureDamage();
             prev.playerHealth -= this.state.dungeon * 20 + 12 - (Math.floor(Math.random() * 5));
+            this.props.healthUpdate(prev.playerHealth);
+          });
+        }
+        break;
+      case 10:
+        const boss = this.state.enemyInfo[this.state.dungeon][[x, y]];
+        if(this.pureDamage() > boss.health) {
+          this.props.win();
+        } else {
+          this.setState(prev => {
+            prev.enemyInfo[this.state.dungeon][[x, y]].health -= this.pureDamage();
+            prev.playerHealth -= 200 - (Math.floor(Math.random() * 5));
             this.props.healthUpdate(prev.playerHealth);
           });
         }
