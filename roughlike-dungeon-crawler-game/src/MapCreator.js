@@ -102,7 +102,6 @@ function getBorder(map, rooms, id) {
   const endY = rooms[id].end.y;
   const border = [];
   const sub = [];
-  let state = map[startX][startY - 2];
   let hasDoors = false;
   _.range(startX, endX + 1).forEach((el, index) => {
     if(map[startX + index][startY - 2] === 1) {
