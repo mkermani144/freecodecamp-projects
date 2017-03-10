@@ -4,7 +4,7 @@ import json from './GDP-data.json';
 
 const x = d3.scaleLinear()
   .domain([json.data[0][1], json.data[json.data.length - 1][1]])
-  .range([0, 100]);
+  .range([0, 100]).nice();
 
 d3.select('.bar-chart')
   .selectAll('div')
