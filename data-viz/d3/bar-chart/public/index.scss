@@ -17,6 +17,9 @@ body {
     div {
       background-color: green;
       flex: 1;
+      &:hover {
+        background-color: darken(green, 5%);
+      }
     }
   }
 }
