@@ -41,4 +41,5 @@ svg.append('text')
   .attr('x', -10)
   .attr('dy', '.75em')
   .attr('transform', 'rotate(-90)')
+  .attr('fill', '#006064')
   .text('Gross Domestic Product, USA');
