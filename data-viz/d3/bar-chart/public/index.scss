@@ -10,8 +10,23 @@ body {
   .bar-chart {
     width: 800px;
     height: 600px;
+
     rect {
       fill: black;
+    }
+  }
+  .d3-tip {
+    background-color: #263238;
+    padding: 1%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .tip-gdp {
+      color: #FFC107;
+    }
+    .tip-time {
+      font-size: 80%;
+      color: #03A9F4;
     }
   }
 }
