@@ -11,9 +11,9 @@ const gdp = d3.scaleLinear()
 
 const xAxis = d3.axisBottom().scale(time);
 const yAxis = d3.axisLeft().scale(gdp).ticks(15, 's');
+const svg = d3.select('.bar-chart');
 
-d3.select('.bar-chart')
-  .selectAll('g')
+d3.select('.bar-chart').selectAll('g')
   .data(json.data)
   .enter()
   .append('g')
@@ -23,11 +23,17 @@ d3.select('.bar-chart')
   .attr('height', el => 580 - gdp(el[1]))
   .attr('y', el => gdp(el[1]));
 
-d3.select('.bar-chart')
-  .append('g')
+
+svg.append('g')
   .attr('transform', 'translate(0, 580)')
   .call(xAxis);
-d3.select('.bar-chart')
-  .append('g')
+svg.append('g')
   .attr('transform', 'translate(40, 0)')
   .call(yAxis);
+svg.append('text')
+  .attr('text-anchor', 'end')
+  .attr('y', 50)
+  .attr('x', -10)
+  .attr('dy', '.75em')
+  .attr('transform', 'rotate(-90)')
+  .text('Gross Domestic Product, USA');
