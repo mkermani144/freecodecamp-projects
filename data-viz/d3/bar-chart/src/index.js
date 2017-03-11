@@ -8,7 +8,7 @@ const time = d3.scaleTime()
   .range([40, 800]);
 const gdp = d3.scaleLinear()
   .domain([json.data[0][1], json.data[json.data.length - 1][1]])
-  .range([580, 0]);
+  .range([580, 0]).nice();
 
 const xAxis = d3.axisBottom().scale(time);
 const yAxis = d3.axisLeft().scale(gdp).ticks(15, 's');
