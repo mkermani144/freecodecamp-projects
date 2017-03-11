@@ -1,0 +1,38 @@
+html, body {
+  margin: 0;
+}
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  background-color: #E1F5FE;
+  font-family: sans-serif;
+  .bar-chart {
+    width: 1000px;
+    height: 600px;
+    rect {
+      fill: #006064;
+      &:hover {
+        fill: lighten(#006064, 30%);
+      }
+    }
+  }
+  .d3-tip {
+    background-color: #263238;
+    padding: 1%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 2px;
+    font-weight: bold;
+    .tip-gdp {
+      color: #FFC107;
+    }
+    .tip-time {
+      font-size: 80%;
+      color: #03A9F4;
+    }
+  }
+}

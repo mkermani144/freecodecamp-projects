@@ -1,0 +1,28 @@
+{
+  "name": "bar-chart",
+  "version": "1.0.0",
+  "description": "Freecodecamp d3 bar chart project",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack",
+    "start": "webpack-dev-server --hot --no-info --port 8000 --open --client-log-level warning --content-base public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mkermani144"
+  },
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "css-loader": "^0.27.1",
+    "node-sass": "^4.5.0",
+    "sass-loader": "^6.0.3",
+    "style-loader": "^0.13.2",
+    "webpack": "^2.2.1",
+    "webpack-dev-server": "^2.4.1"
+  },
+  "dependencies": {
+    "d3": "^4.7.1",
+    "d3-tip": "^0.7.1"
+  }
+}
