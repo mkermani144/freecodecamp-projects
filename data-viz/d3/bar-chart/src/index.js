@@ -5,10 +5,10 @@ import json from './GDP-data.json';
 
 const time = d3.scaleTime()
   .domain([new Date(json.data[0][0]), new Date(json.data[json.data.length - 1][0])])
-  .range([40, 800]);
+  .range([40, 1000]);
 const gdp = d3.scaleLinear()
   .domain([json.data[0][1], json.data[json.data.length - 1][1]])
-  .range([580, 0]);
+  .range([580, 0]).nice();
 
 const xAxis = d3.axisBottom().scale(time);
 const yAxis = d3.axisLeft().scale(gdp).ticks(15, 's');
@@ -24,7 +24,7 @@ d3.select('.bar-chart').selectAll('g')
   .attr('transform', el => `translate(${time(new Date(el[0]))}, 0)`)
   .on('mouseover', tip.show)
   .append('rect')
-  .attr('width', (800 / json.data.length) + 1)
+  .attr('width', (1000 / json.data.length) + 1)
   .attr('height', el => 580 - gdp(el[1]))
   .attr('y', el => gdp(el[1]));
 
