@@ -13,9 +13,7 @@ const gdp = d3.scaleLinear()
 const xAxis = d3.axisBottom().scale(time);
 const yAxis = d3.axisLeft().scale(gdp).ticks(15, 's');
 const svg = d3.select('.bar-chart');
-const tip = d3Tip().attr('class', 'd3-tip').html(d => {
-  return `<div class="tip-gdp">\$${d[1]} Billion</div><div class="tip-time">${d[0]}</div>`
-});
+const tip = d3Tip().attr('class', 'd3-tip').html(d => `<div class="tip-gdp">\$${d[1]} Billion</div><div class="tip-time">${d[0]}</div>`);
 svg.call(tip);
 d3.select('.bar-chart').selectAll('g')
   .data(json.data)
