@@ -12,23 +12,25 @@ body {
     height: 430px;
   }
   .d3-tip {
-    background-color: black;
+    background-color: #212121;
     font-weight: bold;
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 1%;
+    max-width: 300px;
     .tip-name {
-      color: white;
+      color: #FAFAFA;
     }
     .tip-year {
-      color: white;
+      color: #FAFAFA;
     }
     .tip-time {
-      color: lightblue;
+      color: #00BCD4;
     }
     .tip-doping {
-      color: red;
+      color: #EF5350;
+      text-align: center;
     }
   }
 }
