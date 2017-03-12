@@ -1,0 +1,8 @@
+{
+  "name": "scatterplot-graph",
+  "version": "1.0.0",
+  "description": "Freecodecamp d3 scatterplot graph project",
+  "main": "index.js",
+  "repository": "https://github.com/mkermani144/freecodecamp-projects",
+  "license": "MIT"
+}
