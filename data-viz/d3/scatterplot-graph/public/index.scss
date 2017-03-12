@@ -7,6 +7,7 @@ body {
   justify-content: center;
   align-items: center;
   font-family: sans-serif;
+  background-color: #FFEBEE;
   .scatterplot-graph {
     width: 840px;
     height: 430px;
@@ -14,6 +15,7 @@ body {
   .d3-tip {
     background-color: rgba(33, 33, 33, .8);
     font-weight: bold;
+    font-size: 80%;
     display: flex;
     flex-direction: column;
     align-items: center;
