@@ -1,4 +1,5 @@
 import * as d3 from 'd3';
+import d3Tip from 'd3-tip';
 import '../public/index.scss';
 import data from './cyclist-data.json';
 
@@ -20,7 +21,15 @@ const xAxis = d3.axisBottom().scale(time)
     `${Math.floor(timeString / 60)}:${timeString % 60 < 10 ? '0' : ''}${timeString % 60}`);
 const yAxis = d3.axisLeft().scale(ranking);
 const svg = d3.select('.scatterplot-graph');
-svg.selectAll('g')
+const tip = d3Tip().attr('class', 'd3-tip')
+  .html(d => `
+    <div class="tip-name">${d.Name}, ${d.Nationality}</div>
+    <div class="tip-year">Year: ${d.Year}</div>
+    <div class="tip-time">Time: ${d.Time}</div>
+    <div class="tip-doping">${d.Doping}</div>
+  `);
+svg.call(tip);
+svg.selectAll('circle')
   .data(data)
   .enter()
   .append('circle')
@@ -28,7 +37,9 @@ svg.selectAll('g')
   .attr('fill', el => ['green', 'red'][+Boolean(el.Doping)])
   .attr('r', 4)
   .attr('cx', 2)
-  .attr('cy', 2);
+  .attr('cy', 2)
+  .on('mouseover', tip.show)
+  .on('mouseout', tip.hide);
 svg.append('g')
   .attr('transform', 'translate(20, 410)')
   .call(xAxis);
