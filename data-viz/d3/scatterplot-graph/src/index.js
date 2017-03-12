@@ -52,3 +52,27 @@ svg.append('text')
   .attr('y', 400)
   .attr('x', 820)
   .text('Time');
+svg.append('circle')
+  .attr('transform', 'translate(650, 200)')
+  .attr('fill', '#8BC34A')
+  .attr('r', 4)
+  .attr('cx', 2)
+  .attr('cy', 2);
+svg.append('text')
+  .attr('text-anchor', 'start')
+  .attr('y', 205)
+  .attr('x', 660)
+  .attr('font-size', '70%')
+  .text('Riders with no doping allegations');
+svg.append('circle')
+  .attr('transform', 'translate(650, 220)')
+  .attr('fill', '#F44336')
+  .attr('r', 4)
+  .attr('cx', 2)
+  .attr('cy', 2);
+svg.append('text')
+  .attr('text-anchor', 'start')
+  .attr('y', 225)
+  .attr('x', 660)
+  .attr('font-size', '70%')
+  .text('Riders with doping allegations');
