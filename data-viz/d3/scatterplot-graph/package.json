@@ -4,5 +4,17 @@
   "description": "Freecodecamp d3 scatterplot graph project",
   "main": "index.js",
   "repository": "https://github.com/mkermani144/freecodecamp-projects",
-  "license": "MIT"
+  "license": "MIT",
+  "scripts": {
+    "build": "webpack",
+    "start": "webpack-dev-server --hot --no-info --port 8000 --open --client-log-level warning --content-base public"
+  },
+  "devDependencies": {
+    "css-loader": "^0.27.1",
+    "node-sass": "^4.5.0",
+    "sass-loader": "^6.0.3",
+    "style-loader": "^0.13.2",
+    "webpack": "^2.2.1",
+    "webpack-dev-server": "^2.4.1"
+  }
 }
