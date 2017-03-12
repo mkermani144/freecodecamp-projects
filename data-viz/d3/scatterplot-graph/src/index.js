@@ -3,17 +3,12 @@ import d3Tip from 'd3-tip';
 import '../public/index.scss';
 import data from './cyclist-data.json';
 
-const getSeconds = (timeString) => {
-  const [minutes, seconds] = timeString.split(':');
-  return (+minutes * 60) + +seconds;
-};
-
 const ranking = d3.scaleLinear()
   .domain([1, 35])
   .range([0, 400])
   .nice();
 const time = d3.scaleLinear()
-  .domain([getSeconds(data[0].Time), getSeconds(data[data.length - 1].Time)])
+  .domain([data[0].Seconds, data[data.length - 1].Seconds])
   .range([800, 0])
   .nice();
 const xAxis = d3.axisBottom().scale(time)
@@ -33,7 +28,7 @@ svg.selectAll('circle')
   .data(data)
   .enter()
   .append('circle')
-  .attr('transform', el => `translate(${time(getSeconds(el.Time))}, ${ranking(el.Place)})`)
+  .attr('transform', el => `translate(${time(el.Seconds)}, ${ranking(el.Place)})`)
   .attr('fill', el => ['#8BC34A', '#F44336'][+Boolean(el.Doping)])
   .attr('r', 4)
   .attr('cx', 2)
