@@ -46,3 +46,14 @@ svg.append('g')
 svg.append('g')
   .attr('transform', 'translate(20, 10)')
   .call(yAxis);
+svg.append('text')
+  .attr('text-anchor', 'end')
+  .attr('y', 40)
+  .attr('x', -10)
+  .attr('transform', 'rotate(-90)')
+  .text('Ranking');
+svg.append('text')
+  .attr('text-anchor', 'end')
+  .attr('y', 400)
+  .attr('x', 820)
+  .text('Time');
