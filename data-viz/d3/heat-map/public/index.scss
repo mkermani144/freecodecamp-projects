@@ -1,0 +1,41 @@
+body {
+  margin: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: sans-serif;
+  background: linear-gradient(90deg, #C8E6C9 20%, #FFF9C4 50%, #FFCCBC 80%);
+  h4, h2 {
+    margin: .5%;
+    color: #424242;
+  }
+  .heat-map {
+    width: 1112px;
+    height: 505px;
+    > g:nth-of-type(2) line, > g:nth-of-type(2) path{
+      display: none;
+    }
+    rect {
+      cursor: pointer;
+    }
+  }
+  .d3-tip {
+    background-color: #212121;
+    font-weight: bold;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: .75%;
+    max-width: 300px;
+    .tip-date {
+      color: #FAFAFA;
+    }
+    .tip-variance {
+      color: #FAFAFA;
+      text-align: center;
+    }
+  }
+}
