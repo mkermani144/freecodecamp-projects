@@ -7,7 +7,7 @@ const getMonthName = (monthNumber) => {
   const monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
                       'July', 'August', 'September', 'October', 'November', 'December'];
   return monthNames[monthNumber - 1];
-}
+};
 const year = d3.scaleLinear()
   .domain([1753, 2016])
   .range([60, 1112]);
