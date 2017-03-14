@@ -1,0 +1,8 @@
+{
+  "name": "national-contiguity",
+  "version": "1.0.0",
+  "description": "Freecodecamp d3 national contiguity project",
+  "main": "index.js",
+  "repository": "https://github.com/mkermani144/freecodecamp-projects",
+  "license": "MIT"
+}
