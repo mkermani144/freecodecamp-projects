@@ -16,5 +16,9 @@
     "style-loader": "^0.13.2",
     "webpack": "^2.2.1",
     "webpack-dev-server": "^2.4.2"
+  },
+  "dependencies": {
+    "d3": "^4.7.3",
+    "d3-tip": "^0.7.1"
   }
 }
