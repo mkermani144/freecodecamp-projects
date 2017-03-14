@@ -5,6 +5,10 @@
   "main": "index.js",
   "repository": "https://github.com/mkermani144/freecodecamp-projects",
   "license": "MIT",
+  "scripts": {
+    "build": "webpack",
+    "start": "webpack-dev-server --hot --no-info --port 8000 --open --client-log-level warning --content-base public"
+  },
   "devDependencies": {
     "css-loader": "^0.27.3",
     "node-sass": "^4.5.0",
