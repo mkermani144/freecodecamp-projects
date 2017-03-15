@@ -7,8 +7,19 @@ body {
   justify-content: center;
   align-items: center;
   font-family: sans-serif;
-  .graph {
-    width: 800px;
+  overflow: hidden;
+  .flags {
+    width: 1000px;
     height: 600px;
+    overflow: hidden;
+    position: relative;
+    .graph-svg, .graph-div {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
   }
 }
