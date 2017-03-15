@@ -1,0 +1,25 @@
+{
+  "name": "national-contiguity",
+  "version": "1.0.0",
+  "description": "Freecodecamp d3 national contiguity project",
+  "main": "index.js",
+  "repository": "https://github.com/mkermani144/freecodecamp-projects",
+  "license": "MIT",
+  "scripts": {
+    "build": "webpack",
+    "start": "webpack-dev-server --hot --no-info --port 8000 --open --client-log-level warning --content-base public"
+  },
+  "devDependencies": {
+    "css-loader": "^0.27.3",
+    "file-loader": "^0.10.1",
+    "node-sass": "^4.5.0",
+    "sass-loader": "^6.0.3",
+    "style-loader": "^0.13.2",
+    "webpack": "^2.2.1",
+    "webpack-dev-server": "^2.4.2"
+  },
+  "dependencies": {
+    "d3": "^4.7.3",
+    "d3-tip": "^0.7.1"
+  }
+}
