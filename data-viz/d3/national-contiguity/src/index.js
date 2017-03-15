@@ -4,7 +4,7 @@ import '../public/flags.scss';
 import data from './countries.json';
 
 const simulation = d3.forceSimulation()
-  .alpha(.2)
+  .alpha(.3)
   .nodes(data.nodes);
 
 simulation.force('charge', d3.forceManyBody().strength(20))
@@ -13,13 +13,13 @@ simulation.force('charge', d3.forceManyBody().strength(20))
   .force('link', d3.forceLink(data.links).strength(1));
 
 const svg = d3.select('.graph-svg');
-
+const tip = d3.select('.tooltip');
 const link = svg.append('g')
   .selectAll('line')
   .data(data.links)
   .enter()
   .append('line')
-  .attr('stroke', '#999')
+  .attr('stroke', '#FAFAFA')
   .attr('stroke-width', .5);
 
 const node = d3.selectAll('.graph-div')
@@ -28,8 +28,16 @@ const node = d3.selectAll('.graph-div')
   .enter()
   .append('img')
   .attr('class', d => `flag flag-${d.code}`)
-  .style('transform', 'scale(.5)')
-  .style('position', 'absolute');
+  .style('transform', 'scale(.6)')
+  .style('position', 'absolute')
+  .on('mouseover', (d) => {
+    tip.style('display', 'block')
+      .style('position', 'fixed')
+      .style('left', `${d3.event.pageX}px`)
+      .style('top', `${d3.event.pageY}px`)
+      .html(d.country)
+  })
+  .on('mouseout', () => tip.style('display', 'none'));
 
 
 simulation.on('tick', () => {
