@@ -1,0 +1,23 @@
+{
+  "name": "map-data",
+  "version": "1.0.0",
+  "description": "Freecodecamp d3 map data across the globe project",
+  "main": "index.js",
+  "repository": "https://github.com/mkermani144/freecodecamp-projects",
+  "license": "MIT",
+  "scripts": {
+    "build": "webpack",
+    "start": "webpack-dev-server --hot --no-info --port 8000 --open --client-log-level warning --content-base public"
+  },
+  "devDependencies": {
+    "css-loader": "^0.27.3",
+    "node-sass": "^4.5.0",
+    "sass-loader": "^6.0.3",
+    "style-loader": "^0.14.1",
+    "webpack": "^2.2.1",
+    "webpack-dev-server": "^2.4.2"
+  },
+  "dependencies": {
+    "datamaps": "^0.5.8"
+  }
+}

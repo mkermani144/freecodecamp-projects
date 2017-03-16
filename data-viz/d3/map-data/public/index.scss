@@ -1,0 +1,16 @@
+body {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #E1F5FE;
+  font-family: sans-serif;
+  h2 {
+    color: #212121;
+  }
+  #container {
+    width: 90vw;
+    height: 90vh;
+  }
+}
