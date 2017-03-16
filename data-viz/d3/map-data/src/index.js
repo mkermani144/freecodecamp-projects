@@ -22,9 +22,9 @@ for (let i = 0; i < data.features.length; i++) {
     const meteoriteData = {};
     meteoriteData.latitude = data.features[i].geometry.coordinates[1];
     meteoriteData.longitude = data.features[i].geometry.coordinates[0];
-    meteoriteData.radius = Math.max(2, Math.min(50, data.features[i].properties.mass / 100000));
+    meteoriteData.radius = Math.max(1.5, Math.min(90, data.features[i].properties.mass / 50000));
     meteoriteData.data = data.features[i].properties;
-    meteoriteData.borderWidth = 1;
+    meteoriteData.borderWidth = 0;
     meteoriteData.fillKey = ['red', 'blue', 'yellow', 'purple'][Math.floor(Math.random() * 4)];
     newData.push(meteoriteData);
   }
