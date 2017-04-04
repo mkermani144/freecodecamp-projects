@@ -6,3 +6,9 @@ test('dateChecker module functionality on valid dates', (assert) => {
   assert.equal(actual, expected, 'checkDate() should return true for valid dates');
   assert.end();
 });
+test('dateChecer module functionality on valid unix timestamps', (assert) => {
+  const actual = checkDate(1491289118695);
+  const expected = true;
+  assert.equal(actual, expected, 'checkDate() should return true for valid unix timestamps');
+  assert.end();
+});
