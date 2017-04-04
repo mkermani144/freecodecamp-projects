@@ -12,3 +12,21 @@ test('stringChecker module functionality on valid unix timestamps', (assert) => 
   assert.equal(actual, expected, 'checkString() should return true for valid unix timestamps');
   assert.end();
 });
+test('stringChecker module functionality on empty strings', (assert) => {
+  const actual = checkString('');
+  const expected = false;
+  assert.equal(actual, expected, 'checkString() should return false for empty strings');
+  assert.end();
+});
+test('stringChecker module functionality on empty object', (assert) => {
+  const actual = checkString({});
+  const expected = false;
+  assert.equal(actual, expected, 'checkString() should return false for empty objects');
+  assert.end();
+});
+test('stringChecker module functionality on array', (assert) => {
+  const actual = checkString([1, 2, 3]);
+  const expected = false;
+  assert.equal(actual, expected, 'checkString() should return false for array');
+  assert.end();
+});
