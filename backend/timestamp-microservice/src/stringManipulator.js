@@ -10,6 +10,6 @@ const manipulateString = (string) => {
       return { unix, natural };
     }
   }
-  return false;
+  return { unix: null, natural: null };
 }
 module.exports = manipulateString;

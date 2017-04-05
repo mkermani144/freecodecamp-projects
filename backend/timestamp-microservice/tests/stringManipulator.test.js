@@ -15,18 +15,18 @@ test('stringManipulator module functionality on valid unix timestamps', (assert)
 test('stringManipulator module functionality on empty strings', (assert) => {
   const actual = manipulateString('');
   const expected = { unix: null, natural: null };
-  assert.equal(actual, expected, 'manipulateString() should return false for empty strings');
+  assert.deepEqual(actual, expected, 'manipulateString() should return false for empty strings');
   assert.end();
 });
 test('stringManipulator module functionality on empty object', (assert) => {
   const actual = manipulateString({});
   const expected = { unix: null, natural: null };
-  assert.equal(actual, expected, 'manipulateString() should return false for empty objects');
+  assert.deepEqual(actual, expected, 'manipulateString() should return false for empty objects');
   assert.end();
 });
 test('stringManipulator module functionality on arrays', (assert) => {
   const actual = manipulateString([1, 2, 3]);
   const expected = { unix: null, natural: null };
-  assert.equal(actual, expected, 'manipulateString() should return false for arrays');
+  assert.deepEqual(actual, expected, 'manipulateString() should return false for arrays');
   assert.end();
 });
