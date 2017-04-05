@@ -1,5 +1,5 @@
 const { test } = require('tape');
-const manipulateString = require('../stringManipulator');
+const manipulateString = require('../src/stringManipulator');
 test('stringManipulator module functionality on valid natural dates', (assert) => {
   const actual = manipulateString('20 March 2017');
   const expected = { unix: 1489955400, natural: 'Mon Mar 20 2017' };
