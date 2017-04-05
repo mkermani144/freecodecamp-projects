@@ -12,6 +12,12 @@ test('stringManipulator module functionality on valid unix timestamps', (assert)
   assert.deepEqual(actual, expected, 'manipulateString() should return correct date object for valid unix timestamps');
   assert.end();
 });
+test('stringManipulator module functionality on valid small unix timestamps', (assert) => {
+  const actual = manipulateString('1000');
+  const expected = { unix: 1000, natural: 'Thu Jan 01 1970' };
+  assert.deepEqual(actual, expected, 'manipulateString() should return correct date object for valid small unix timestamps');
+  assert.end();
+});
 test('stringManipulator module functionality on empty strings', (assert) => {
   const actual = manipulateString('');
   const expected = { unix: null, natural: null };
