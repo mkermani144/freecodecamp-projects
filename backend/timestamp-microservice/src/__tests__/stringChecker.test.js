@@ -2,8 +2,8 @@ const { test } = require('tape');
 const checkString = require('../stringChecker');
 test('stringChecker module functionality on valid dates', (assert) => {
   const actual = checkString('20 March 2017');
-  const expected = true;
-  assert.equal(actual, expected, 'checkString() should return true for valid dates');
+  const expected = { unix: 1489955400, natural: 'Mon Mar 20 2017' };
+  assert.equal(actual, expected, 'checkString() should return correct date object for valid dates');
   assert.end();
 });
 test('stringChecker module functionality on valid unix timestamps', (assert) => {
