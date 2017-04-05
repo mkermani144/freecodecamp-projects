@@ -1,0 +1,15 @@
+{
+  "name": "timestamp-microservice",
+  "version": "1.0.0",
+  "description": "Freecodecamp timestamp microservice backend project",
+  "main": "main.js",
+  "repository": "https://github.com/mkermani144/freecodecamp-projects",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.15.2",
+    "global": "^4.3.1"
+  },
+  "devDependencies": {
+    "tape": "^4.6.3"
+  }
+}
