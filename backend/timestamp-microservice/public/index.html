@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Freecodecamp timestamp microservice project</title>
+    <link href="https://fonts.googleapis.com/css?family=Exo:100" rel="stylesheet">
+    <style media="screen">
+      body {
+        width: 100%;
+        min-width: 100vw;
+        min-height: 100vh;
+        margin: 0;
+        background-color: #7B1FA2;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+      h1 {
+        font-size: 5vw;
+        font-family: exo, sans-serif;
+        font-weight: 100;
+        color: #F3E5F5;
+      }
+      div {
+        margin-top: 7vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      code {
+        background-color: #F3E5F5;
+        color: #4A148C;
+        padding: 5px;
+        border-radius: 2px;
+        cursor: default;
+      }
+      span {
+        margin: 5px;
+        color: #F3E5F5;
+        font-family: exo, sans-serif;
+      }
+      h3 {
+        font-family: exo, sans-serif;
+        color: #F3E5F5;
+      }
+      a {
+        font-family: monospace;
+        color: #B3E5FC;
+        transition: color .23s;
+      }
+      a:hover {
+        color: #81D4FA;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Timestamp microservice</h1>
+    <div>
+      <h3>Usage</h3>
+      <code>GET https://mkermani144fccp-tm.herokuapp.com/[unix-timestamp]</code>
+      <span>or</span>
+      <code>GET https://mkermani144fccp-tm.herokuapp.com/[natural-date-string]</code>
+    </div>
+    <div>
+      <h3>Example</h3>
+      <a href="https://mkermani144fccp-tm.herokuapp.com/1489955400">https://mkermani144fccp-tm.herokuapp.com/1489955400</a>
+      <a href="https://mkermani144fccp-tm.herokuapp.com/Mar 20 2017">https://mkermani144fccp-tm.herokuapp.com/Mar 20 2017</a>
+      <a href="https://mkermani144fccp-tm.herokuapp.com/2017,20,March">https://mkermani144fccp-tm.herokuapp.com/2017,20,March</a>
+    </div>
+  </body>
+</html>
