@@ -1,4 +1,4 @@
-const checkString = (string) => {
+const manipulateString = (string) => {
   if (typeof string == 'string') {
     if (isNaN(Date.parse(string)) == false) {
       const unix = Date.parse(string) / 1000;
@@ -12,4 +12,4 @@ const checkString = (string) => {
   }
   return false;
 }
-module.exports = checkString;
+module.exports = manipulateString;
