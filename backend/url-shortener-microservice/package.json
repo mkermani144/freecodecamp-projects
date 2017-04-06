@@ -1,0 +1,11 @@
+{
+  "name": "url-shortener-microservice",
+  "version": "1.0.0",
+  "description": "Freecodecamp url shortener microservice project",
+  "main": "index.js",
+  "repository": "https://github.com/mkermani144/freecodecamp-projects",
+  "license": "MIT",
+  "devDependencies": {
+    "tape": "^4.6.3"
+  }
+}
