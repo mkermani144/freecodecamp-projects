@@ -3,11 +3,11 @@ const express = require('express');
 const app = express();
 
 app.get('/', (req, res) => {
-  const ip = req.ip;
+  const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
   const acceptLanguage = req.get('Accept-Language');
   const userAgent = req.get('User-Agent');
   res.send({
-    'IP address': ip.substring(ip.lastIndexOf(':') + 1, ip.length),
+    'IP address': ip,
     language: acceptLanguage.split(',')[0],
     OS: userAgent.substring(userAgent.indexOf('(') + 1, userAgent.indexOf(')')),
   });
