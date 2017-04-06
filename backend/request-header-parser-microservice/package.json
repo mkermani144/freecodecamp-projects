@@ -1,0 +1,11 @@
+{
+  "name": "request-header-parser-microservice",
+  "version": "1.0.0",
+  "description": "Freecodecamp request header parser microserivce project",
+  "main": "index.js",
+  "repository": "https://github.com/mkermani144/freecodecamp-projects",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.15.2"
+  }
+}
