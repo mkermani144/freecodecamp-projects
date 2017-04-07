@@ -19,4 +19,14 @@ const fetchShortURLs = (URL, callback) => {
   });
 };
 
-module.exports = { add, fetchShortURLs };
+const findOriginalURL = (URL, shortURL, callback) => {
+  URL.find({ shortURL }, (err, data) => {
+    if (err) {
+      console.err(err);
+    } else {
+      callback(data);
+    }
+  })
+}
+
+module.exports = { add, fetchShortURLs, findOriginalURL };
