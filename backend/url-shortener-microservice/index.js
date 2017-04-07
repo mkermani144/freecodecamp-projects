@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const express = require('express');
+const path = require('path');
 const validate = require('./src/validate');
 const makeRandomHex = require('./src/makeRandomHex');
 const manipulateDatabase = require('./src/manipulateDatabase');
@@ -46,6 +47,10 @@ db.once('open', () => {
         res.send({ error: 'The URL does not exist on the database.'});
       }
     });
+  });
+
+  app.get('/', (req, res) => {
+    res.sendFile(path.resolve('public/index.html'));
   });
 
   app.listen(process.env.PORT || 8000, () => {
