@@ -33,7 +33,7 @@ db.once('open', () => {
       });
     } else {
       res.send({
-        error: 'Not a valid URL.'
+        error: 'The URL is not valid.'
       });
     }
   });
