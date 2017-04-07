@@ -38,6 +38,16 @@ db.once('open', () => {
     }
   });
 
+  app.get('/:shortURL', (req, res) => {
+    manipulateDatabase.findOriginalURL(URL, req.params.shortURL, (data) => {
+      if (data.length) {
+        res.redirect(data[0].originalURL);
+      } else {
+        res.send({ error: 'The URL does not exist on the database.'});
+      }
+    });
+  });
+
   app.listen(process.env.PORT || 8000, () => {
     console.log(`App is running on http://localhost:${process.env.PORT || 8000}`)
   });
