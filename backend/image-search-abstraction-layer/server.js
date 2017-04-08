@@ -1,7 +1,7 @@
 const express = require('express');
 const Google = require('google-images');
 const dotenv = require('dotenv');
-var path = require('path');
+const path = require('path');
 const extract = require('./src/extract');
 
 dotenv.config();
