@@ -1,0 +1,11 @@
+{
+  "name": "image-search-abstraction-layer",
+  "version": "1.0.0",
+  "description": "Freecodecamp image search abstraction layer project",
+  "main": "server.js",
+  "repository": "https://github.com/mkermani144/freecodecamp-projects",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.15.2"
+  }
+}
