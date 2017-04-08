@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Freecodecamp image search abstraction layer project</title>
+    <link href="https://fonts.googleapis.com/css?family=Exo:100" rel="stylesheet">
+    <style media="screen">
+      body {
+        width: 100%;
+        min-width: 100vw;
+        min-height: 100vh;
+        margin: 0;
+        background-color: #C2185B;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+      h1 {
+        font-size: 5vw;
+        font-family: exo, sans-serif;
+        font-weight: 100;
+        color: #FCE4EC;
+      }
+      h2 {
+      	margin-top: 0px;
+      	font-family: exo, sans-serif;
+      	font-weight: 100;
+      	color: #F3E5F6;
+      }
+      div {
+        margin-top: 7vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      code {
+        background-color: #FCE4EC;
+        color: #880E4F;
+        padding: 5px;
+        border-radius: 2px;
+        cursor: default;
+      }
+      span {
+        margin: 5px;
+        color: #FCE4EC;
+        font-family: exo, sans-serif;
+      }
+      h3 {
+        font-family: exo, sans-serif;
+        color: #FCE4EC;
+      }
+      a {
+        font-family: monospace;
+        color: #B3E5FC;
+        transition: color .23s;
+      }
+      a:hover {
+        color: #81D4FA;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Image search abstraction layer</h1>
+    <h2>Freecodecamp project</h2>
+    <div>
+      <h3>Usage</h3>
+      <span>Search for images</span>
+      <code>GET https://mkermani144fccp-isal.herokuapp.com/api/imagesearch/[search-text]?offset=[page]</code>
+      <span>See recent searches</span>
+      <code>GET https://mkermani144fccp-isal.herokuapp.com/api/recent/imagesearch</code>
+    </div>
+    <div>
+      <h3>Example</h3>
+      <a href="https://mkermani144fccp-isal.herokuapp.com/api/imagesearch/cute baby">https://mkermani144fccp-isal.herokuapp.com/api/imagesearch/cute baby</a>
+      <a href="https://mkermani144fccp-isal.herokuapp.com/api/imagesearch/cute baby?offset=3">https://mkermani144fccp-isal.herokuapp.com/api/imagesearch/cute baby?offset=3</a>
+    </div>
+  </body>
+</html>

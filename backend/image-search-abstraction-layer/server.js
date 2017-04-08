@@ -1,6 +1,7 @@
 const express = require('express');
 const Google = require('google-images');
 const dotenv = require('dotenv');
+var path = require('path');
 const extract = require('./src/extract');
 
 dotenv.config();
@@ -21,6 +22,10 @@ app.get('/api/imagesearch/:query', (req, res) => {
 
 app.get('/api/recent/imagesearch', (req, res) => {
   res.send(recent);
+});
+
+app.get('/', (req, res) => {
+  res.sendFile(path.resolve('public/index.html'));
 });
 
 app.listen((process.env.PORT || 8000), () => {
