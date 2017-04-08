@@ -10,7 +10,7 @@ const client = new Google(process.env.CSE_ID, process.env.API_KEY);
 const recent = Array(5).fill({});
 
 app.get('/api/imagesearch/:query', (req, res) => {
-  client.search(req.params.query)
+  client.search(req.params.query, { page: req.query.offset || 1 })
     .then(images => res.send(extract(images)));
   recent.unshift({
     query: req.params.query,
