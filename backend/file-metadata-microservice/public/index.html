@@ -28,6 +28,12 @@
       	font-weight: 100;
       	color: #E0F2F1;
       }
+      h4 {
+        margin-top: 3vh;
+        font-family: exo, sans-serif;
+        font-weight: 100;
+        color: #E0F2F1;
+      }
       form {
         margin-top: 7vh;
         display: flex;
@@ -71,7 +77,8 @@
     <h1>File metadata microservice</h1>
     <h2>Freecodecamp project</h2>
     <form action="https://mkermani144fccp-fmm.herokuapp.com/api/filesize" method="post" required enctype="multipart/form-data">
-      <label class="custom-file-upload">
+      <h4>Usage: Upload a file and to view its size</h3>
+      <label>
         <input type="file" name="file" />
         Choose file
       </label>
