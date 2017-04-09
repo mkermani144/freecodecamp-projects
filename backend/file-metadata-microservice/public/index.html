@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Freecodecamp file metadata microservice project</title>
+    <link href="https://fonts.googleapis.com/css?family=Exo:100" rel="stylesheet">
+    <style media="screen">
+      body {
+        width: 100%;
+        min-width: 100vw;
+        min-height: 100vh;
+        margin: 0;
+        background-color: #00796B;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+      h1 {
+        font-size: 5vw;
+        font-family: exo, sans-serif;
+        font-weight: 100;
+        color: #E0F2F1;
+      }
+      h2 {
+      	margin-top: 0px;
+      	font-family: exo, sans-serif;
+      	font-weight: 100;
+      	color: #E0F2F1;
+      }
+      h4 {
+        margin-top: 3vh;
+        font-family: exo, sans-serif;
+        font-weight: 100;
+        color: #E0F2F1;
+      }
+      form {
+        margin-top: 7vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      label, button {
+        margin-top: 2vh;
+        cursor: pointer;
+        background-color: #00897B;
+        background-image: linear-gradient(0deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.07) 33%, rgba(255,255,255,0.15) 66%);
+        padding: 1vh;
+        border: 1px solid #E0F2F1;
+        border-radius: 5px;
+        color: #E0F2F1;
+        font-family: exo, sans-serif;
+        font-weight: bold;
+        letter-spacing: 1px;
+        width: 15vw;
+        max-width: 150px;
+        min-width: 100px;
+        text-align: center;
+        transition: background-color .23s;
+      }
+      label:hover, button:hover {
+        background-color: #009688;
+        background-image: linear-gradient(0deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.1) 33%, rgba(255,255,255,0.2) 66%);
+      }
+      label:active, button:active {
+        background-color: #00695C;
+        background-image: linear-gradient(0deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.03) 33%, rgba(255,255,255,0.05) 66%);
+        border-color: rgba(255, 255, 255, .5);
+        outline: none;
+      }
+      input {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>File metadata microservice</h1>
+    <h2>Freecodecamp project</h2>
+    <form action="https://mkermani144fccp-fmm.herokuapp.com/api/filesize" method="post" required enctype="multipart/form-data">
+      <h4>Usage: Upload a file and to view its size</h3>
+      <label>
+        <input type="file" name="file" />
+        Choose file
+      </label>
+      <button type="submit">Submit</button>
+    </form>
+  </body>
+</html>

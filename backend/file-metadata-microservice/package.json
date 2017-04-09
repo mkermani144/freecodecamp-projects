@@ -1,0 +1,12 @@
+{
+  "name": "file-metadata-microservice",
+  "version": "1.0.0",
+  "description": "Freecodecamp file metadata microservice project",
+  "main": "server.js",
+  "repository": "https://github.com/mkermani144/freecodecamp-projects",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.15.2",
+    "multer": "^1.3.0"
+  }
+}
