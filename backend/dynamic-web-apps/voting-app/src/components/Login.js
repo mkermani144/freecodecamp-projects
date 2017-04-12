@@ -8,8 +8,7 @@ import './Login.css';
 class Login extends Component {
   render() {
     const paperStyle = {
-      width: '90vmin',
-      height: '70vmin',
+      padding: '5vmin',
       backgroundColor: blue50,
       display: 'flex',
       flexDirection: 'row',
@@ -20,18 +19,9 @@ class Login extends Component {
       backgroundColor: blue500
     };
     const buttonStyle = {
-      marginTop: '25%',
+      marginTop: '5vmin',
+      alignSelf: 'flex-end'
     };
-    // const underlineStyle = {
-    //   borderColor: blue500,
-    // };
-    // const floatingLabelFocusStyle = {
-    //   color: blue500,
-    // };
-    // const buttonStyle = {
-    //   backgroundColor: blue500,
-    //   color: 'white',
-    // };
     return (
       <div className="Login" style={loginStyle}>
         <Paper className="paper" style={paperStyle}>
@@ -40,23 +30,19 @@ class Login extends Component {
               name="username"
               floatingLabelText="Username"
               floatingLabelFixed={true}
-              // underlineFocusStyle={underlineStyle}
-              // floatingLabelFocusStyle={floatingLabelFocusStyle}
+              autoFocus
             />
             <TextField
               name="password"
               type="password"
               floatingLabelText="Password"
               floatingLabelFixed={true}
-              // underlineFocusStyle={underlineStyle}
-              // floatingLabelFocusStyle={floatingLabelFocusStyle}
             />
             <RaisedButton
               type="submit"
               label="login"
               primary={true}
               style={buttonStyle}
-              // buttonStyle={buttonStyle}
             />
           </form>
         </Paper>
