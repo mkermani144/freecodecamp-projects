@@ -2,26 +2,14 @@
   "name": "voting-app",
   "version": "0.1.0",
   "private": true,
-  "devDependencies": {
-    "react-scripts": "0.9.5"
-  },
   "dependencies": {
     "body-parser": "^1.17.1",
     "express": "^4.15.2",
     "express-graphql": "^0.6.4",
     "graphql": "^0.9.3",
     "material-ui": "^0.17.3",
+    "mongoose": "^4.9.4",
     "passport": "^0.3.2",
-    "passport-local": "^1.0.0",
-    "react": "^15.5.3",
-    "react-dom": "^15.5.3",
-    "react-router-dom": "^4.1.0",
-    "react-tap-event-plugin": "^2.0.1"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "passport-local": "^1.0.0"
   }
 }
