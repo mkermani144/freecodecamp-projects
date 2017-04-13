@@ -3,7 +3,7 @@ import Paper from 'material-ui/Paper';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import { blue50, blue500 } from 'material-ui/styles/colors';
-import './Login.css';
+import './Login-Signup.css';
 
 class Login extends Component {
   render() {

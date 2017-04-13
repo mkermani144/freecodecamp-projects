@@ -2,8 +2,14 @@ const express = require('express');
 const graphqlHTTP = require('express-graphql');
 const { buildSchema } = require('graphql');
 const { User } = require('./src/api/schema');
+const passport = require('passport');
+const LocalStrategy = require('passport-local').Strategy;
+const bodyParser = require('body-parser');
 
 const app = express();
+app.use(bodyParser.urlencoded());
+
+app.post('/login', passport.authenticate('local'));
 
 const APISchema = buildSchema(`
   type User {
