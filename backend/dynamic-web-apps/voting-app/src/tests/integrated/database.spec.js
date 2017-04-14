@@ -1,6 +1,6 @@
 const test = require('tape');
 const User = require('../../../models/User');
-const { connect, add, remove } = require('../../database');
+const { connect, add, remove, findUser } = require('../../database');
 
 test('connection to database', async (assert) => {
   const actual = await connect();
@@ -23,5 +23,14 @@ test('adding duplicates to database', async (assert) => {
   const expected = 2;
   await remove(User, 'sample');
   assert.equal(actual, expected, 'It should not add duplicate documents to the database');
+  assert.end();
+});
+
+test('finding usernames in database', async (assert) => {
+  await add(User, 'sample', 'secret');
+  const actual = await findUser(User, 'sample');
+  const expected = 1;
+  await remove(User, 'sample');
+  assert.equal(actual, expected, 'It should tell if the user exists in the database without errors');
   assert.end();
 });
