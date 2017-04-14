@@ -9,7 +9,6 @@
     "express": "^4.15.2",
     "express-graphql": "^0.6.4",
     "graphql": "^0.9.3",
-    "material-ui": "^0.17.3",
     "mongoose": "^4.9.4",
     "passport": "^0.3.2",
     "passport-local": "^1.0.0"
@@ -18,6 +17,10 @@
     "node": "7.9.0"
   },
   "devDependencies": {
-    "tape": "^4.6.3"
+    "ava": "^0.19.1"
+  },
+  "scripts": {
+    "e2e": "./node_modules/ava/cli.js --serial src/tests/e2e",
+    "unit": "./node_modules/ava/cli.js src/tests/unit"
   }
 }
