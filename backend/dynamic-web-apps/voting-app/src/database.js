@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
+const hashPassword = require('./hashPassword');
 
 dotenv.config();
 
@@ -21,6 +22,7 @@ const add = async (model, username, password) => {
     if (isDuplicate) {
       throw 'username already exists';
     }
+    password = await hashPassword(password);
     await model.create({ username, password });
     console.log('Successfully created document');
     return 0;
