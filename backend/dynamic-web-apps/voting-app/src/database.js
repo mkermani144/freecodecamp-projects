@@ -43,4 +43,13 @@ const remove = async (model, username) => {
   }
 }
 
-module.exports = { connect, add, remove };
+const findUser = async (model, username) => {
+  try {
+    const isTaken = await Boolean(model.findOne({ username }));
+    return +isTaken;
+  } catch (e) {
+    return 2;
+  }
+}
+
+module.exports = { connect, add, remove, findUser };
