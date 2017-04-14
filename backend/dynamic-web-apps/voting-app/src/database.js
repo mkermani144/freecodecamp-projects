@@ -4,7 +4,7 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 mongoose.Promise = global.Promise;
-const connectToDatabase = async (mongoose) => {
+const connect = async () => {
   try {
     await mongoose.connect(process.env.MONGODBURI);
     console.log('Successfully connected to database');
@@ -15,4 +15,15 @@ const connectToDatabase = async (mongoose) => {
   }
 }
 
-module.exports = connectToDatabase;
+const add = async (model, username, password) => {
+  try {
+    await model.create({ username, password });
+    console.log('Successfully created document');
+    return 0;
+  } catch (e) {
+    console.log('Failed to create');
+    return 1;
+  }
+}
+
+module.exports = { connect, add };
