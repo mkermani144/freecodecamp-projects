@@ -17,13 +17,28 @@ const connect = async () => {
 
 const add = async (model, username, password) => {
   try {
+    const isDuplicate = Boolean(await model.findOne({ username }));
+    if (isDuplicate) {
+      throw 'username already exists';
+    }
     await model.create({ username, password });
     console.log('Successfully created document');
     return 0;
   } catch (e) {
-    console.log('Failed to create');
+    console.log('Failed to create document');
+    return e === 'username already exists' ? 2 : 1;
+  }
+}
+
+const remove = async (model, username) => {
+  try {
+    await model.remove({ username });
+    console.log('Successfully removed document');
+    return 0;
+  } catch (e) {
+    console.log('Failed to remove document');
     return 1;
   }
 }
 
-module.exports = { connect, add };
+module.exports = { connect, add, remove };
