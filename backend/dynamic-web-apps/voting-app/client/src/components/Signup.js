@@ -4,6 +4,7 @@ import { Step, Stepper, StepLabel, StepContent } from 'material-ui/Stepper';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import FlatButton from 'material-ui/FlatButton';
+import CircularProgress from 'material-ui/CircularProgress';
 import { blue50, blue500 } from 'material-ui/styles/colors';
 import './Login-Signup.css';
 
@@ -12,7 +13,11 @@ class Signup extends Component {
     super();
     this.state = {
       stepIndex: 0,
+      progress: {
+        visibility: 'hidden'
+      },
     };
+    this.timeout = null;
   }
 
   handleNext = () => {
@@ -26,10 +31,27 @@ class Signup extends Component {
     const { stepIndex } = this.state;
     if (stepIndex > 0) {
       this.setState({
-        stepIndex: stepIndex - 1
+        stepIndex: stepIndex - 1,
       });
     }
   };
+
+  handleUsernameChange = (e) => {
+    clearTimeout(this.timeout);
+    this.setState({
+      progress: {
+        visibility: 'visible',
+      },
+    }, () => {
+      this.timeout = setTimeout(() => {
+        this.setState({
+          progress: {
+            visibility: 'hidden'
+          },
+        });
+      }, 2000);
+    });
+  }
 
   renderStepActions(step) {
 
@@ -84,13 +106,18 @@ class Signup extends Component {
               <Step>
                 <StepLabel>Choose a username</StepLabel>
                 <StepContent>
-                  <TextField
+                  <div className="wrapper">
+                    <TextField
                     name="username"
                     type="text"
                     floatingLabelText="Username"
                     floatingLabelFixed={true}
+                    fullWidth={true}
                     autoFocus
-                  />
+                    onChange={this.handleUsernameChange}
+                    />
+                    <CircularProgress size={20} thickness={2} style={this.state.progress} />
+                  </div>
                   {this.renderStepActions(0)}
                 </StepContent>
               </Step>
@@ -102,6 +129,7 @@ class Signup extends Component {
                     type="password"
                     floatingLabelText="Password"
                     floatingLabelFixed={true}
+                    fullWidth={true}
                     autoFocus
                   />
                   {this.renderStepActions(1)}
@@ -115,6 +143,7 @@ class Signup extends Component {
                     type="password"
                     floatingLabelText="Password (Again)"
                     floatingLabelFixed={true}
+                    fullWidth={true}
                     autoFocus
                   />
                   {this.renderStepActions(2)}
