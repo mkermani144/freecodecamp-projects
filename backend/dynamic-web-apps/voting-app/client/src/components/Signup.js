@@ -133,7 +133,7 @@ class Signup extends Component {
                       autoFocus
                       onChange={this.handleUsernameChange}
                       errorText={
-                        this.state.usernameError == '1' ?
+                        this.state.usernameError === 1 ?
                         'Username already taken' :
                         ''
                       }
