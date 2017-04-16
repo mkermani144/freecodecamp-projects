@@ -16,6 +16,7 @@ class Signup extends Component {
       progress: {
         visibility: 'hidden'
       },
+      usernameError: 0,
     };
     this.timeout = null;
   }
@@ -37,19 +38,35 @@ class Signup extends Component {
   };
 
   handleUsernameChange = (e) => {
+    const username = e.target.value;
     clearTimeout(this.timeout);
     this.setState({
       progress: {
         visibility: 'visible',
       },
-    }, () => {
-      this.timeout = setTimeout(() => {
-        this.setState({
-          progress: {
-            visibility: 'hidden'
-          },
-        });
-      }, 2000);
+    }, async () => {
+      const response = await fetch('http://localhost:8000/api', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          query: `{
+            database {
+              user {
+                userExists(username: "${username}")
+              }
+            }
+          }`
+        }),
+      });
+      const json = await response.json();
+      this.setState({
+        progress: {
+          visibility: 'hidden',
+        },
+        usernameError: json.data.database.user.userExists
+      });
     });
   }
 
@@ -108,13 +125,18 @@ class Signup extends Component {
                 <StepContent>
                   <div className="wrapper">
                     <TextField
-                    name="username"
-                    type="text"
-                    floatingLabelText="Username"
-                    floatingLabelFixed={true}
-                    fullWidth={true}
-                    autoFocus
-                    onChange={this.handleUsernameChange}
+                      name="username"
+                      type="text"
+                      floatingLabelText="Username"
+                      floatingLabelFixed={true}
+                      fullWidth={true}
+                      autoFocus
+                      onChange={this.handleUsernameChange}
+                      errorText={
+                        this.state.usernameError == '1' ?
+                        'Username already taken' :
+                        ''
+                      }
                     />
                     <CircularProgress size={20} thickness={2} style={this.state.progress} />
                   </div>

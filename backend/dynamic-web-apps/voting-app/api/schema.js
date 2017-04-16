@@ -1,15 +1,13 @@
-class User {
-  constructor(username, password) {
-    this.username = username;
-    this.password = password;
+const schema = `
+  type User {
+    userExists(username: String!): Int!
   }
-  getUsername() {
-    console.log(asdf);
-    return this.username;
+  type Database {
+    user: User
   }
-  getPassword() {
-    return this.password;
+  type Query {
+    database: Database
   }
-}
+`;
 
-module.exports.User = User;
+module.exports = schema;

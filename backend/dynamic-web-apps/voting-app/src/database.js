@@ -45,7 +45,7 @@ const remove = async (model, username) => {
 
 const findUser = async (model, username) => {
   try {
-    const isTaken = await Boolean(model.findOne({ username }));
+    const isTaken = Boolean(await model.findOne({ username }));
     return +isTaken;
   } catch (e) {
     return 2;
