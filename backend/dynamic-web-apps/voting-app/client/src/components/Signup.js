@@ -27,6 +27,8 @@ class Signup extends Component {
       4: 'Username is too long',
       5: 'Username is not valid'
     }
+    this.timeout = 0;
+    this.alive = true;
   }
 
   validateUsername = (username) => {
@@ -61,44 +63,47 @@ class Signup extends Component {
   };
 
   handleUsernameChange = (e) => {
+    clearTimeout(this.timeout);
     const username = e.target.value;
-    const validationResult = this.validateUsername(username);
-    if (validationResult == 0) {
-      this.setState({
-        progress: {
-          visibility: 'visible',
-        },
-      }, async () => {
-        const response = await fetch('http://localhost:8000/api', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            query: `{
-              database {
-                user {
-                  userExists(username: "${username}")
-                }
-              }
-            }`
-          }),
-        });
-        const json = await response.json();
+    this.timeout = setTimeout(() => {
+      const validationResult = this.validateUsername(username);
+      if (validationResult == 0) {
         this.setState({
           progress: {
-            visibility: 'hidden',
+            visibility: 'visible',
           },
-          usernameError: json.data.database.user.userExists,
-          nextDisabled: json.data.database.user.userExists !== 0,
+        }, async () => {
+          const response = await fetch('http://localhost:8000/api', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              query: `{
+                database {
+                  user {
+                    userExists(username: "${username}")
+                  }
+                }
+              }`
+            }),
+          });
+          const json = await response.json();
+          this.setState({
+            progress: {
+              visibility: 'hidden',
+            },
+            usernameError: json.data.database.user.userExists,
+            nextDisabled: json.data.database.user.userExists !== 0,
+          });
         });
-      });
-    } else {
-      this.setState({
-        usernameError: validationResult,
-        nextDisabled: true,
-      });
-    }
+      } else {
+        this.setState({
+          usernameError: validationResult,
+          nextDisabled: true,
+        });
+      }
+    }, 200);
   }
 
   renderStepActions(step) {
