@@ -17,6 +17,7 @@ class Signup extends Component {
         visibility: 'hidden'
       },
       usernameError: 0,
+      nextDisabled: true,
     };
     this.timeout = null;
     this.errors = {
@@ -88,12 +89,14 @@ class Signup extends Component {
           progress: {
             visibility: 'hidden',
           },
-          usernameError: json.data.database.user.userExists
+          usernameError: json.data.database.user.userExists,
+          nextDisabled: json.data.database.user.userExists !== 0,
         });
       });
     } else {
       this.setState({
         usernameError: validationResult,
+        nextDisabled: true,
       });
     }
   }
@@ -124,6 +127,7 @@ class Signup extends Component {
           primary={true}
           onClick={this.handleNext}
           style={buttonStyle}
+          disabled={this.state.nextDisabled}
         />
       </div>
     );
