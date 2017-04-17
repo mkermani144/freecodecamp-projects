@@ -19,6 +19,28 @@ class Signup extends Component {
       usernameError: 0,
     };
     this.timeout = null;
+    this.errors = {
+      0: '',
+      1: 'Username is already taken',
+      3: 'Username is too short',
+      4: 'Username is too long',
+      5: 'Username is not valid'
+    }
+  }
+
+  validateUsername = (username) => {
+    if (username.length < 6) {
+      return 3;
+    } else if (username.length > 20) {
+      return 4;
+    } else {
+      const testResult = (/^[a-zA-Z][a-zA-Z0-9_\.]{4,18}[a-zA-Z0-9]$/).test(username);
+      if (testResult) {
+        return 0;
+      } else {
+        return 5;
+      }
+    }
   }
 
   handleNext = () => {
@@ -39,35 +61,41 @@ class Signup extends Component {
 
   handleUsernameChange = (e) => {
     const username = e.target.value;
-    clearTimeout(this.timeout);
-    this.setState({
-      progress: {
-        visibility: 'visible',
-      },
-    }, async () => {
-      const response = await fetch('http://localhost:8000/api', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          query: `{
-            database {
-              user {
-                userExists(username: "${username}")
-              }
-            }
-          }`
-        }),
-      });
-      const json = await response.json();
+    const validationResult = this.validateUsername(username);
+    if (validationResult == 0) {
       this.setState({
         progress: {
-          visibility: 'hidden',
+          visibility: 'visible',
         },
-        usernameError: json.data.database.user.userExists
+      }, async () => {
+        const response = await fetch('http://localhost:8000/api', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            query: `{
+              database {
+                user {
+                  userExists(username: "${username}")
+                }
+              }
+            }`
+          }),
+        });
+        const json = await response.json();
+        this.setState({
+          progress: {
+            visibility: 'hidden',
+          },
+          usernameError: json.data.database.user.userExists
+        });
       });
-    });
+    } else {
+      this.setState({
+        usernameError: validationResult,
+      });
+    }
   }
 
   renderStepActions(step) {
@@ -132,11 +160,7 @@ class Signup extends Component {
                       fullWidth={true}
                       autoFocus
                       onChange={this.handleUsernameChange}
-                      errorText={
-                        this.state.usernameError === 1 ?
-                        'Username already taken' :
-                        ''
-                      }
+                      errorText={this.errors[this.state.usernameError]}
                     />
                     <CircularProgress size={20} thickness={2} style={this.state.progress} />
                   </div>
