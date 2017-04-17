@@ -53,7 +53,7 @@ class Signup extends Component {
     const { stepIndex } = this.state;
     this.setState({
       stepIndex: stepIndex + 1,
-      nextDisabled: stepIndex !== 3,
+      nextDisabled: stepIndex !== 2,
     });
   };
 
@@ -142,7 +142,6 @@ class Signup extends Component {
   }
 
   renderStepActions(step) {
-
     const buttonStyle = {
       marginTop: '5vmin',
       marginLeft: '1vmin',
