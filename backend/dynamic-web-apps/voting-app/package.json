@@ -21,6 +21,7 @@
     "ava": "^0.19.1"
   },
   "scripts": {
+    "start": "nodemon server.js || node server.js",
     "e2e": "./node_modules/ava/cli.js --serial src/tests/e2e",
     "unit": "./node_modules/ava/cli.js src/tests/unit"
   }
