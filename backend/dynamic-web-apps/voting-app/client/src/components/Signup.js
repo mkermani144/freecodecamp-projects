@@ -27,7 +27,8 @@ class Signup extends Component {
       3: 'Username is too short',
       4: 'Username is too long',
       5: 'Username is not valid',
-      6: 'Password must be at least 6 characters length'
+      6: 'Password must be at least 6 characters length',
+      7: 'Passwords entered do not match',
     }
     this.timeout = 0;
     this.alive = true;
@@ -110,7 +111,6 @@ class Signup extends Component {
   }
 
   handlePasswordChange = (e) => {
-    console.log('asdf');
     const password = e.target.value;
     if (password.length >= 6) {
       this.setState({
@@ -122,6 +122,21 @@ class Signup extends Component {
       this.setState({
         nextDisabled: true,
         textFieldError: 6,
+      });
+    }
+  }
+
+  handlePasswordConfirmChange = (e) => {
+    const passwordConfirm = e.target.value;
+    if (passwordConfirm === this.state.password) {
+      this.setState({
+        nextDisabled: false,
+        textFieldError: 0,
+      });
+    } else {
+      this.setState({
+        nextDisabled: true,
+        textFieldError: 7,
       });
     }
   }
@@ -222,6 +237,8 @@ class Signup extends Component {
                     floatingLabelFixed={true}
                     fullWidth={true}
                     autoFocus
+                    onChange={this.handlePasswordConfirmChange}
+                    errorText={this.errors[this.state.textFieldError]}
                   />
                   {this.renderStepActions(2)}
                 </StepContent>
