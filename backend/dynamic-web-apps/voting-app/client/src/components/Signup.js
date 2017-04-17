@@ -16,8 +16,9 @@ class Signup extends Component {
       progress: {
         visibility: 'hidden'
       },
-      usernameError: 0,
+      textFieldError: 0,
       nextDisabled: true,
+      passwrod: '',
     };
     this.timeout = null;
     this.errors = {
@@ -25,7 +26,8 @@ class Signup extends Component {
       1: 'Username is already taken',
       3: 'Username is too short',
       4: 'Username is too long',
-      5: 'Username is not valid'
+      5: 'Username is not valid',
+      6: 'Password must be at least 6 characters length'
     }
     this.timeout = 0;
     this.alive = true;
@@ -50,6 +52,7 @@ class Signup extends Component {
     const { stepIndex } = this.state;
     this.setState({
       stepIndex: stepIndex + 1,
+      nextDisabled: stepIndex !== 3,
     });
   };
 
@@ -93,17 +96,34 @@ class Signup extends Component {
             progress: {
               visibility: 'hidden',
             },
-            usernameError: json.data.database.user.userExists,
+            textFieldError: json.data.database.user.userExists,
             nextDisabled: json.data.database.user.userExists !== 0,
           });
         });
       } else {
         this.setState({
-          usernameError: validationResult,
+          textFieldError: validationResult,
           nextDisabled: true,
         });
       }
     }, 200);
+  }
+
+  handlePasswordChange = (e) => {
+    console.log('asdf');
+    const password = e.target.value;
+    if (password.length >= 6) {
+      this.setState({
+        password,
+        nextDisabled: false,
+        textFieldError: 0,
+      });
+    } else {
+      this.setState({
+        nextDisabled: true,
+        textFieldError: 6,
+      });
+    }
   }
 
   renderStepActions(step) {
@@ -169,7 +189,7 @@ class Signup extends Component {
                       fullWidth={true}
                       autoFocus
                       onChange={this.handleUsernameChange}
-                      errorText={this.errors[this.state.usernameError]}
+                      errorText={this.errors[this.state.textFieldError]}
                     />
                     <CircularProgress size={20} thickness={2} style={this.state.progress} />
                   </div>
@@ -186,6 +206,8 @@ class Signup extends Component {
                     floatingLabelFixed={true}
                     fullWidth={true}
                     autoFocus
+                    onChange={this.handlePasswordChange}
+                    errorText={this.errors[this.state.textFieldError]}
                   />
                   {this.renderStepActions(1)}
                 </StepContent>
