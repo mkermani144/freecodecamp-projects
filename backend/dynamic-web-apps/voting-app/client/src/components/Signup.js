@@ -40,7 +40,7 @@ class Signup extends Component {
     } else if (username.length > 20) {
       return 4;
     } else {
-      const testResult = (/^[a-zA-Z][a-zA-Z0-9_\.]{4,18}[a-zA-Z0-9]$/).test(username);
+      const testResult = (/^[a-zA-Z][a-zA-Z0-9_.]{4,18}[a-zA-Z0-9]$/).test(username);
       if (testResult) {
         return 0;
       } else {
@@ -72,7 +72,7 @@ class Signup extends Component {
     const username = e.target.value;
     this.timeout = setTimeout(() => {
       const validationResult = this.validateUsername(username);
-      if (validationResult == 0) {
+      if (validationResult === 0) {
         this.setState({
           progress: {
             visibility: 'visible',
