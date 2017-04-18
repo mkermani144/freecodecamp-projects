@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router';
 import Paper from 'material-ui/Paper';
 import { Step, Stepper, StepLabel, StepContent } from 'material-ui/Stepper';
 import TextField from 'material-ui/TextField';
@@ -18,7 +19,9 @@ class Signup extends Component {
       },
       textFieldError: 0,
       nextDisabled: true,
+      username: '',
       passwrod: '',
+      isLoggedIn: false,
     };
     this.timeout = null;
     this.errors = {
@@ -98,6 +101,7 @@ class Signup extends Component {
             progress: {
               visibility: 'hidden',
             },
+            username,
             textFieldError: json.data.database.user.userExists,
             nextDisabled: json.data.database.user.userExists !== 0,
           });
@@ -142,6 +146,33 @@ class Signup extends Component {
     }
   }
 
+  handleSubmit = async () => {
+    const response = await fetch('http://localhost:8000/api', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        query: `{
+          database {
+            user {
+              create(username: "${this.state.username}", password: "${this.state.password}")
+            }
+          }
+        }`
+      }),
+    });
+    const json = await response.json();
+    console.log(json);
+    if (json.data.database.user.create === 0) {
+      this.setState({
+        isLoggedIn: true,
+      });
+    } else {
+      // Render "try again later" message
+    }
+  }
+
   renderStepActions(step) {
     const buttonStyle = {
       marginTop: '5vmin',
@@ -161,11 +192,11 @@ class Signup extends Component {
         )}
         <RaisedButton
           label={step === 3 ? 'Sign up' : 'Next'}
-          type={step === 3 ? 'submit' : 'button'}
+          type='button'
           disableTouchRipple={true}
           disableFocusRipple={true}
           primary={true}
-          onClick={this.handleNext}
+          onClick={step === 3 ? this.handleSubmit : this.handleNext}
           style={buttonStyle}
           disabled={this.state.nextDisabled}
         />
@@ -187,10 +218,10 @@ class Signup extends Component {
       justifyContent: 'flex-start',
     };
     const { stepIndex } = this.state;
-    return (
+    return this.state.isLoggedIn ? <Redirect to="/" /> : (
       <div className="Signup" style={signupStyle}>
         <Paper className="paper" style={paperStyle}>
-          <form action="/signup" method="post">
+          <form>
             <Stepper activeStep={stepIndex} orientation="vertical">
               <Step>
                 <StepLabel>Choose a username</StepLabel>
