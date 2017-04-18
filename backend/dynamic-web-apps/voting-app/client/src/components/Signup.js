@@ -6,6 +6,7 @@ import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import FlatButton from 'material-ui/FlatButton';
 import CircularProgress from 'material-ui/CircularProgress';
+import Snackbar from 'material-ui/Snackbar';
 import { blue50, blue500 } from 'material-ui/styles/colors';
 import './Login-Signup.css';
 
@@ -22,6 +23,7 @@ class Signup extends Component {
       username: '',
       passwrod: '',
       isLoggedIn: false,
+      submitFailed: false,
     };
     this.timeout = null;
     this.errors = {
@@ -163,14 +165,23 @@ class Signup extends Component {
       }),
     });
     const json = await response.json();
-    console.log(json);
-    if (json.data.database.user.create === 0) {
+    try {
+      if (json.data.database.user.create === 0) {
+        this.setState({
+          isLoggedIn: true,
+        });
+      }
+    } catch (e) {
       this.setState({
-        isLoggedIn: true,
+        submitFailed: true,
       });
-    } else {
-      // Render "try again later" message
     }
+  }
+
+  handleSnackbarClose = () => {
+    this.setState({
+      submitFailed: false,
+    });
   }
 
   renderStepActions(step) {
@@ -289,6 +300,12 @@ class Signup extends Component {
             </Stepper>
           </form>
         </Paper>
+        <Snackbar
+          open={this.state.submitFailed}
+          message="Something bad happended. Try again later."
+          autoHideDuration={4000}
+          onRequestClose={this.handleSnackbarClose}
+        />
       </div>
     );
   }
