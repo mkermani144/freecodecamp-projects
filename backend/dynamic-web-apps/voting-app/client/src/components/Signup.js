@@ -62,6 +62,7 @@ class Signup extends Component {
     if (stepIndex > 0) {
       this.setState({
         stepIndex: stepIndex - 1,
+        textFieldError: '',
       });
     }
   };
@@ -213,32 +214,38 @@ class Signup extends Component {
               <Step>
                 <StepLabel>Set a password</StepLabel>
                 <StepContent>
-                  <TextField
-                    name="password"
-                    type="password"
-                    floatingLabelText="Password"
-                    floatingLabelFixed={true}
-                    fullWidth={true}
-                    autoFocus
-                    onChange={this.handlePasswordChange}
-                    errorText={this.errors[this.state.textFieldError]}
-                  />
+                  <div className="wrapper">
+                    <TextField
+                      name="password"
+                      type="password"
+                      floatingLabelText="Password"
+                      floatingLabelFixed={true}
+                      fullWidth={true}
+                      autoFocus
+                      onChange={this.handlePasswordChange}
+                      errorText={this.errors[this.state.textFieldError]}
+                    />
+                    <CircularProgress size={20} thickness={2} style={{visibility: 'hidden'}} />
+                  </div>
                   {this.renderStepActions(1)}
                 </StepContent>
               </Step>
               <Step>
                 <StepLabel>Confirm password</StepLabel>
                 <StepContent>
-                  <TextField
-                    name="password"
-                    type="password"
-                    floatingLabelText="Password (Again)"
-                    floatingLabelFixed={true}
-                    fullWidth={true}
-                    autoFocus
-                    onChange={this.handlePasswordConfirmChange}
-                    errorText={this.errors[this.state.textFieldError]}
-                  />
+                  <div className="wrapper">
+                    <TextField
+                      name="password"
+                      type="password"
+                      floatingLabelText="Password (Again)"
+                      floatingLabelFixed={true}
+                      fullWidth={true}
+                      autoFocus
+                      onChange={this.handlePasswordConfirmChange}
+                      errorText={this.errors[this.state.textFieldError]}
+                    />
+                    <CircularProgress size={20} thickness={2} style={{visibility: 'hidden'}} />
+                  </div>
                   {this.renderStepActions(2)}
                 </StepContent>
               </Step>
