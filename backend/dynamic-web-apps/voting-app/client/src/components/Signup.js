@@ -83,19 +83,13 @@ class Signup extends Component {
             visibility: 'visible',
           },
         }, async () => {
-          const response = await fetch('http://localhost:8000/api', {
+          const response = await fetch('http://localhost:8000/api/findUser', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-              query: `{
-                database {
-                  user {
-                    userExists(username: "${username}")
-                  }
-                }
-              }`
+              username
             }),
           });
           const json = await response.json();
@@ -104,8 +98,8 @@ class Signup extends Component {
               visibility: 'hidden',
             },
             username,
-            textFieldError: json.data.database.user.userExists,
-            nextDisabled: json.data.database.user.userExists !== 0,
+            textFieldError: +json.userExists,
+            nextDisabled: +json.userExists !== 0,
           });
         });
       } else {
