@@ -143,29 +143,21 @@ class Signup extends Component {
   }
 
   handleSubmit = async () => {
-    const response = await fetch('http://localhost:8000/api', {
+    const response = await fetch('http://localhost:8000/signup', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        query: `{
-          database {
-            user {
-              create(username: "${this.state.username}", password: "${this.state.password}")
-            }
-          }
-        }`
+        username: this.state.username,
+        password: this.state.password
       }),
     });
-    const json = await response.json();
-    try {
-      if (json.data.database.user.create === 0) {
-        this.setState({
-          isLoggedIn: true,
-        });
-      }
-    } catch (e) {
+    if (response.ok) {
+      this.setState({
+        isLoggedIn: true,
+      });
+    } else {
       this.setState({
         submitFailed: true,
       });
