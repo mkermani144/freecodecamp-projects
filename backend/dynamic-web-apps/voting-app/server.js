@@ -4,8 +4,9 @@ const cors = require('cors');
 const session = require('express-session');
 const passport = require('passport');
 
-const User = require('./models/User');
 const db = require('./src/database');
+const signup = require('./routes/signup');
+const api = require('./routes/api');
 require('./config/passport');
 
 db.connect();
@@ -21,29 +22,8 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.post('/api/finduser', async (req, res) => {
-  const result = await db.findUser(User, req.body.username);
-  res.json({ userExists: result !== 0 });
-});
-
-app.post('/signup', async (req, res) => {
-  const result = await db.add(User, req.body.username, req.body.password);
-  if (result === 0) {
-    passport.authenticate('local', (err, user, info) => {
-      if (err) {
-        return res.status(500).end();
-      }
-      req.logIn(user, (err) => {
-        if (err) {
-          return res.status(500).end();
-        }
-        res.status(200).end();
-      });
-    })(req, res);
-  } else {
-    res.status(500).end();
-  }
-});
+app.use('/signup', signup);
+app.use('/api', api);
 
 const port = process.env.PORT || 8000;
 app.listen(port, () => console.log(`App is running on http://localhost:${port}`));
