@@ -1,0 +1,55 @@
+.vote {
+  margin-bottom: 0;
+  animation: fadeIn 2s ease-out;
+  font-family: 'Black Ops One', cursive;
+  font-weight: normal;
+  font-size: 10vw;
+  color: #FAFAFA;
+}
+.fccp {
+  margin-top: 0;
+  animation: fadeInMoreDelay 2s linear;
+  font-family: 'Black Ops One', cursive;
+  font-weight: normal;
+  font-size: 2vw;
+  color: #E0E0E0;
+}
+.view-all-polls {
+  margin-top: 7vw;
+  animation: fadeInEvenMoreDelay 2s ease-out;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  25% {
+    opacity: 0;
+    transform: scale(1.03);
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes fadeInMoreDelay {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes fadeInEvenMoreDelay {
+  0% {
+    opacity: 0;
+  }
+  75% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}

@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import reactTapEventPlugin from 'react-tap-event-plugin';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import { blue500 } from 'material-ui/styles/colors';
+import { blue500, redA200 } from 'material-ui/styles/colors';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Home from './components/Home';
 import Login from './components/Login';
@@ -15,6 +15,7 @@ reactTapEventPlugin();
 const customTheme = getMuiTheme({
   palette: {
     primary1Color: blue500,
+    accent1Color: redA200,
   },
 });
 

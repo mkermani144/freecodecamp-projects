@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import FlatButton from 'material-ui/FlatButton';
+import RaisedButton from 'material-ui/RaisedButton';
 import { grey50, grey600, blue600, blue500 } from 'material-ui/styles/colors';
 import './Home.css';
 
@@ -28,6 +29,9 @@ class Home extends Component {
     const actionButtonLabelStyle = {
       color: grey50,
     };
+    const viewAllButtonRippleStyle = {
+      color: 'black',
+    };
     return (
       <div className="Home" style={homeStyle}>
         <div className="actions" style={actionsStyle}>
@@ -46,6 +50,20 @@ class Home extends Component {
             hoverColor={blue600}
           />
         </div>
+        <h1 className="vote">
+          Vote
+        </h1>
+        <h3 className="fccp">
+          Freecodecamp project
+        </h3>
+        <RaisedButton
+          className="view-all-polls"
+          containerElement={<Link to="/polls" />}
+          label="View all polls"
+          secondary={true}
+          rippleStyle={viewAllButtonRippleStyle}
+          hoverColor={blue600}
+        />
       </div>
     );
   }
