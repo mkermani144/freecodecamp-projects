@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import AppBar from 'material-ui/AppBar';
 import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
-import { grey50, grey600, blue600, blue500 } from 'material-ui/styles/colors';
+import { grey50, grey600, blue500, blue600 } from 'material-ui/styles/colors';
 import './Home.css';
 
 class Home extends Component {
@@ -22,11 +23,7 @@ class Home extends Component {
       alignItems: 'center',
       minHeight: '100vh',
     };
-    const actionsStyle = {
-      alignSelf: 'flex-end',
-      padding: '10px',
-    };
-    const actionButtonLabelStyle = {
+    const appbarButtonLabelStyle = {
       color: grey50,
     };
     const viewAllButtonRippleStyle = {
@@ -34,22 +31,29 @@ class Home extends Component {
     };
     return (
       <div className="Home" style={homeStyle}>
-        <div className="actions" style={actionsStyle}>
-          <FlatButton
-            containerElement={<Link to="/login" />}
-            label="Login"
-            labelStyle={actionButtonLabelStyle}
-            rippleColor={grey600}
-            hoverColor={blue600}
-          />
-          <FlatButton
-            containerElement={<Link to="/signup" />}
-            label="Signup"
-            labelStyle={actionButtonLabelStyle}
-            rippleColor={grey600}
-            hoverColor={blue600}
-          />
-        </div>
+        <AppBar
+          style={{backgroundColor: blue500}}
+          zDepth={0}
+          iconElementLeft={<div />}
+          iconElementRight={
+            <div>
+              <FlatButton
+                containerElement={<Link to="/login" />}
+                label="Login"
+                labelStyle={appbarButtonLabelStyle}
+                rippleColor={grey600}
+                hoverColor={blue600}
+              />
+              <FlatButton
+                containerElement={<Link to="/signup" />}
+                label="Signup"
+                labelStyle={appbarButtonLabelStyle}
+                rippleColor={grey600}
+                hoverColor={blue600}
+              />
+            </div>
+          }
+        />
         <h1 className="vote">
           Vote
         </h1>
