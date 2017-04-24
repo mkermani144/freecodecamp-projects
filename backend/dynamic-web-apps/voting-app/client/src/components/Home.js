@@ -35,7 +35,7 @@ class Home extends Component {
       minHeight: '250px',
       display: 'flex',
       flexDirection: 'column',
-      alignItems: 'center',
+      alignItems: 'stretch',
       justifyContent: 'center',
     };
     return (
@@ -81,14 +81,24 @@ class Home extends Component {
           <h3>Recent polls</h3>
           <div className="polls">
             <Paper className="poll" zDepth={5} style={paperStyle}>
+              <div />
+              <h4>Angular vs React</h4>
             </Paper>
             <Paper className="poll" zDepth={5} style={paperStyle}>
+              <div />
+              <h4>Barcelona vs Real Madrid</h4>
             </Paper>
             <Paper className="poll" zDepth={5} style={paperStyle}>
+              <div />
+              <h4>Best movie of 2017</h4>
             </Paper>
             <Paper className="poll" zDepth={5} style={paperStyle}>
+              <div />
+              <h4>Most popular programming language</h4>
             </Paper>
             <Paper className="poll" zDepth={5} style={paperStyle}>
+              <div />
+              <h4>Most popular operating system</h4>
             </Paper>
           </div>
         </div>
