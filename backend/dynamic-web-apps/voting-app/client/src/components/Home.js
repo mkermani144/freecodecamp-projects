@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import AppBar from 'material-ui/AppBar';
 import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
+import Paper from 'material-ui/Paper';
 import { grey50, grey600, blue500, blue600 } from 'material-ui/styles/colors';
 import './Home.css';
 
@@ -28,6 +29,14 @@ class Home extends Component {
     };
     const viewAllButtonRippleStyle = {
       color: 'black',
+    };
+    const paperStyle = {
+      minWidth: '250px',
+      minHeight: '250px',
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      justifyContent: 'center',
     };
     return (
       <div className="Home" style={homeStyle}>
@@ -68,6 +77,21 @@ class Home extends Component {
           rippleStyle={viewAllButtonRippleStyle}
           hoverColor={blue600}
         />
+        <div className="recent">
+          <h3>Recent polls</h3>
+          <div className="polls">
+            <Paper className="poll" zDepth={5} style={paperStyle}>
+            </Paper>
+            <Paper className="poll" zDepth={5} style={paperStyle}>
+            </Paper>
+            <Paper className="poll" zDepth={5} style={paperStyle}>
+            </Paper>
+            <Paper className="poll" zDepth={5} style={paperStyle}>
+            </Paper>
+            <Paper className="poll" zDepth={5} style={paperStyle}>
+            </Paper>
+          </div>
+        </div>
       </div>
     );
   }
