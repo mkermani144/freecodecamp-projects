@@ -32,8 +32,8 @@ class Home extends Component {
       color: 'black',
     };
     const paperStyle = {
-      minWidth: '250px',
-      minHeight: '250px',
+      minWidth: '350px',
+      minHeight: '350px',
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'stretch',
@@ -130,6 +130,7 @@ class Home extends Component {
                       legend: 'none',
                       pieHole: 0,
                       is3D: false,
+                      pieSliceText: 'label',
                     }
                   }
                 />
@@ -148,6 +149,7 @@ class Home extends Component {
                       legend: 'none',
                       pieHole: 0,
                       is3D: false,
+                      pieSliceText: 'label',
                     }
                   }
                 />
@@ -166,6 +168,7 @@ class Home extends Component {
                       legend: 'none',
                       pieHole: 0,
                       is3D: false,
+                      pieSliceText: 'label',
                     }
                   }
                 />
@@ -184,6 +187,7 @@ class Home extends Component {
                       legend: 'none',
                       pieHole: 0,
                       is3D: false,
+                      pieSliceText: 'label',
                     }
                   }
                 />
@@ -202,6 +206,7 @@ class Home extends Component {
                       legend: 'none',
                       pieHole: 0,
                       is3D: false,
+                      pieSliceText: 'label',
                     }
                   }
                 />
