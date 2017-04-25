@@ -3217,6 +3217,10 @@ loader-utils@0.2.x, loader-utils@^0.2.11, loader-utils@^0.2.16, loader-utils@^0.
     json5 "^0.5.0"
     object-assign "^4.0.1"
 
+loadjs@^3.3.1:
+  version "3.5.0"
+  resolved "https://registry.yarnpkg.com/loadjs/-/loadjs-3.5.0.tgz#1dd8934c064c5dad9c62c513875918e87db8e6e1"
+
 lodash._arraycopy@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/lodash._arraycopy/-/lodash._arraycopy-3.0.0.tgz#76e7b7c1f1fb92547374878a562ed06a3e50f6e1"
@@ -4278,7 +4282,7 @@ react-dev-utils@^0.5.2:
     sockjs-client "1.0.1"
     strip-ansi "3.0.1"
 
-react-dom@^15.5.3:
+react-dom@^15.3.2, react-dom@^15.5.3:
   version "15.5.3"
   resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-15.5.3.tgz#2ee127ce942df55da53111ae303316e68072b5c5"
   dependencies:
@@ -4295,6 +4299,15 @@ react-event-listener@^0.4.5:
     fbjs "^0.8.4"
     prop-types "^15.5.4"
     warning "^3.0.0"
+
+react-google-charts@^1.5.4-alpha.1:
+  version "1.5.4-alpha.1"
+  resolved "https://registry.yarnpkg.com/react-google-charts/-/react-google-charts-1.5.4-alpha.1.tgz#073518461f08aaa731199de382c3c2d78795d4c3"
+  dependencies:
+    debug "^2.2.0"
+    loadjs "^3.3.1"
+    react "^15.3.2"
+    react-dom "^15.3.2"
 
 react-router-dom@^4.1.0:
   version "4.1.0"
@@ -4368,7 +4381,7 @@ react-tap-event-plugin@^2.0.1:
   dependencies:
     fbjs "^0.8.6"
 
-react@^15.5.3:
+react@^15.3.2, react@^15.5.3:
   version "15.5.3"
   resolved "https://registry.yarnpkg.com/react/-/react-15.5.3.tgz#84055382c025dec4e3b902bb61a8697cc79c1258"
   dependencies:
