@@ -8,6 +8,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Home from './components/Home';
 import Login from './components/Login';
 import Signup from './components/Signup';
+import Poll from './components/Poll';
 import './index.css';
 
 reactTapEventPlugin();
@@ -26,6 +27,7 @@ ReactDOM.render((
           <Route exact path="/" component={Home} />
           <Route path="/login" component={Login} />
           <Route path="/signup" component={Signup} />
+          <Route path="/poll/:id" component={Poll} />
         </div>
       </Router>
     </MuiThemeProvider>
