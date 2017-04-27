@@ -6,13 +6,30 @@ import RaisedButton from 'material-ui/RaisedButton';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 import Paper from 'material-ui/Paper';
-import { grey50, grey600, blue500, blue600 } from 'material-ui/styles/colors';
+import { grey50, grey300, grey600, blue500, blue600 } from 'material-ui/styles/colors';
 import { Chart } from 'react-google-charts';
 import './Poll.css';
 
 class Poll extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      value: '',
+    };
+  }
+  handleChange = (event, index, value) => {
+    this.setState({
+      value,
+    });
+  }
   render() {
     const appbarButtonLabelStyle = {
+      color: grey50,
+    };
+    const selectFloatingLabelStyle = {
+      color: grey300,
+    };
+    const selectLabelStyle = {
       color: grey50,
     };
     const data = [
@@ -69,6 +86,10 @@ class Poll extends React.Component {
             <p className="poll-description">Which one do you prefer? Angular or React?</p>
             <SelectField
               floatingLabelText="Your choice"
+              floatingLabelStyle={selectFloatingLabelStyle}
+              labelStyle={selectLabelStyle}
+              value={this.state.value}
+              onChange={this.handleChange}
             >
               <MenuItem value={1} primaryText="Angular" />
               <MenuItem value={2} primaryText="React" />
