@@ -5,10 +5,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import { blue500, redA200 } from 'material-ui/styles/colors';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import Home from './components/Home';
-import Login from './components/Login';
-import Signup from './components/Signup';
-import Poll from './components/Poll';
+import App from './components/App';
 import './index.css';
 
 reactTapEventPlugin();
@@ -23,12 +20,7 @@ const customTheme = getMuiTheme({
 ReactDOM.render((
     <MuiThemeProvider muiTheme={customTheme}>
       <Router>
-        <div>
-          <Route exact path="/" component={Home} />
-          <Route path="/login" component={Login} />
-          <Route path="/signup" component={Signup} />
-          <Route path="/poll/:id" component={Poll} />
-        </div>
+        <Route path="/" component={App}></Route>
       </Router>
     </MuiThemeProvider>
   ),

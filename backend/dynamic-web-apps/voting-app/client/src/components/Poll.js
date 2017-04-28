@@ -1,12 +1,9 @@
 import React, { PropTypes } from 'react';
-import { Link } from 'react-router-dom';
-import AppBar from 'material-ui/AppBar';
-import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 import Paper from 'material-ui/Paper';
-import { grey50, grey300, grey600, blue500, blue600 } from 'material-ui/styles/colors';
+import { grey50, grey300 } from 'material-ui/styles/colors';
 import { Chart } from 'react-google-charts';
 import './Poll.css';
 
@@ -47,39 +44,6 @@ class Poll extends React.Component {
     };
     return (
       <div className="Poll">
-        <AppBar
-          style={{backgroundColor: blue500}}
-          zDepth={0}
-          iconElementLeft={
-            <div>
-              <FlatButton
-                containerElement={<Link to="/" />}
-                label="Home"
-                labelStyle={appbarButtonLabelStyle}
-                rippleColor={grey600}
-                hoverColor={blue600}
-              />
-            </div>
-          }
-          iconElementRight={
-            <div>
-              <FlatButton
-                containerElement={<Link to="/login" />}
-                label="Login"
-                labelStyle={appbarButtonLabelStyle}
-                rippleColor={grey600}
-                hoverColor={blue600}
-              />
-              <FlatButton
-                containerElement={<Link to="/signup" />}
-                label="Signup"
-                labelStyle={appbarButtonLabelStyle}
-                rippleColor={grey600}
-                hoverColor={blue600}
-              />
-            </div>
-          }
-        />
         <div className="main">
           <div className="poll-info">
             <h3 className="poll-title">Angular vs React</h3>

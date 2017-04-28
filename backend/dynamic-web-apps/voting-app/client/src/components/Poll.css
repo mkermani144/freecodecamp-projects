@@ -4,7 +4,7 @@
   align-items: center;
   justify-content: space-between;
   background-color: rgb(33, 150, 243);
-  min-height: 100vh;
+  flex: 1;
 }
 .main {
   flex: 1;

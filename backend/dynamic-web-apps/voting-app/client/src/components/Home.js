@@ -25,9 +25,6 @@ class Home extends Component {
       alignItems: 'center',
       minHeight: '100vh',
     };
-    const appbarButtonLabelStyle = {
-      color: grey50,
-    };
     const viewAllButtonRippleStyle = {
       color: 'black',
     };
@@ -78,29 +75,6 @@ class Home extends Component {
     ]
     return (
       <div className="Home" style={homeStyle}>
-        <AppBar
-          style={{backgroundColor: blue500}}
-          zDepth={0}
-          iconElementLeft={<div />}
-          iconElementRight={
-            <div>
-              <FlatButton
-                containerElement={<Link to="/login" />}
-                label="Login"
-                labelStyle={appbarButtonLabelStyle}
-                rippleColor={grey600}
-                hoverColor={blue600}
-              />
-              <FlatButton
-                containerElement={<Link to="/signup" />}
-                label="Signup"
-                labelStyle={appbarButtonLabelStyle}
-                rippleColor={grey600}
-                hoverColor={blue600}
-              />
-            </div>
-          }
-        />
         <h1 className="vote">
           Vote
         </h1>
@@ -113,7 +87,6 @@ class Home extends Component {
           label="View all polls"
           secondary={true}
           rippleStyle={viewAllButtonRippleStyle}
-          hoverColor={blue600}
         />
         <div className="recent">
           <h3>Recent polls</h3>
