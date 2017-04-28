@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 import RaisedButton from 'material-ui/RaisedButton';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
@@ -20,9 +20,6 @@ class Poll extends React.Component {
     });
   }
   render() {
-    const appbarButtonLabelStyle = {
-      color: grey50,
-    };
     const selectFloatingLabelStyle = {
       color: grey300,
     };

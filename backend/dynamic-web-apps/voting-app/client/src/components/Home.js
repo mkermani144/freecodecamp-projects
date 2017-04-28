@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import AppBar from 'material-ui/AppBar';
-import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
 import Paper from 'material-ui/Paper';
-import { grey50, grey600, blue500, blue600 } from 'material-ui/styles/colors';
+import { blue500 } from 'material-ui/styles/colors';
 import { Chart } from 'react-google-charts';
 import './Home.css';
 
