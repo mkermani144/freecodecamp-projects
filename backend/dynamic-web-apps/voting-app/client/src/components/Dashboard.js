@@ -38,7 +38,7 @@ class Dashboard extends Component {
         primary={true}
         keyboardFocused={true}
         onTouchTap={this.handleClose}
-        disabled= {this.state.value === -1}
+        disabled={this.state.value === -1}
       />,
       <FlatButton
         label="Cancel"
@@ -79,10 +79,10 @@ class Dashboard extends Component {
           floatingLabelText="Your choice"
           value={this.state.value}
           fullWidth={true}
-          disabled= {this.state.choices === ''}
+          disabled={this.state.choices === ''}
           onChange={(event, index, value) => this.setState({value})}
         >
-          {this.state.choices.split(',').map((el, i) => <MenuItem value={i} primaryText={el} />)}
+          {this.state.choices.split(',').map((el, i) => <MenuItem key={i} value={i} primaryText={el} />)}
         </SelectField>
       </Dialog>
     );
