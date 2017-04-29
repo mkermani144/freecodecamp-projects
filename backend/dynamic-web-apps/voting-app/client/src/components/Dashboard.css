@@ -1,0 +1,56 @@
+.Dashboard {
+  padding-bottom: 10vh;
+}
+.Dashboard > h1 {
+  font-family: roboto;
+  font-weight: normal;
+  font-size: 300%;
+  color: #FAFAFA;
+}
+.your-polls {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.your-polls h3 {
+  color: #FAFAFA;
+  font-family: roboto;
+  font-weight: normal;
+}
+.your-polls .polls {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  padding: 2%;
+}
+.poll {
+  cursor: pointer;
+  margin-bottom: 2%;
+  margin-left: 1%;
+  margin-right: 1%;
+}
+.poll:hover {
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23) !important;
+}
+.poll:active {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24) !important;
+}
+.poll div {
+  flex: 3;
+}
+.poll h4 {
+  margin: 0;
+  padding-left: 2%;
+  padding-right: 2%;
+  flex: 1;
+  background-color: #E3F2FD;
+  border-top: 1px solid #BBDEFB;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-family: roboto;
+  font-weight: normal;
+  color: #424242;
+}
