@@ -12,27 +12,27 @@ const removePoll = (user, pollID) => {
   return {
     type: 'REMOVE_POLL',
     user,
-    pollID,
+    index,
   };
 };
 
-const addOption = (pollID, options) => {
+const addChoice = (pollID, choice) => {
   return {
-    type: 'ADD_OPTION',
-    pollID,
-    options,
+    type: 'ADD_CHOICE',
+    index,
+    choice,
   };
 };
 
 const vote = (pollID, choice) => {
   return {
     type: 'VOTE',
-    pollID,
+    index,
     choice,
   };
 };
 
 export addPoll;
 export removePoll;
-export addOption;
+export addChoice;
 export vote;
