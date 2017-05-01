@@ -11,7 +11,6 @@ const polls = (state = [], action) => {
           choices: choices.reduce((el, next) => Object.assign(el, {[`${next}`]: 0}), {}),
         }
       ];
-      break;
     case 'REMOVE_POLL':
       return [
         ...state.slice(0, action.index),
@@ -23,7 +22,7 @@ const polls = (state = [], action) => {
         {
           ...state[action.index],
           choices: Object.assign(state[action.index].choices, {
-            action.choice: 0,
+            [`${action.choice}`]: 0,
           }),
         }
       ];
@@ -33,7 +32,7 @@ const polls = (state = [], action) => {
         {
           ...state[action.index],
           choices: Object.assign(...state[action.index].choices, {
-              action.choice: state[action.index].choices[action.choice] + 1
+            [`${action.choice}`]: state[action.index].choices[action.choice] + 1
           }),
         }
       ];
@@ -41,3 +40,5 @@ const polls = (state = [], action) => {
       return state;
   }
 };
+
+export default polls;
