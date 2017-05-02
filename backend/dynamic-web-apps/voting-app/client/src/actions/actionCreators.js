@@ -8,7 +8,7 @@ const addPoll = (user, title, description, choices) => {
   };
 };
 
-const removePoll = (user, pollID) => {
+const removePoll = (user, index) => {
   return {
     type: 'REMOVE_POLL',
     user,
@@ -16,7 +16,7 @@ const removePoll = (user, pollID) => {
   };
 };
 
-const addChoice = (pollID, choice) => {
+const addChoice = (index, choice) => {
   return {
     type: 'ADD_CHOICE',
     index,
@@ -24,7 +24,7 @@ const addChoice = (pollID, choice) => {
   };
 };
 
-const vote = (pollID, choice) => {
+const vote = (index, choice) => {
   return {
     type: 'VOTE',
     index,
@@ -32,7 +32,4 @@ const vote = (pollID, choice) => {
   };
 };
 
-export addPoll;
-export removePoll;
-export addChoice;
-export vote;
+export { addPoll, removePoll, addChoice, vote };
