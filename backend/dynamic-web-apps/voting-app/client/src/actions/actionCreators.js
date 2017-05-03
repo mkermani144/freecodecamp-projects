@@ -32,4 +32,13 @@ const vote = (index, choice) => {
   };
 };
 
-export { addPoll, removePoll, addChoice, vote };
+const logIn = (username, password) => {
+  // Do logIn
+  return {
+    type: 'LOGIN',
+    loggedIn: false,
+    errorMessage: 'Invalid credentials',
+  };
+};
+
+export { addPoll, removePoll, addChoice, vote, logIn };
