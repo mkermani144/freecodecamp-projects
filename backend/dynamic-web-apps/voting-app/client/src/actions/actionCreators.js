@@ -1,39 +1,31 @@
-const addPoll = (user, title, description, choices) => {
-  return {
-    type: 'ADD_POLL',
-    user,
-    title,
-    description,
-    choices,
-  };
-};
+const addPoll = (user, title, description, choices) => ({
+  type: 'ADD_POLL',
+  user,
+  title,
+  description,
+  choices,
+});
 
-const removePoll = (user, index) => {
-  return {
-    type: 'REMOVE_POLL',
-    user,
-    index,
-  };
-};
+const removePoll = (user, index) => ({
+  type: 'REMOVE_POLL',
+  user,
+  index,
+});
 
-const addChoice = (index, choice) => {
-  return {
-    type: 'ADD_CHOICE',
-    index,
-    choice,
-  };
-};
+const addChoice = (index, choice) => ({
+  type: 'ADD_CHOICE',
+  index,
+  choice,
+});
 
-const vote = (index, choice) => {
-  return {
-    type: 'VOTE',
-    index,
-    choice,
-  };
-};
+const vote = (index, choice) => ({
+  type: 'VOTE',
+  index,
+  choice,
+});
 
 const logIn = (username, password) => {
-  // Do logIn
+  // TODO: Do login
   return {
     type: 'LOGIN',
     loggedIn: false,
