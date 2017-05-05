@@ -45,12 +45,15 @@ class Login extends Component {
       this.props.logIn(1);
     } else if (response.status === 401) {
       this.props.logIn(2);
+      this.setState({
+        isSubmitted: true,
+      });
     } else {
       this.props.logIn(3);
+      this.setState({
+        isSubmitted: true,
+      });
     }
-    this.setState({
-      isSubmitted: true,
-    });
   }
 
   handleRequestClose = () => {
