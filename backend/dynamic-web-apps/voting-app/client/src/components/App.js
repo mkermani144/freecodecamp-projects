@@ -5,7 +5,7 @@ import FlatButton from 'material-ui/FlatButton';
 import { blue500, blue600, grey50, grey600 } from 'material-ui/styles/colors';
 import Home from './Home';
 import Dashboard from './Dashboard';
-import Login from './Login';
+import LoginContainer from './LoginContainer';
 import Signup from './Signup';
 import Poll from './Poll';
 import './App.css';
@@ -52,7 +52,7 @@ class App extends Component {
         />
         <Route exact path="/" component={Home} />
         <Route exact path="/dashboard" component={Dashboard} />
-        <Route path="/login" component={Login} />
+        <Route path="/login" component={LoginContainer} />
         <Route path="/signup" component={Signup} />
         <Route path="/poll/:id" component={Poll} />
       </div>

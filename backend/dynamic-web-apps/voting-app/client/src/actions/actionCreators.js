@@ -24,13 +24,33 @@ const vote = (index, choice) => ({
   choice,
 });
 
-const logIn = (username, password) => {
-  // TODO: Do login
-  return {
-    type: 'LOGIN',
-    loggedIn: false,
-    errorMessage: 'Invalid credentials',
-  };
+const logIn = (status) => {
+  switch (status) {
+    case 1:
+      return {
+        type: 'LOGIN',
+        loggedIn: true,
+        errorMessage: '',
+      };
+    case 2:
+      return {
+        type: 'LOGIN',
+        loggedIn: false,
+        errorMessage: 'Wrong username or password. Try again.',
+      };
+    case 3:
+      return {
+        type: 'LOGIN',
+        loggedIn: false,
+        errorMessage: 'Something bad happened. Try again later.',
+      };
+    default:
+      return {
+        type: 'LOGIN',
+        loggedIn: false,
+        errorMessage: 'Unknown',
+      };
+  }
 };
 
 export { addPoll, removePoll, addChoice, vote, logIn };

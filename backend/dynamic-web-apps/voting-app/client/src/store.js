@@ -4,6 +4,7 @@ import rootReducer from './reducers/root';
 const defaultState = {
   user: {
     loggedIn: localStorage.getItem('loggedIn') || false,
+    errorMessage: '',
   },
   polls: [],
 };

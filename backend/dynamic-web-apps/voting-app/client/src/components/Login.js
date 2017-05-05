@@ -13,8 +13,8 @@ class Login extends Component {
     this.state = {
       username: '',
       password: '',
+      isSubmitted: false,
     };
-    this.loginStatus = 0;
   }
 
   handleUsernameChange = (e) => {
@@ -42,23 +42,20 @@ class Login extends Component {
       }),
     });
     if (response.ok) {
-      this.setState({
-        loginStatus: 1,
-      });
+      this.props.logIn(1);
     } else if (response.status === 401) {
-      this.setState({
-        loginStatus: 2,
-      });
+      this.props.logIn(2);
     } else {
-      this.setState({
-        loginStatus: 3,
-      });
+      this.props.logIn(3);
     }
+    this.setState({
+      isSubmitted: true,
+    });
   }
 
-  handleSnackbarClose = () => {
+  handleRequestClose = () => {
     this.setState({
-      loginStatus: 0,
+      isSubmitted: false,
     });
   }
 
@@ -78,7 +75,7 @@ class Login extends Component {
       marginTop: '5vmin',
       alignSelf: 'flex-end'
     };
-    return this.state.loginStatus === 1 ? <Redirect to="/" /> : (
+    return this.props.loggedIn === true ? <Redirect to="/" /> : (
       <div className="Login" style={loginStyle}>
         <Paper className="paper" style={paperStyle}>
           <form onSubmit={this.handleSubmit}>
@@ -105,14 +102,10 @@ class Login extends Component {
           </form>
         </Paper>
         <Snackbar
-          open={this.state.loginStatus >= 2}
-          message={
-            this.state.loginStatus === 2
-            ? "Wrong username or password. Try again."
-            : "Something bad happended. Try again later."
-          }
+          open={this.props.loggedIn === false && this.state.isSubmitted === true}
+          message={this.props.errorMessage}
           autoHideDuration={4000}
-          onRequestClose={this.handleSnackbarClose}
+          onRequestClose={this.handleRequestClose}
         />
       </div>
     );
