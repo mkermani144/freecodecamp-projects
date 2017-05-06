@@ -23,7 +23,7 @@ const add = async (model, username, password) => {
       throw 'username already exists';
     }
     password = await hashPassword(password);
-    await model.create({ username, password });
+    await model.create({ username, password, polls: [] });
     console.log('Successfully created document');
     return 0;
   } catch (e) {
