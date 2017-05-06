@@ -11,6 +11,9 @@ import Poll from './Poll';
 import './App.css';
 
 class App extends Component {
+  handleClick = () => {
+    this.props.logOut();
+  }
   render() {
     const appbarButtonLabelStyle = {
       color: grey50,
@@ -33,13 +36,24 @@ class App extends Component {
           }
           iconElementRight={
             <div>
-              <FlatButton
-                containerElement={this.props.loggedIn? <Link to="/" /> : <Link to="/login" />}
-                label={this.props.loggedIn? "Logout" : "Login"}
-                labelStyle={appbarButtonLabelStyle}
-                rippleColor={grey600}
-                hoverColor={blue600}
-              />
+              {this.props.loggedIn ?
+                <FlatButton
+                  containerElement={<Link to="/" />}
+                  label="Logout"
+                  labelStyle={appbarButtonLabelStyle}
+                  rippleColor={grey600}
+                  hoverColor={blue600}
+                  onClick={this.handleClick}
+                /> :
+                <FlatButton
+                  containerElement={<Link to="/login" />}
+                  label="Login"
+                  labelStyle={appbarButtonLabelStyle}
+                  rippleColor={grey600}
+                  hoverColor={blue600}
+                />
+              }
+
               <FlatButton
                 containerElement={<Link to="/signup" />}
                 label="Signup"

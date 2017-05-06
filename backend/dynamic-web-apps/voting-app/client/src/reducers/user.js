@@ -6,6 +6,12 @@ const user = (state = [], action) => {
         loggedIn: action.loggedIn,
         errorMessage: action.errorMessage,
       };
+    case 'LOGOUT':
+      return {
+        ...state,
+        loggedIn: false,
+        errorMessage: '',
+      };
     default:
       return state;
   }

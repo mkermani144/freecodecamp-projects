@@ -53,4 +53,6 @@ const logIn = (status) => {
   }
 };
 
-export { addPoll, removePoll, addChoice, vote, logIn };
+const logOut = () => ({ type: 'LOGOUT' });
+
+export { addPoll, removePoll, addChoice, vote, logIn, logOut };
