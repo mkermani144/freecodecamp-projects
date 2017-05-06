@@ -30,7 +30,7 @@ class App extends Component {
             <div>
               <FlatButton
                 containerElement={<Link to="/" />}
-                label="Home"
+                label={this.props.loggedIn ? "Dashboard" : "Home"}
                 labelStyle={appbarButtonLabelStyle}
                 rippleColor={grey600}
                 hoverColor={blue600}
