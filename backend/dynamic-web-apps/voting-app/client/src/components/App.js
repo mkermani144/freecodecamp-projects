@@ -34,8 +34,8 @@ class App extends Component {
           iconElementRight={
             <div>
               <FlatButton
-                containerElement={<Link to="/login" />}
-                label="Login"
+                containerElement={this.props.loggedIn? <Link to="/" /> : <Link to="/login" />}
+                label={this.props.loggedIn? "Logout" : "Login"}
                 labelStyle={appbarButtonLabelStyle}
                 rippleColor={grey600}
                 hoverColor={blue600}
@@ -46,14 +46,18 @@ class App extends Component {
                 labelStyle={appbarButtonLabelStyle}
                 rippleColor={grey600}
                 hoverColor={blue600}
+                style={
+                  this.props.loggedIn ?
+                  {display: 'none'} :
+                  {}
+                }
               />
             </div>
           }
         />
-        <Route exact path="/" component={Home} />
-        <Route exact path="/dashboard" component={Dashboard} />
-        <Route path="/login" component={LoginContainer} />
-        <Route path="/signup" component={Signup} />
+        <Route exact path="/" component={this.props.loggedIn ? Dashboard : Home} />
+        <Route path="/login" component={this.props.loggedIn ? Dashboard : LoginContainer} />
+        <Route path="/signup" component={this.props.loggedIn ? Dashboard : Signup} />
         <Route path="/poll/:id" component={Poll} />
       </div>
     );
