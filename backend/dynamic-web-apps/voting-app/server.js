@@ -7,6 +7,7 @@ const passport = require('passport');
 const db = require('./src/database');
 const signup = require('./routes/signup');
 const login = require('./routes/login');
+const logout = require('./routes/logout');
 const api = require('./routes/api');
 require('./config/passport');
 
@@ -25,6 +26,7 @@ app.use(passport.session());
 
 app.use('/signup', signup);
 app.use('/login', login);
+app.use('/logout', logout);
 app.use('/api', api);
 
 const port = process.env.PORT || 8000;

@@ -12,6 +12,9 @@ import './App.css';
 
 class App extends Component {
   handleClick = () => {
+    fetch('http://localhost:8000/logout', {
+      method: 'POST',
+    });
     this.props.logOut();
   }
   render() {
