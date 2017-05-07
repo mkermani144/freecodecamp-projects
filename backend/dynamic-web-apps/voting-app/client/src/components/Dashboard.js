@@ -16,12 +16,13 @@ class Dashboard extends Component {
     super();
     this.state = {
       isOpen: false,
+      title: '',
+      description: '',
       choices: '',
       value: -1,
     };
   }
   handleOpen = () => {
-    console.log('asdf');
     this.setState({
       isOpen: true,
     });
@@ -31,13 +32,31 @@ class Dashboard extends Component {
       isOpen: false,
     });
   }
+  handleAdd = async () => {
+    const { title, description } = this.state;
+    const choices = this.state.choices.split(',');
+    console.log(choices.map(el => el === choices[this.state.value] ? {el: 1} : {el: 0}));
+    const response = await fetch('http://localhost:8000/poll/add', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        title,
+        description,
+        choices: choices.map(el => el === choices[this.state.value] ? {[`${el}`]: 1} : {[`${el}`]: 0}),
+      }),
+    });
+    const json = await response.json();
+    console.log(json);
+  }
   renderDialog = () => {
     const actions = [
       <FlatButton
         label="Add"
         primary={true}
         keyboardFocused={true}
-        onTouchTap={this.handleClose}
+        onTouchTap={this.handleAdd}
         disabled={this.state.value === -1}
       />,
       <FlatButton
@@ -65,10 +84,12 @@ class Dashboard extends Component {
         <TextField
           floatingLabelText="Poll title"
           fullWidth={true}
+          onChange={(e) => this.setState({title: e.target.value})}
         />
         <TextField
           floatingLabelText="Poll description"
           fullWidth={true}
+          onChange={(e) => this.setState({description: e.target.value})}
         />
         <TextField
           floatingLabelText="Poll choices (separated by commas)"
