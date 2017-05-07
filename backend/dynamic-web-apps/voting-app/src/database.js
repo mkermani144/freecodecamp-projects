@@ -11,7 +11,7 @@ const connect = async () => {
     console.log('Successfully connected to database');
     return 0;
   } catch (e) {
-    console.log('Failed to connect to database: ', e);
+    console.log(e, 'Failed to connect to database: ', e);
     return 1;
   }
 }
@@ -27,7 +27,7 @@ const add = async (model, username, password) => {
     console.log('Successfully created document');
     return 0;
   } catch (e) {
-    console.log('Failed to create document');
+    console.log(e, 'Failed to create document');
     return e === 'username already exists' ? 2 : 1;
   }
 }
@@ -38,7 +38,7 @@ const remove = async (model, username) => {
     console.log('Successfully removed document');
     return 0;
   } catch (e) {
-    console.log('Failed to remove document');
+    console.log(e, 'Failed to remove document');
     return 1;
   }
 }
