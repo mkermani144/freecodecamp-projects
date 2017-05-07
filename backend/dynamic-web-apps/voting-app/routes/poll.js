@@ -6,8 +6,12 @@ const User = require('../models/User');
 const router = express.Router();
 
 router.post('/add', async (req, res) => {
-  const result = await db.addPoll(User, req.body.username, req.body.poll);
-  res.json({ successful: result === 0 });
+  if (req.isAuthenticated()) {
+    const result = await db.addPoll(User, req.user, req.body.poll);
+    res.json({ successful: result === 0 });
+  } else {
+    res.json({ successful: false });
+  }
 });
 
 module.exports = router;
