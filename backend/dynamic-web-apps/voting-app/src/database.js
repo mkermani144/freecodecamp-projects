@@ -52,4 +52,28 @@ const findUser = async (model, username) => {
   }
 }
 
-module.exports = { connect, add, remove, findUser };
+const addPoll = async (model, username, poll) => {
+  try {
+    const { title, description, choices } = poll;
+    await model.findOneAndUpdate(
+      { username: username },
+      {
+        $push: {
+          polls: {
+            title,
+            description,
+            choices
+          },
+        },
+      },
+      { safe: true }
+    );
+    console.log('Successfully added poll');
+    return 0;
+  } catch (e) {
+    console.log(e, 'Failed to add poll');
+    return 1;
+  }
+}
+
+module.exports = { connect, add, remove, findUser, addPoll };

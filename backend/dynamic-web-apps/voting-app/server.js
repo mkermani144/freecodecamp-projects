@@ -9,6 +9,7 @@ const signup = require('./routes/signup');
 const login = require('./routes/login');
 const logout = require('./routes/logout');
 const api = require('./routes/api');
+const poll = require('./routes/poll');
 require('./config/passport');
 
 db.connect();
@@ -28,6 +29,7 @@ app.use('/signup', signup);
 app.use('/login', login);
 app.use('/logout', logout);
 app.use('/api', api);
+app.use('/poll', poll);
 
 const port = process.env.PORT || 8000;
 app.listen(port, () => console.log(`App is running on http://localhost:${port}`));
