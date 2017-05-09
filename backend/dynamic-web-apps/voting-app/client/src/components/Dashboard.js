@@ -34,8 +34,7 @@ class Dashboard extends Component {
   }
   handleAdd = async () => {
     const { title, description } = this.state;
-    const choices = this.state.choices.split(',');
-    console.log(choices.map(el => el === choices[this.state.value] ? {el: 1} : {el: 0}));
+    const choices = this.state.choices.split(/[\s,]+/);
     const response = await fetch('http://localhost:8000/poll/add', {
       method: 'POST',
       headers: {
@@ -48,7 +47,6 @@ class Dashboard extends Component {
       }),
     });
     const json = await response.json();
-    console.log(json);
   }
   renderDialog = () => {
     const actions = [
