@@ -15,6 +15,7 @@ require('./config/passport');
 db.connect();
 
 const app = express();
+
 app.use(cors());
 app.use(bodyParser.json());
 app.use(session({
