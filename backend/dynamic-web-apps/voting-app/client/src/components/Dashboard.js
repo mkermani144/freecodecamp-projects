@@ -42,12 +42,17 @@ class Dashboard extends Component {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        title,
-        description,
-        choices: choices.map(el => el === choices[this.state.value] ? {[`${el}`]: 1} : {[`${el}`]: 0}),
+        poll: {
+          title,
+          description,
+          choices: choices.map(el => el === choices[this.state.value] ? {[`${el}`]: 1} : {[`${el}`]: 0}),
+        }
       }),
     });
     const json = await response.json();
+    if (json.successful) {
+      this.handleClose();
+    }
   }
   renderDialog = () => {
     const actions = [
