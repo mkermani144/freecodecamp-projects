@@ -8,7 +8,7 @@ const polls = (state = [], action) => {
           user,
           title,
           description,
-          choices: choices.reduce((el, next) => Object.assign(el, {[`${next}`]: 0}), {}),
+          choices,
         }
       ];
     case 'REMOVE_POLL':

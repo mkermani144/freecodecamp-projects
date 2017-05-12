@@ -60,6 +60,7 @@ class Dashboard extends Component {
       const json = await response.json();
       if (json.successful) {
         this.handleClose();
+        this.props.addPoll('user', title, description, choices.map(el => el === choices[this.state.value] ? {[`${el}`]: 1} : {[`${el}`]: 0}));
       } else {
         this.setState({
           error: 'Something bad happened. Try again later.',

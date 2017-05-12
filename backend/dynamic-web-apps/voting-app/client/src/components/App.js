@@ -4,7 +4,7 @@ import AppBar from 'material-ui/AppBar';
 import FlatButton from 'material-ui/FlatButton';
 import { blue500, blue600, grey50, grey600 } from 'material-ui/styles/colors';
 import Home from './Home';
-import Dashboard from './Dashboard';
+import DashboardContainer from './DashboardContainer';
 import LoginContainer from './LoginContainer';
 import Signup from './Signup';
 import Poll from './Poll';
@@ -72,9 +72,9 @@ class App extends Component {
             </div>
           }
         />
-        <Route exact path="/" component={this.props.loggedIn ? Dashboard : Home} />
-        <Route path="/login" component={this.props.loggedIn ? Dashboard : LoginContainer} />
-        <Route path="/signup" component={this.props.loggedIn ? Dashboard : Signup} />
+        <Route exact path="/" component={this.props.loggedIn ? DashboardContainer : Home} />
+        <Route path="/login" component={this.props.loggedIn ? DashboardContainer : LoginContainer} />
+        <Route path="/signup" component={this.props.loggedIn ? DashboardContainer : Signup} />
         <Route path="/poll/:id" component={Poll} />
       </div>
     );
