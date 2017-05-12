@@ -6,6 +6,7 @@ import FlatButton from 'material-ui/FlatButton';
 import TextField from 'material-ui/TextField';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
+import Snackbar from 'material-ui/Snackbar';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 import { Chart } from 'react-google-charts';
 import { blue500 } from 'material-ui/styles/colors';
@@ -20,6 +21,7 @@ class Dashboard extends Component {
       description: '',
       choices: '',
       value: -1,
+      error: '',
     };
   }
   handleOpen = () => {
@@ -32,25 +34,42 @@ class Dashboard extends Component {
       isOpen: false,
     });
   }
-  handleAdd = async () => {
-    const { title, description } = this.state;
-    const choices = this.state.choices.split(/[\s,]+/);
-    const response = await fetch('http://localhost:8000/poll/add', {
-      method: 'POST',
-      credentials: 'include',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        poll: {
-          title,
-          description,
-          choices: choices.map(el => el === choices[this.state.value] ? {[`${el}`]: 1} : {[`${el}`]: 0}),
-        }
-      }),
+  handleRequestClose = () => {
+    this.setState({
+      error: '',
     });
-    const json = await response.json();
-    if (json.successful) {
+  }
+  handleAdd = async () => {
+    try {
+      const { title, description } = this.state;
+      const choices = this.state.choices.split(/[\s,]+/);
+      const response = await fetch('http://localhost:8000/poll/add', {
+        method: 'POST',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          poll: {
+            title,
+            description,
+            choices: choices.map(el => el === choices[this.state.value] ? {[`${el}`]: 1} : {[`${el}`]: 0}),
+          }
+        }),
+      });
+      const json = await response.json();
+      if (json.successful) {
+        this.handleClose();
+      } else {
+        this.setState({
+          error: 'Something bad happened. Try again later.',
+        });
+        this.handleClose();
+      }
+    } catch (e) {
+      this.setState({
+        error: 'Something bad happened. Try again later.',
+      });
       this.handleClose();
     }
   }
@@ -277,6 +296,12 @@ class Dashboard extends Component {
             </Paper>
           </div>
         </div>
+        <Snackbar
+          open={this.state.error !== ''}
+          message={this.state.error}
+          autoHideDuration={4000}
+          onRequestClose={this.handleRequestClose}
+        />
       </div>
     );
   }
