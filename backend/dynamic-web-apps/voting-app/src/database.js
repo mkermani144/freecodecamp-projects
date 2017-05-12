@@ -14,7 +14,7 @@ const connect = async () => {
     console.log(e, 'Failed to connect to database: ', e);
     return 1;
   }
-}
+};
 
 const add = async (model, username, password) => {
   try {
@@ -30,7 +30,7 @@ const add = async (model, username, password) => {
     console.log(e, 'Failed to create document');
     return e === 'username already exists' ? 2 : 1;
   }
-}
+};
 
 const remove = async (model, username) => {
   try {
@@ -41,7 +41,7 @@ const remove = async (model, username) => {
     console.log(e, 'Failed to remove document');
     return 1;
   }
-}
+};
 
 const findUser = async (model, username) => {
   try {
@@ -50,7 +50,7 @@ const findUser = async (model, username) => {
   } catch (e) {
     return 2;
   }
-}
+};
 
 const addPoll = async (model, username, poll) => {
   try {
@@ -74,6 +74,17 @@ const addPoll = async (model, username, poll) => {
     console.log(e, 'Failed to add poll');
     return 1;
   }
+};
+
+const fetchUserPolls = async (model, username) => {
+  try {
+    return (await model.findOne({
+      username,
+    })).polls;
+  } catch (e) {
+    console.log(e, 'Failed to fetch user polls');
+    return 1;
+  }
 }
 
-module.exports = { connect, add, remove, findUser, addPoll };
+module.exports = { connect, add, remove, findUser, addPoll, fetchUserPolls };
