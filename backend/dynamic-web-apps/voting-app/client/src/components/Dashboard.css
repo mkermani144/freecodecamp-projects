@@ -54,3 +54,6 @@
   font-weight: normal;
   color: #424242;
 }
+.fab {
+  z-index: 10;
+}
