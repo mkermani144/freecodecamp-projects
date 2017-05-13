@@ -148,43 +148,6 @@ class Dashboard extends Component {
       alignItems: 'stretch',
       justifyContent: 'center',
     };
-    const data = [
-      [
-        ['React vs Angular', 'Popularity'],
-        ['React', 7],
-        ['Angular', 5],
-      ],
-      [
-        ['Barcelona vs Real Madrid', 'Popularity'],
-        ['Barcelona', 4],
-        ['Real Madrid', 4],
-      ],
-      [
-        ['Movie', 'Popularity'],
-        ['Guardians of the galaxy', 4],
-        ['Starwars: The last Jedi', 6],
-        ['Logan', 4],
-        ['The fate of the furious', 5],
-        ['Beauty and the beast', 2],
-        ['Spiderman: homecoming', 3],
-        ['Transformers: the last knight', 4],
-      ],
-      [
-        ['Language', 'Popularity'],
-        ['Javascript', 14],
-        ['C', 6],
-        ['C++', 6],
-        ['Java', 7],
-        ['C#', 7],
-        ['Python', 9],
-      ],
-      [
-        ['Operating system', 'Popularity'],
-        ['Windows', 4],
-        ['Linux', 7],
-        ['MacOS', 7],
-      ],
-    ];
     const fabStyle = {
       position: 'fixed',
       right: '30px',
