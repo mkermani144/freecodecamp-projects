@@ -12,6 +12,6 @@ router.post('/finduser', async (req, res) => {
 router.get('/userpolls/:username', async (req, res) => {
   const result = await db.fetchUserPolls(User, req.params.username);
   res.json({ polls: result });
-})
+});
 
 module.exports = router;

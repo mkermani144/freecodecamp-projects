@@ -53,14 +53,14 @@ class Dashboard extends Component {
           poll: {
             title,
             description,
-            choices: choices.map(el => el === choices[this.state.value] ? {[`${el}`]: 1} : {[`${el}`]: 0}),
+            choices: choices.map(el => el === choices[this.state.value] ? [`${el}`, 1] : [`${el}`, 0]),
           }
         }),
       });
       const json = await response.json();
       if (json.successful) {
         this.handleClose();
-        this.props.addPoll('user', title, description, choices.map(el => el === choices[this.state.value] ? {[`${el}`]: 1} : {[`${el}`]: 0}));
+        this.props.addPoll('user', title, description, choices.map(el => el === choices[this.state.value] ? [`${el}`, 1] : [`${el}`, 0]));
       } else {
         this.setState({
           error: 'Something bad happened. Try again later.',
@@ -200,101 +200,30 @@ class Dashboard extends Component {
         <div className="your-polls">
           <h3>Your polls</h3>
           <div className="polls">
-            <Paper className="poll" zDepth={5} style={paperStyle}>
-              <div>
-                <Chart
-                  chartType="PieChart"
-                  width="100%"
-                  height="100%"
-                  data={data[0]}
-                  options={
-                    {
-                      legend: 'none',
-                      pieHole: 0,
-                      is3D: false,
-                      pieSliceText: 'label',
+            {this.props.polls.map((el, index) => (
+              <Paper className="poll" zDepth={5} style={paperStyle} key={index}>
+                <div>
+                  <Chart
+                    chartType="PieChart"
+                    width="100%"
+                    height="100%"
+                    data={[
+                      [el.title, 'popularity'],
+                      ...el.choices.map(choice => [choice[0], choice[1]])
+                    ]}
+                    options={
+                      {
+                        legend: 'none',
+                        pieHole: 0,
+                        is3D: false,
+                        pieSliceText: 'label',
+                      }
                     }
-                  }
-                />
-              </div>
-              <h4>Angular vs React</h4>
-            </Paper>
-            <Paper className="poll" zDepth={5} style={paperStyle}>
-              <div>
-                <Chart
-                  chartType="PieChart"
-                  width="100%"
-                  height="100%"
-                  data={data[1]}
-                  options={
-                    {
-                      legend: 'none',
-                      pieHole: 0,
-                      is3D: false,
-                      pieSliceText: 'label',
-                    }
-                  }
-                />
-              </div>
-              <h4>Barcelona vs Real Madrid</h4>
-            </Paper>
-            <Paper className="poll" zDepth={5} style={paperStyle}>
-              <div>
-                <Chart
-                  chartType="PieChart"
-                  width="100%"
-                  height="100%"
-                  data={data[2]}
-                  options={
-                    {
-                      legend: 'none',
-                      pieHole: 0,
-                      is3D: false,
-                      pieSliceText: 'label',
-                    }
-                  }
-                />
-              </div>
-              <h4>Best movie of 2017</h4>
-            </Paper>
-            <Paper className="poll" zDepth={5} style={paperStyle}>
-              <div>
-                <Chart
-                  chartType="PieChart"
-                  width="100%"
-                  height="100%"
-                  data={data[3]}
-                  options={
-                    {
-                      legend: 'none',
-                      pieHole: 0,
-                      is3D: false,
-                      pieSliceText: 'label',
-                    }
-                  }
-                />
-              </div>
-              <h4>Most popular programming language</h4>
-            </Paper>
-            <Paper className="poll" zDepth={5} style={paperStyle}>
-              <div>
-                <Chart
-                  chartType="PieChart"
-                  width="100%"
-                  height="100%"
-                  data={data[4]}
-                  options={
-                    {
-                      legend: 'none',
-                      pieHole: 0,
-                      is3D: false,
-                      pieSliceText: 'label',
-                    }
-                  }
-                />
-              </div>
-              <h4>Most popular operating system</h4>
-            </Paper>
+                  />
+                </div>
+                <h4>{el.title}</h4>
+              </Paper>
+            ))}
           </div>
         </div>
         <Snackbar

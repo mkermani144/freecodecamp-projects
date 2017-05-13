@@ -4,6 +4,7 @@ const user = (state = [], action) => {
       return {
         ...state,
         loggedIn: action.loggedIn,
+        user: action.user,
         errorMessage: action.errorMessage,
       };
     case 'LOGOUT':

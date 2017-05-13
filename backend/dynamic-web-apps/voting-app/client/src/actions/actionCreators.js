@@ -24,30 +24,34 @@ const vote = (index, choice) => ({
   choice,
 });
 
-const logIn = (status) => {
+const logIn = (status, user='') => {
   switch (status) {
     case 1:
       return {
         type: 'LOGIN',
         loggedIn: true,
+        user,
         errorMessage: '',
       };
     case 2:
       return {
         type: 'LOGIN',
         loggedIn: false,
+        user,
         errorMessage: 'Wrong username or password. Try again.',
       };
     case 3:
       return {
         type: 'LOGIN',
         loggedIn: false,
+        user,
         errorMessage: 'Something bad happened. Try again later.',
       };
     default:
       return {
         type: 'LOGIN',
         loggedIn: false,
+        user,
         errorMessage: 'Unknown',
       };
   }

@@ -43,7 +43,15 @@ class Login extends Component {
       }),
     });
     if (response.ok) {
-      this.props.logIn(1);
+      this.props.logIn(1, this.state.username);
+      const response = await fetch(`http://localhost:8000/api/userpolls/${this.state.username}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+      });
+      const json = await response.json();
+      json.polls.forEach(poll => this.props.addPoll(this.state.username, poll.title, poll.description, poll.choices.map(choice => [choice[0], choice[1]])));
     } else if (response.status === 401) {
       this.props.logIn(2);
       this.setState({
