@@ -11,9 +11,6 @@ import Poll from './Poll';
 import './App.css';
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-  }
   handleClick = () => {
     fetch('http://localhost:8000/logout', {
       method: 'POST',
