@@ -43,6 +43,7 @@ class Login extends Component {
       }),
     });
     if (response.ok) {
+      localStorage.setItem('username', this.state.username);
       this.props.logIn(1, this.state.username);
       const response = await fetch(`http://localhost:8000/api/userpolls/${this.state.username}`, {
         method: 'GET',

@@ -11,11 +11,36 @@ import Poll from './Poll';
 import './App.css';
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+  }
   handleClick = () => {
     fetch('http://localhost:8000/logout', {
       method: 'POST',
     });
     this.props.logOut();
+  }
+  componentDidMount() {
+    (async () => {
+      const username = await localStorage.getItem('username');
+      if (username) {
+        const response = await fetch('http://localhost:8000/api/sessionisvalid', {
+          method: 'GET',
+          credentials: 'include',
+        });
+        if (response.ok) {
+          this.props.logIn(1, username);
+          const response2 = await fetch(`http://localhost:8000/api/userpolls/${username}`, {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+          });
+          const json = await response2.json();
+          json.polls.forEach(poll => this.props.addPoll(username, poll.title, poll.description, poll.choices.map(choice => [choice[0], choice[1]])));
+        }
+      }
+    })();
   }
   render() {
     const appbarButtonLabelStyle = {
