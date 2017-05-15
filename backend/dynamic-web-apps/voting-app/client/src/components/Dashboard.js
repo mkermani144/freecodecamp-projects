@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import Paper from 'material-ui/Paper';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import Dialog from 'material-ui/Dialog';
@@ -164,28 +165,30 @@ class Dashboard extends Component {
           <h3>Your polls</h3>
           <div className="polls">
             {this.props.polls.map((el, index) => (
-              <Paper className="poll" zDepth={5} style={paperStyle} key={index}>
-                <div>
-                  <Chart
-                    chartType="PieChart"
-                    width="100%"
-                    height="100%"
-                    data={[
-                      [el.title, 'popularity'],
-                      ...el.choices.map(choice => [choice[0], choice[1]])
-                    ]}
-                    options={
-                      {
-                        legend: 'none',
-                        pieHole: 0,
-                        is3D: false,
-                        pieSliceText: 'label',
-                      }
-                    }
-                  />
-                </div>
-                <h4>{el.title}</h4>
-              </Paper>
+                <Paper className="poll" zDepth={5} style={paperStyle} key={index}>
+                  <div>
+                    <Link to={`/poll/${index}`}>
+                      <Chart
+                        chartType="PieChart"
+                        width="100%"
+                        height="100%"
+                        data={[
+                          [el.title, 'popularity'],
+                          ...el.choices.map(choice => [choice[0], choice[1]])
+                        ]}
+                        options={
+                          {
+                            legend: 'none',
+                            pieHole: 0,
+                            is3D: false,
+                            pieSliceText: 'label',
+                          }
+                        }
+                        />
+                    </Link>
+                  </div>
+                  <h4>{el.title}</h4>
+                </Paper>
             ))}
           </div>
         </div>

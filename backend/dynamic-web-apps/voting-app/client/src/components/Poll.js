@@ -39,6 +39,7 @@ class Poll extends React.Component {
       alignItems: 'stretch',
       justifyContent: 'center',
     };
+    const currentPoll = this.props.polls[this.props.match.params.id];
     return (
       <div className="Poll">
         <div className="main">
@@ -66,7 +67,10 @@ class Poll extends React.Component {
               chartType="PieChart"
               width="100%"
               height="100%"
-              data={data}
+              data={[
+                [currentPoll.title, 'popularity'],
+                ...currentPoll.choices.map(choice => [choice[0], choice[1]])
+              ]}
               options={
                 {
                   legend: 'none',
@@ -76,8 +80,8 @@ class Poll extends React.Component {
                   backgroundColor: 'rgb(33, 150, 243)'
                 }
               }
-            />
-        </Paper>
+              />
+          </Paper>
         </div>
       </div>
     );

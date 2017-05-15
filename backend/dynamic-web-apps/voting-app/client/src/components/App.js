@@ -7,7 +7,7 @@ import Home from './Home';
 import DashboardContainer from './DashboardContainer';
 import LoginContainer from './LoginContainer';
 import Signup from './Signup';
-import Poll from './Poll';
+import PollContainer from './PollContainer';
 import './App.css';
 
 class App extends Component {
@@ -97,7 +97,7 @@ class App extends Component {
         <Route exact path="/" component={this.props.loggedIn ? DashboardContainer : Home} />
         <Route path="/login" component={this.props.loggedIn ? DashboardContainer : LoginContainer} />
         <Route path="/signup" component={this.props.loggedIn ? DashboardContainer : Signup} />
-        <Route path="/poll/:id" component={Poll} />
+        <Route path="/poll/:id" component={PollContainer} />
       </div>
     );
   }
