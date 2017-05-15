@@ -4266,12 +4266,13 @@ react-event-listener@^0.4.5:
     prop-types "^15.5.4"
     warning "^3.0.0"
 
-react-google-charts@^1.5.4-alpha.1:
-  version "1.5.4-alpha.1"
-  resolved "https://registry.yarnpkg.com/react-google-charts/-/react-google-charts-1.5.4-alpha.1.tgz#073518461f08aaa731199de382c3c2d78795d4c3"
+react-google-charts@^1.5.5:
+  version "1.5.5"
+  resolved "https://registry.yarnpkg.com/react-google-charts/-/react-google-charts-1.5.5.tgz#ffeaeca752a820a05029bd6a23516be2432d7df5"
   dependencies:
     debug "^2.2.0"
     loadjs "^3.3.1"
+    prop-types "^15.5.8"
     react "^15.3.2"
     react-dom "^15.3.2"
 

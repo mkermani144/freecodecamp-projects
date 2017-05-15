@@ -10,7 +10,7 @@
     "prop-types": "^15.5.8",
     "react": "^15.5.3",
     "react-dom": "^15.5.3",
-    "react-google-charts": "^1.5.4-alpha.1",
+    "react-google-charts": "^1.5.5",
     "react-redux": "^5.0.4",
     "react-router-dom": "^4.1.1",
     "react-tap-event-plugin": "^2.0.1",
