@@ -54,7 +54,7 @@ const findUser = async (model, username) => {
 
 const addPoll = async (model, username, poll) => {
   try {
-    const { title, description, choices } = poll;
+    const { title, description, choices, id } = poll;
     await model.findOneAndUpdate(
       { username: username },
       {
@@ -62,7 +62,8 @@ const addPoll = async (model, username, poll) => {
           polls: {
             title,
             description,
-            choices
+            choices,
+            id
           },
         },
       },

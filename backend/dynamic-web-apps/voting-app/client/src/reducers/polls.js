@@ -1,10 +1,11 @@
 const polls = (state = [], action) => {
   switch (action.type) {
     case 'ADD_POLL':
-      const { user, title, description, choices } = action;
+      const { id, user, title, description, choices } = action;
       return [
         ...state,
         {
+          id,
           user,
           title,
           description,

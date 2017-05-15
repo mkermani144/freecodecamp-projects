@@ -1,5 +1,6 @@
-const addPoll = (user, title, description, choices) => ({
+const addPoll = (id, user, title, description, choices) => ({
   type: 'ADD_POLL',
+  id,
   user,
   title,
   description,

@@ -34,7 +34,7 @@ class App extends Component {
             },
           });
           const json = await response2.json();
-          json.polls.forEach(poll => this.props.addPoll(username, poll.title, poll.description, poll.choices.map(choice => [choice[0], choice[1]])));
+          json.polls.forEach(poll => this.props.addPoll(poll.id, username, poll.title, poll.description, poll.choices.map(choice => [choice[0], choice[1]])));
         }
       }
     })();

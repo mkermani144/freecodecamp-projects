@@ -52,7 +52,7 @@ class Login extends Component {
         },
       });
       const json = await response.json();
-      json.polls.forEach(poll => this.props.addPoll(this.state.username, poll.title, poll.description, poll.choices.map(choice => [choice[0], choice[1]])));
+      json.polls.forEach(poll => this.props.addPoll(poll.id, this.state.username, poll.title, poll.description, poll.choices.map(choice => [choice[0], choice[1]])));
     } else if (response.status === 401) {
       this.props.logIn(2);
       this.setState({
