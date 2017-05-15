@@ -26,11 +26,6 @@ class Poll extends React.Component {
     const selectLabelStyle = {
       color: grey50,
     };
-    const data = [
-      ['React vs Angular', 'Popularity'],
-      ['React', 7],
-      ['Angular', 5],
-    ];
     const paperStyle = {
       minWidth: '450px',
       minHeight: '450px',
@@ -44,8 +39,8 @@ class Poll extends React.Component {
       <div className="Poll">
         <div className="main">
           <div className="poll-info">
-            <h3 className="poll-title">Angular vs React</h3>
-            <p className="poll-description">Which one do you prefer? Angular or React?</p>
+            <h3 className="poll-title">{currentPoll.title}</h3>
+            <p className="poll-description">{currentPoll.description}</p>
             <SelectField
               floatingLabelText="Your choice"
               floatingLabelStyle={selectFloatingLabelStyle}
@@ -53,8 +48,9 @@ class Poll extends React.Component {
               value={this.state.value}
               onChange={this.handleChange}
             >
-              <MenuItem value={1} primaryText="Angular" />
-              <MenuItem value={2} primaryText="React" />
+              {currentPoll.choices.map((el, index) => (
+                <MenuItem value={index} primaryText={el[0]} key={index} />
+              ))}
             </SelectField>
             <RaisedButton
               className="submit-vote"
