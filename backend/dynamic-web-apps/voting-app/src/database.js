@@ -88,4 +88,16 @@ const fetchUserPolls = async (model, username) => {
   }
 }
 
-module.exports = { connect, add, remove, findUser, addPoll, fetchUserPolls };
+const vote = async (model, pollId, choice) => {
+  try {
+    await model.findOneAndUpdate({
+      'polls.id': pollId,
+    }, { $inc: { [`polls.$.choices.${choice}`]: 1 }});
+    return 0;
+  } catch (e) {
+    console.log(e, 'Failed to vote');
+    return 1;
+  }
+}
+
+module.exports = { connect, add, remove, findUser, addPoll, fetchUserPolls, vote };
