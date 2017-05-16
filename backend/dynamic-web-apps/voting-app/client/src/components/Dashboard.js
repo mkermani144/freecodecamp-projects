@@ -44,6 +44,9 @@ class Dashboard extends Component {
     try {
       const { title, description } = this.state;
       const choices = this.state.choices.split(/[\s,]+/);
+      const choicesArray = choices.map(el => el === choices[this.state.value] ? [`${el}`, 1] : [`${el}`, 0]);
+      const choicesObject = {};
+      choicesArray.forEach(el => choicesObject[el[0]] = el[1]);
       const id = Math.max(...this.props.polls.map(el => el.id)) + 1;
       const response = await fetch('http://localhost:8000/poll/add', {
         method: 'POST',
@@ -56,7 +59,7 @@ class Dashboard extends Component {
             id,
             title,
             description,
-            choices: choices.map(el => el === choices[this.state.value] ? [`${el}`, 1] : [`${el}`, 0]),
+            choices: choicesObject,
           }
         }),
       });
