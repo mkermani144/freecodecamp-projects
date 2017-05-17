@@ -19,6 +19,29 @@ class Poll extends React.Component {
       value,
     });
   }
+  handleSubmit = async () => {
+    try {
+      const currentPoll = this.props.polls[this.props.match.params.id];
+      const response = await fetch('http://localhost:8000/poll/vote', {
+        method: 'PUT',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          pollId: currentPoll.id,
+          choice: currentPoll.choices[this.state.value][0],
+        }),
+      });
+      const json = await response.json();
+      if (json.successful) {
+        this.props.vote(currentPoll.id, currentPoll.choices[this.state.value][0]);
+      } else {
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  }
   render() {
     const selectFloatingLabelStyle = {
       color: grey300,
@@ -56,6 +79,7 @@ class Poll extends React.Component {
               className="submit-vote"
               label="Submit"
               secondary={true}
+              onClick={this.handleSubmit}
             />
           </div>
           <Paper className="chart" zDepth={0} style={paperStyle}>
