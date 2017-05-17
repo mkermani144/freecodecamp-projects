@@ -28,14 +28,30 @@ const polls = (state = [], action) => {
         }
       ];
     case 'VOTE':
-      return [
-        ...state,
-        {
-          ...state[action.index],
-          choices: Object.assign(...state[action.index].choices, {
-            [`${action.choice}`]: state[action.index].choices[action.choice] + 1
-          }),
+      let pollIndex;
+      for (let i = 0; i < state.length; i++) {
+        if (state[i].id === action.index) {
+          pollIndex = i;
+          break;
         }
+      }
+      let choiceIndex;
+      for (let i = 0; i < state[pollIndex].choices.length; i++) {
+        if (state[pollIndex].choices[i][pollIndex] === action.choice) {
+          choiceIndex = i;
+        }
+      }
+      return [
+        ...state.slice(0, pollIndex - 1),
+        {
+          ...state[pollIndex],
+          choices: [
+            ...state[pollIndex].choices.slice(0, choiceIndex),
+            [action.choice, state[pollIndex].choices[choiceIndex][1] + 1],
+            ...state[pollIndex].choices.slice(choiceIndex + 1),
+          ],
+        },
+        ...state.slice(pollIndex + 1),
       ];
     default:
       return state;

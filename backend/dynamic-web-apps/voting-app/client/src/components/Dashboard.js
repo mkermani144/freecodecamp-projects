@@ -170,24 +170,24 @@ class Dashboard extends Component {
           <h3>Your polls</h3>
           <div className="polls">
             {this.props.polls.map((el, index) => (
-                <Paper className="poll" zDepth={5} style={paperStyle} key={index}>
-                  <div>
-                    <Link to={`/poll/${index}`}>
-                      <Chart
-                        chartType="PieChart"
-                        width="100%"
-                        height="100%"
-                        data={[
+              <Paper className="poll" zDepth={5} style={paperStyle} key={index}>
+                <div>
+                  <Link to={`/poll/${index}`}>
+                    <Chart
+                      chartType="PieChart"
+                      width="100%"
+                      height="100%"
+                      data={[
                           [el.title, 'popularity'],
-                          ...el.choices.map(choice => [choice[0], choice[1]])
-                        ]}
-                        options={
-                          {
+                        ...el.choices.map(choice => [choice[0], choice[1]])
+                      ]}
+                      options={
+                        {
                             legend: 'none',
                             pieHole: 0,
                             is3D: false,
                             pieSliceText: 'label',
-                          }
+                        }
                         }
                         />
                     </Link>

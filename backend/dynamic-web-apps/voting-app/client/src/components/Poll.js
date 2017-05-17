@@ -89,7 +89,7 @@ class Poll extends React.Component {
               height="100%"
               data={[
                 [currentPoll.title, 'popularity'],
-                ...currentPoll.choices.map(choice => [choice[0], choice[1]])
+                ...currentPoll.choices
               ]}
               options={
                 {
