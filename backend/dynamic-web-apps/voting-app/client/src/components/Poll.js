@@ -3,7 +3,9 @@ import RaisedButton from 'material-ui/RaisedButton';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 import Paper from 'material-ui/Paper';
-import { grey50, grey300 } from 'material-ui/styles/colors';
+import IconButton from 'material-ui/IconButton';
+import ActionDelete from 'material-ui/svg-icons/action/delete';
+import { grey50, grey300, redA200 } from 'material-ui/styles/colors';
 import { Chart } from 'react-google-charts';
 import './Poll.css';
 
@@ -57,6 +59,9 @@ class Poll extends React.Component {
       alignItems: 'stretch',
       justifyContent: 'center',
     };
+    const iconStyle = {
+      color: redA200,
+    }
     const currentPoll = this.props.polls[this.props.match.params.id];
     return (
       <div className="Poll">
@@ -81,6 +86,10 @@ class Poll extends React.Component {
               secondary={true}
               onClick={this.handleSubmit}
             />
+            <IconButton tooltip='delete' iconStyle={iconStyle}>
+              <ActionDelete />
+            </IconButton>
+
           </div>
           <Paper className="chart" zDepth={0} style={paperStyle}>
             <Chart
