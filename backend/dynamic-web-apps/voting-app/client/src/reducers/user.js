@@ -9,7 +9,7 @@ const user = (state = [], action) => {
       };
     case 'LOGOUT':
       return {
-        ...state,
+        user: '',
         loggedIn: false,
         errorMessage: '',
       };
