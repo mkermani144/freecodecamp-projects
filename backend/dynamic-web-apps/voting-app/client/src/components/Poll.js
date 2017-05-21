@@ -1,4 +1,5 @@
 import React from 'react';
+import { Redirect } from 'react-router-dom';
 import RaisedButton from 'material-ui/RaisedButton';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
@@ -14,6 +15,7 @@ class Poll extends React.Component {
     super();
     this.state = {
       value: '',
+      redirect: false,
     };
   }
   handleChange = (event, index, value) => {
@@ -24,6 +26,9 @@ class Poll extends React.Component {
   handleDelete = () => {
     const currentPoll = this.props.polls[this.props.match.params.id];
     this.props.removePoll(this.props.user, this.props.polls.indexOf(currentPoll));
+    this.setState({
+      redirect: true,
+    });
   }
   handleSubmit = async () => {
     try {
@@ -67,7 +72,7 @@ class Poll extends React.Component {
       color: redA200,
     }
     const currentPoll = this.props.polls[this.props.match.params.id];
-    return (
+    return this.state.redirect === true ? <Redirect to='/' /> : (
       <div className="Poll">
         <div className="main">
           <div className="poll-info">
