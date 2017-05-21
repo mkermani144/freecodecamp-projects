@@ -21,6 +21,10 @@ class Poll extends React.Component {
       value,
     });
   }
+  handleDelete = () => {
+    const currentPoll = this.props.polls[this.props.match.params.id];
+    this.props.removePoll(this.props.user, this.props.polls.indexOf(currentPoll));
+  }
   handleSubmit = async () => {
     try {
       const currentPoll = this.props.polls[this.props.match.params.id];
@@ -86,10 +90,9 @@ class Poll extends React.Component {
               secondary={true}
               onClick={this.handleSubmit}
             />
-            <IconButton tooltip='delete' iconStyle={iconStyle}>
+            <IconButton tooltip='delete' iconStyle={iconStyle} onClick={this.handleDelete}>
               <ActionDelete />
             </IconButton>
-
           </div>
           <Paper className="chart" zDepth={0} style={paperStyle}>
             <Chart

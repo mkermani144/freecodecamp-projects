@@ -1,11 +1,11 @@
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { vote } from '../actions/actionCreators';
+import { vote, removePoll } from '../actions/actionCreators';
 
 import Poll from './Poll';
 
-const mapStateToProps = state => ({ polls: state.polls });
-const mapDispatchToProps = dispatch => bindActionCreators({ vote }, dispatch);
+const mapStateToProps = state => ({ polls: state.polls, user: state.user.user });
+const mapDispatchToProps = dispatch => bindActionCreators({ vote, removePoll }, dispatch);
 
 const PollContainer = connect(mapStateToProps, mapDispatchToProps)(Poll);
 
