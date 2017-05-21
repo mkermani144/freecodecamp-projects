@@ -17,5 +17,9 @@ router.put('/vote', async (req, res) => {
   const result = await db.vote(User, req.body.pollId, req.body.choice);
   res.json({ successful: result === 0});
 });
+router.get('/fetchrecent', async (req, res) => {
+  const result = await db.fetchRecentPolls(User);
+  res.send(result).end();
+});
 
 module.exports = router;

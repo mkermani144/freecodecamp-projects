@@ -63,7 +63,8 @@ const addPoll = async (model, username, poll) => {
             title,
             description,
             choices,
-            id
+            id: id | 0,
+            time: Date.now(),
           },
         },
       },
@@ -100,4 +101,17 @@ const vote = async (model, pollId, choice) => {
   }
 }
 
-module.exports = { connect, add, remove, findUser, addPoll, fetchUserPolls, vote };
+const fetchRecentPolls = async (model) => {
+  try {
+    const result = await model.find().select('polls -_id').sort('-created_at');
+    const polls = result.reduce((acc, cur) => {
+      return acc.concat(cur.polls);
+    }, []);
+    return polls.sort((a, b) => b.time - a.time);
+  } catch (e) {
+    console.log(e, 'Failed to fetch recent polls');
+    return 1;
+  }
+};
+
+module.exports = { connect, add, remove, findUser, addPoll, fetchUserPolls, vote, fetchRecentPolls };
