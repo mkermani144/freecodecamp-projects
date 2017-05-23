@@ -29,6 +29,9 @@ class Poll extends React.Component {
       const response = await fetch('http://localhost:8000/poll/delete', {
         method: 'DELETE',
         credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json'
+        },
         body: JSON.stringify({
           user: this.props.user,
           pollId: currentPoll.id,
@@ -92,7 +95,6 @@ class Poll extends React.Component {
     if (currentPoll === undefined) {
       return <Redirect to='/' />;
     }
-    console.log(currentPoll, this.state.redirect);
     return this.state.redirect === true ? <Redirect to='/' /> : (
       <div className="Poll">
         <div className="main">
