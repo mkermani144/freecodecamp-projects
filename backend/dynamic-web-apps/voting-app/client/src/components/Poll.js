@@ -25,7 +25,6 @@ class Poll extends React.Component {
   }
   handleDelete = async () => {
     const currentPoll = this.props.polls[this.props.match.params.id];
-    console.log(currentPoll);
     try {
       const response = await fetch('http://localhost:8000/poll/delete', {
         method: 'DELETE',
@@ -36,7 +35,6 @@ class Poll extends React.Component {
         }),
       });
       const json = await response.json();
-      console.log(json);
       if (json.successful) {
         this.props.removePoll(this.props.user, this.props.polls.indexOf(currentPoll));
         this.setState({
