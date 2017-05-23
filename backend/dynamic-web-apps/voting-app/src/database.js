@@ -78,6 +78,27 @@ const addPoll = async (model, username, poll) => {
   }
 };
 
+const removePoll = async (model, username, pollId) => {
+  try {
+    await model.findOneAndUpdate(
+      { username },
+      {
+        $pull: {
+          polls: {
+            id: +pollId,
+          },
+        },
+      },
+      { safe: true }
+    );
+    console.log('Successfully removed poll');
+    return 0;
+  } catch (e) {
+    console.log(e, 'Failed to remove poll');
+    return 1;
+  }
+};
+
 const fetchUserPolls = async (model, username) => {
   try {
     return (await model.findOne({
@@ -108,10 +129,20 @@ const fetchRecentPolls = async (model) => {
       return acc.concat(cur.polls);
     }, []);
     return polls.sort((a, b) => b.time - a.time);
-  } catch (e) {
+  } catch (e) {r
     console.log(e, 'Failed to fetch recent polls');
     return 1;
   }
 };
 
-module.exports = { connect, add, remove, findUser, addPoll, fetchUserPolls, vote, fetchRecentPolls };
+module.exports = {
+  connect,
+  add,
+  remove,
+  findUser,
+  addPoll,
+  removePoll,
+  fetchUserPolls,
+  vote,
+  fetchRecentPolls
+};

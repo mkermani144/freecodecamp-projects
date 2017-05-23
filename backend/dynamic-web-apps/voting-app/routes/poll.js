@@ -13,6 +13,14 @@ router.post('/add', async (req, res) => {
     res.json({ successful: false });
   }
 });
+router.delete('/delete', async (req, res) => {
+  if (req.isAuthenticated()) {
+    const result = await db.removePoll(User, req.user.username, req.body.pollId);
+    res.json({ successful: result === 0 });
+  } else {
+    res.json({ successful: false });
+  }
+});
 router.put('/vote', async (req, res) => {
   const result = await db.vote(User, req.body.pollId, req.body.choice);
   res.json({ successful: result === 0});
