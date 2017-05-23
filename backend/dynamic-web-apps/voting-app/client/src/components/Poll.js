@@ -23,12 +23,31 @@ class Poll extends React.Component {
       value,
     });
   }
-  handleDelete = () => {
+  handleDelete = async () => {
     const currentPoll = this.props.polls[this.props.match.params.id];
-    this.props.removePoll(this.props.user, this.props.polls.indexOf(currentPoll));
-    this.setState({
-      redirect: true,
-    });
+    console.log(currentPoll);
+    try {
+      const response = await fetch('http://localhost:8000/poll/delete', {
+        method: 'DELETE',
+        credentials: 'include',
+        body: JSON.stringify({
+          user: this.props.user,
+          pollId: currentPoll.id,
+        }),
+      });
+      const json = await response.json();
+      console.log(json);
+      if (json.successful) {
+        this.props.removePoll(this.props.user, this.props.polls.indexOf(currentPoll));
+        this.setState({
+          redirect: true,
+        });
+      } else {
+
+      }
+    } catch (e) {
+      console.log(e);
+    }
   }
   handleSubmit = async () => {
     try {
@@ -72,6 +91,10 @@ class Poll extends React.Component {
       color: redA200,
     }
     const currentPoll = this.props.polls[this.props.match.params.id];
+    if (currentPoll === undefined) {
+      return <Redirect to='/' />;
+    }
+    console.log(currentPoll, this.state.redirect);
     return this.state.redirect === true ? <Redirect to='/' /> : (
       <div className="Poll">
         <div className="main">
