@@ -3,7 +3,7 @@ import { Route, Link } from 'react-router-dom';
 import AppBar from 'material-ui/AppBar';
 import FlatButton from 'material-ui/FlatButton';
 import { blue500, blue600, grey50, grey600 } from 'material-ui/styles/colors';
-import Home from './Home';
+import HomeContainer from './HomeContainer';
 import DashboardContainer from './DashboardContainer';
 import LoginContainer from './LoginContainer';
 import Signup from './Signup';
@@ -94,7 +94,7 @@ class App extends Component {
             </div>
           }
         />
-        <Route exact path="/" component={this.props.loggedIn ? DashboardContainer : Home} />
+      <Route exact path="/" component={this.props.loggedIn ? DashboardContainer : HomeContainer} />
         <Route path="/login" component={this.props.loggedIn ? DashboardContainer : LoginContainer} />
         <Route path="/signup" component={this.props.loggedIn ? DashboardContainer : Signup} />
         <Route path="/poll/:id" component={PollContainer} />
