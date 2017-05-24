@@ -11,12 +11,20 @@ import PollContainer from './PollContainer';
 import './App.css';
 
 class App extends Component {
-  handleClick = () => {
+  handleClick = async () => {
     fetch('http://localhost:8000/logout', {
       method: 'POST',
     });
     this.props.logOut();
     localStorage.removeItem('username');
+    const result = await fetch('http://localhost:8000/poll/fetchrecent', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+    });
+    const json = await result.json();
+    json.forEach(poll => this.props.addPoll(poll.id, this.state.username, poll.title, poll.description, Object.keys(poll.choices).map(key => [key, poll.choices[key]])));
   }
   componentDidMount() {
     (async () => {

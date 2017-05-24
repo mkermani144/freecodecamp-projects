@@ -15,6 +15,7 @@ class Home extends Component {
     };
   }
   componentDidMount = async () => {
+    this.props.logOut();
     const result = await fetch('http://localhost:8000/poll/fetchrecent', {
       method: 'GET',
       headers: {
