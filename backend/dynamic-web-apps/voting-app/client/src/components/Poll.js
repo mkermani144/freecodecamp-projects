@@ -118,9 +118,11 @@ class Poll extends React.Component {
               secondary={true}
               onClick={this.handleSubmit}
             />
+          {this.props.user &&
             <IconButton tooltip='delete' iconStyle={iconStyle} onClick={this.handleDelete}>
               <ActionDelete />
             </IconButton>
+          }
           </div>
           <Paper className="chart" zDepth={0} style={paperStyle}>
             <Chart
