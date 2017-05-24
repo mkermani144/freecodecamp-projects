@@ -16,6 +16,7 @@ class App extends Component {
       method: 'POST',
     });
     this.props.logOut();
+    localStorage.removeItem('username');
   }
   componentDidMount() {
     (async () => {
