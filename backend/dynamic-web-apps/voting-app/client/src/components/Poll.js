@@ -6,7 +6,8 @@ import MenuItem from 'material-ui/MenuItem';
 import Paper from 'material-ui/Paper';
 import IconButton from 'material-ui/IconButton';
 import ActionDelete from 'material-ui/svg-icons/action/delete';
-import { grey50, grey300, redA200 } from 'material-ui/styles/colors';
+import ContentAddBox from 'material-ui/svg-icons/content/add-box';
+import { grey50, grey300, redA200, amber500 } from 'material-ui/styles/colors';
 import { Chart } from 'react-google-charts';
 import './Poll.css';
 
@@ -88,9 +89,12 @@ class Poll extends React.Component {
       alignItems: 'stretch',
       justifyContent: 'center',
     };
-    const iconStyle = {
+    const deleteIconStyle = {
       color: redA200,
-    }
+    };
+    const addIconStyle = {
+      color: amber500,
+    };
     const currentPoll = this.props.polls[this.props.match.params.id];
     if (currentPoll === undefined) {
       return <Redirect to='/' />;
@@ -118,11 +122,16 @@ class Poll extends React.Component {
               secondary={true}
               onClick={this.handleSubmit}
             />
-          {this.props.user &&
-            <IconButton tooltip='delete' iconStyle={iconStyle} onClick={this.handleDelete}>
-              <ActionDelete />
-            </IconButton>
-          }
+            {this.props.user &&
+              <div>
+                <IconButton tooltip='delete poll' iconStyle={deleteIconStyle} onClick={this.handleDelete}>
+                  <ActionDelete />
+                </IconButton>
+                <IconButton tooltip='add choice' iconStyle={addIconStyle} onClick={this.handleDelete}>
+                  <ContentAddBox />
+                </IconButton>
+              </div>
+            }
           </div>
           <Paper className="chart" zDepth={0} style={paperStyle}>
             <Chart
