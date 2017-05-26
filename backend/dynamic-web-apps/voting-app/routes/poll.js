@@ -29,7 +29,7 @@ router.get('/fetchrecent', async (req, res) => {
   const result = await db.fetchRecentPolls(User);
   res.send(result).end();
 });
-router.put('/addChoice', async(req, res) => {
+router.put('/addchoice', async(req, res) => {
   if (req.isAuthenticated()) {
     const result = await db.addChoice(User, req.user.username, req.body.pollId, req.body.choices);
     res.json({ successful: result === 0 });

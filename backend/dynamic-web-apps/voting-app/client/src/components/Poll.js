@@ -56,16 +56,31 @@ class Poll extends React.Component {
       console.log(e);
     }
   }
-  handleAddChoice = () => {
+  handleAddChoice = async () => {
     const currentPoll = this.props.polls[this.props.match.params.id];
     try {
-      this.state.choices.split(/[\s,]+/).forEach(choice => {
-        this.props.addChoice(this.props.polls.indexOf(currentPoll), choice);
+      const response = await fetch('http://localhost:8000/poll/addchoice', {
+        method: 'PUT',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          user: this.props.user,
+          pollId: currentPoll.id,
+          choices: this.state.choices
+        }),
       });
-      this.setState({
-        isOpen: false,
-        choices: '',
-      });
+      const json = await response.json();
+      if (json.successful) {
+        this.state.choices.split(/[\s,]+/).forEach(choice => {
+          this.props.addChoice(this.props.polls.indexOf(currentPoll), choice);
+        });
+        this.setState({
+          isOpen: false,
+          choices: '',
+        });
+      }
     } catch (e) {
       console.log(e);
     }
