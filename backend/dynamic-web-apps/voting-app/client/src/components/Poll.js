@@ -3,6 +3,9 @@ import { Redirect } from 'react-router-dom';
 import RaisedButton from 'material-ui/RaisedButton';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
+import Dialog from 'material-ui/Dialog';
+import FlatButton from 'material-ui/FlatButton';
+import TextField from 'material-ui/TextField';
 import Paper from 'material-ui/Paper';
 import IconButton from 'material-ui/IconButton';
 import ActionDelete from 'material-ui/svg-icons/action/delete';
@@ -17,6 +20,8 @@ class Poll extends React.Component {
     this.state = {
       value: '',
       redirect: false,
+      isOpen: false,
+      choices: '',
     };
   }
   handleChange = (event, index, value) => {
@@ -54,7 +59,13 @@ class Poll extends React.Component {
   handleAddChoice = () => {
     const currentPoll = this.props.polls[this.props.match.params.id];
     try {
-      this.props.addChoice(this.props.polls.indexOf(currentPoll), 'asdf');
+      this.state.choices.split(/[\s,]+/).forEach(choice => {
+        this.props.addChoice(this.props.polls.indexOf(currentPoll), choice);
+      });
+      this.setState({
+        isOpen: false,
+        choices: '',
+      });
     } catch (e) {
       console.log(e);
     }
@@ -81,6 +92,54 @@ class Poll extends React.Component {
     } catch (e) {
       console.log(e);
     }
+  }
+  handleOpen = () => {
+    this.setState({
+      isOpen: true,
+    });
+  }
+  handleClose = () => {
+    this.setState({
+      isOpen: false,
+    });
+  }
+  renderDialog = () => {
+    const actions = [
+      <FlatButton
+        label="Add"
+        primary={true}
+        keyboardFocused={true}
+        onTouchTap={this.handleAddChoice}
+      />,
+      <FlatButton
+        label="Cancel"
+        primary={true}
+        onTouchTap={this.handleClose}
+      />,
+    ];
+    return (
+      <Dialog
+        title="Add choices"
+        actions={actions}
+        open={this.state.isOpen}
+        onRequestClose={this.handleClose}
+        contentStyle={{
+          width: '40%',
+        }}
+        bodyStyle={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'flex-start',
+          justifyContent: 'center',
+        }}
+      >
+        <TextField
+          floatingLabelText="New poll choices (separated by commas)"
+          fullWidth={true}
+          onChange={(e) => this.setState({choices: e.target.value})}
+        />
+      </Dialog>
+    );
   }
   render() {
     const selectFloatingLabelStyle = {
@@ -109,6 +168,7 @@ class Poll extends React.Component {
     }
     return this.state.redirect === true ? <Redirect to='/' /> : (
       <div className="Poll">
+        {this.renderDialog()}
         <div className="main">
           <div className="poll-info">
             <h3 className="poll-title">{currentPoll.title}</h3>
@@ -135,7 +195,7 @@ class Poll extends React.Component {
                 <IconButton tooltip='delete poll' iconStyle={deleteIconStyle} onClick={this.handleDelete}>
                   <ActionDelete />
                 </IconButton>
-                <IconButton tooltip='add choice' iconStyle={addIconStyle} onClick={this.handleAddChoice}>
+                <IconButton tooltip='add choice' iconStyle={addIconStyle} onClick={this.handleOpen}>
                   <ContentAddBox />
                 </IconButton>
               </div>
