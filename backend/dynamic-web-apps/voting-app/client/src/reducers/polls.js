@@ -19,13 +19,12 @@ const polls = (state = [], action) => {
       ];
     case 'ADD_CHOICE':
       return [
-        ...state,
+        ...state.slice(0, action.index),
         {
           ...state[action.index],
-          choices: Object.assign(state[action.index].choices, {
-            [`${action.choice}`]: 0,
-          }),
-        }
+          choices: [...state[action.index].choices, [`${action.choice}`, 0]]
+        },
+        ...state.slice(action.index + 1),
       ];
     case 'VOTE':
       let pollIndex;

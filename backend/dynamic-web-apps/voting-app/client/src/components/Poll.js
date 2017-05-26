@@ -51,6 +51,14 @@ class Poll extends React.Component {
       console.log(e);
     }
   }
+  handleAddChoice = () => {
+    const currentPoll = this.props.polls[this.props.match.params.id];
+    try {
+      this.props.addChoice(this.props.polls.indexOf(currentPoll), 'asdf');
+    } catch (e) {
+      console.log(e);
+    }
+  }
   handleSubmit = async () => {
     try {
       const currentPoll = this.props.polls[this.props.match.params.id];
@@ -127,7 +135,7 @@ class Poll extends React.Component {
                 <IconButton tooltip='delete poll' iconStyle={deleteIconStyle} onClick={this.handleDelete}>
                   <ActionDelete />
                 </IconButton>
-                <IconButton tooltip='add choice' iconStyle={addIconStyle} onClick={this.handleDelete}>
+                <IconButton tooltip='add choice' iconStyle={addIconStyle} onClick={this.handleAddChoice}>
                   <ContentAddBox />
                 </IconButton>
               </div>
