@@ -135,6 +135,23 @@ const fetchRecentPolls = async (model) => {
   }
 };
 
+const addChoice = async (model, username, pollId, choices) => {
+  try {
+    const choicesObject = choices.split(',').reduce((acc, cur) => {
+      acc[`polls.$.choices.${cur}`] = 0;
+      return acc;
+    }, {});
+    await model.findOneAndUpdate({
+      username,
+      [`polls.id`]: pollId,
+    }, { $set: choicesObject });
+    return 0;
+  } catch (e) {
+    console.log(e, 'Failed to add new choices');
+    return 1;
+  }
+};
+
 module.exports = {
   connect,
   add,
@@ -144,5 +161,6 @@ module.exports = {
   removePoll,
   fetchUserPolls,
   vote,
-  fetchRecentPolls
+  fetchRecentPolls,
+  addChoice
 };
