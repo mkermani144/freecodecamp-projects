@@ -10,6 +10,7 @@ import Paper from 'material-ui/Paper';
 import IconButton from 'material-ui/IconButton';
 import ActionDelete from 'material-ui/svg-icons/action/delete';
 import ContentAddBox from 'material-ui/svg-icons/content/add-box';
+import SocialShare from 'material-ui/svg-icons/social/share';
 import { grey50, grey300, redA200, amber500 } from 'material-ui/styles/colors';
 import { Chart } from 'react-google-charts';
 import './Poll.css';
@@ -178,6 +179,7 @@ class Poll extends React.Component {
       color: amber500,
     };
     const currentPoll = this.props.polls[this.props.match.params.id];
+    const tweetText = `Vote on "${currentPoll.title}". Link: http://localhost:8000/${this.props.match.url}`;
     if (currentPoll === undefined) {
       return <Redirect to='/' />;
     }
@@ -212,6 +214,9 @@ class Poll extends React.Component {
                 </IconButton>
                 <IconButton tooltip='add choice' iconStyle={addIconStyle} onClick={this.handleOpen}>
                   <ContentAddBox />
+                </IconButton>
+                <IconButton tooltip='share on twitter' iconStyle={addIconStyle} onClick={() => window.open(`https://twitter.com/intent/tweet?text=${tweetText}`, '_blank')}>
+                  <SocialShare />
                 </IconButton>
               </div>
             }
