@@ -145,6 +145,7 @@ class Signup extends Component {
   handleSubmit = async () => {
     const response = await fetch('http://localhost:8000/signup', {
       method: 'POST',
+      credentials: 'include',
       headers: {
         'Content-Type': 'application/json'
       },
@@ -157,6 +158,16 @@ class Signup extends Component {
       this.setState({
         isLoggedIn: true,
       });
+      localStorage.setItem('username', this.state.username);
+      this.props.logIn(1, this.state.username);
+      const response = await fetch(`http://localhost:8000/api/userpolls/${this.state.username}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+      });
+      const json = await response.json();
+      json.polls.forEach(poll => this.props.addPoll(poll.id, poll.owner, poll.title, poll.description, Object.keys(poll.choices).map(key => [key, poll.choices[key]])));
     } else {
       this.setState({
         submitFailed: true,

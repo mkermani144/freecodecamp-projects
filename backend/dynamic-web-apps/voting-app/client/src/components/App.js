@@ -6,7 +6,7 @@ import { blue500, blue600, grey50, grey600 } from 'material-ui/styles/colors';
 import HomeContainer from './HomeContainer';
 import DashboardContainer from './DashboardContainer';
 import LoginContainer from './LoginContainer';
-import Signup from './Signup';
+import SignupContainer from './SignupContainer';
 import PollContainer from './PollContainer';
 import './App.css';
 
@@ -105,7 +105,7 @@ class App extends Component {
         />
         <Route exact path="/" component={this.props.loggedIn ? DashboardContainer : HomeContainer} />
         <Route path="/login" component={this.props.loggedIn ? DashboardContainer : LoginContainer} />
-        <Route path="/signup" component={this.props.loggedIn ? DashboardContainer : Signup} />
+        <Route path="/signup" component={this.props.loggedIn ? DashboardContainer : SignupContainer} />
         <Route path="/poll/:user/:id" component={PollContainer} />
       </div>
     );
