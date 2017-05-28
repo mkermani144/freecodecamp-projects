@@ -31,7 +31,7 @@ class Poll extends React.Component {
     });
   }
   handleDelete = async () => {
-    const currentPoll = this.props.polls[this.props.match.params.id];
+    const currentPoll = this.props.polls.find(poll => +poll.id === +this.props.match.params.id);
     try {
       const response = await fetch('http://localhost:8000/poll/delete', {
         method: 'DELETE',
@@ -58,7 +58,7 @@ class Poll extends React.Component {
     }
   }
   handleAddChoice = async () => {
-    const currentPoll = this.props.polls[this.props.match.params.id];
+    const currentPoll = this.props.polls.find(poll => +poll.id === +this.props.match.params.id);
     try {
       const response = await fetch('http://localhost:8000/poll/addchoice', {
         method: 'PUT',
@@ -88,7 +88,7 @@ class Poll extends React.Component {
   }
   handleSubmit = async () => {
     try {
-      const currentPoll = this.props.polls[this.props.match.params.id];
+      const currentPoll = this.props.polls.find(poll => +poll.id === +this.props.match.params.id);
       const response = await fetch('http://localhost:8000/poll/vote', {
         method: 'PUT',
         credentials: 'include',
@@ -102,8 +102,9 @@ class Poll extends React.Component {
       });
       const json = await response.json();
       if (json.successful) {
+        console.log(this.props.polls);
         this.props.vote(currentPoll.id, currentPoll.choices[this.state.value][0]);
-      } else {
+        console.log(this.props.polls);
       }
     } catch (e) {
       console.log(e);
@@ -178,7 +179,7 @@ class Poll extends React.Component {
     const addIconStyle = {
       color: amber500,
     };
-    const currentPoll = this.props.polls[this.props.match.params.id];
+    const currentPoll = this.props.polls.find(poll => +poll.id === +this.props.match.params.id);
     const tweetText = `Vote on "${currentPoll.title}". Link: http://localhost:8000/${this.props.match.url}`;
     if (currentPoll === undefined) {
       return <Redirect to='/' />;

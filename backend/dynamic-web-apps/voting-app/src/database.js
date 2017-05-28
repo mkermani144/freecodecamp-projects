@@ -161,7 +161,7 @@ const fetchBlacklist = async (model, pollId) => {
   try {
     const result = await model.findOne({
       [`polls.id`]: +pollId,
-    }).select('polls.casters -_id');
+    }).select('polls.$.casters -_id');
     return result.polls[0].casters;
   } catch (e) {
     console.log(e, 'Failed to add new choices');

@@ -65,7 +65,7 @@ class Home extends Component {
             {this.props.polls.map((el, index) => (
               <Paper className="poll" zDepth={5} style={paperStyle} key={index}>
                 <div>
-                  <Link to={`/poll/${el.user}/${index}`}>
+                  <Link to={`/poll/${el.user}/${el.id}`}>
                     <Chart
                       chartType="PieChart"
                       width="100%"
