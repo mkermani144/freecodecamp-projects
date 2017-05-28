@@ -22,8 +22,19 @@ router.delete('/delete', async (req, res) => {
   }
 });
 router.put('/vote', async (req, res) => {
-  const result = await db.vote(User, req.body.pollId, req.body.choice);
-  res.json({ successful: result === 0});
+  let user;
+  if (req.user) {
+    user = req.user.username;
+  } else {
+    user = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+  }
+  const casters = await db.fetchBlacklist(User, 'asdfasdf', req.body.pollId);
+  if (casters.indexOf(user) === -1) {
+    const result = await db.vote(User, req.body.pollId, req.body.choice, user);
+    res.json({ successful: result === 0});
+  } else {
+    res.json({ successful: false });
+  }
 });
 router.get('/fetchrecent', async (req, res) => {
   const result = await db.fetchRecentPolls(User);
@@ -36,6 +47,10 @@ router.put('/addchoice', async(req, res) => {
   } else {
     res.json({ successful: false });
   }
-})
+});
+router.get('/fetchblacklist/:id', async(req, res) => {
+  const result = await db.fetchBlacklist(User, 'asdfasdf', req.params.id);
+  res.json(result);
+});
 
 module.exports = router;

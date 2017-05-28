@@ -24,7 +24,7 @@ class App extends Component {
       },
     });
     const json = await result.json();
-    json.forEach(poll => this.props.addPoll(poll.id, this.state.username, poll.title, poll.description, Object.keys(poll.choices).map(key => [key, poll.choices[key]])));
+    json.forEach(poll => this.props.addPoll(poll.id, poll.owner, poll.title, poll.description, Object.keys(poll.choices).map(key => [key, poll.choices[key]])));
   }
   componentDidMount() {
     (async () => {
@@ -43,7 +43,7 @@ class App extends Component {
             },
           });
           const json = await response2.json();
-          json.polls.forEach(poll => this.props.addPoll(poll.id, username, poll.title, poll.description, Object.keys(poll.choices).map(key => [key, poll.choices.key])));
+          json.polls.forEach(poll => this.props.addPoll(poll.id, poll.owner, poll.title, poll.description, Object.keys(poll.choices).map(key => [key, poll.choices.key])));
         }
       }
     })();
@@ -103,10 +103,10 @@ class App extends Component {
             </div>
           }
         />
-      <Route exact path="/" component={this.props.loggedIn ? DashboardContainer : HomeContainer} />
+        <Route exact path="/" component={this.props.loggedIn ? DashboardContainer : HomeContainer} />
         <Route path="/login" component={this.props.loggedIn ? DashboardContainer : LoginContainer} />
         <Route path="/signup" component={this.props.loggedIn ? DashboardContainer : Signup} />
-        <Route path="/poll/:id" component={PollContainer} />
+        <Route path="/poll/:user/:id" component={PollContainer} />
       </div>
     );
   }

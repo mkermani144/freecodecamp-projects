@@ -23,7 +23,7 @@ class Home extends Component {
       },
     });
     const json = await result.json();
-    json.forEach(poll => this.props.addPoll(poll.id, this.state.username, poll.title, poll.description, Object.keys(poll.choices).map(key => [key, poll.choices[key]])));
+    json.forEach(poll => this.props.addPoll(poll.id, poll.owner, poll.title, poll.description, Object.keys(poll.choices).map(key => [key, poll.choices[key]])));
   }
   renderPublicHome = () => {
     const homeStyle = {
@@ -65,7 +65,7 @@ class Home extends Component {
             {this.props.polls.map((el, index) => (
               <Paper className="poll" zDepth={5} style={paperStyle} key={index}>
                 <div>
-                  <Link to={`/poll/${index}`}>
+                  <Link to={`/poll/${el.user}/${index}`}>
                     <Chart
                       chartType="PieChart"
                       width="100%"

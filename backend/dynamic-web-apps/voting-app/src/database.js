@@ -65,6 +65,8 @@ const addPoll = async (model, username, poll) => {
             choices,
             id: id | 0,
             time: Date.now(),
+            casters: [],
+            owner: username,
           },
         },
       },
@@ -110,11 +112,14 @@ const fetchUserPolls = async (model, username) => {
   }
 }
 
-const vote = async (model, pollId, choice) => {
+const vote = async (model, pollId, choice, caster) => {
   try {
     await model.findOneAndUpdate({
-      'polls.id': pollId,
-    }, { $inc: { [`polls.$.choices.${choice}`]: 1 }});
+      'polls.id': +pollId,
+    }, {
+      $inc: { [`polls.$.choices.${choice}`]: 1 },
+      $push: { [`polls.$.casters`]: caster }
+    });
     return 0;
   } catch (e) {
     console.log(e, 'Failed to vote');
@@ -152,6 +157,19 @@ const addChoice = async (model, username, pollId, choices) => {
   }
 };
 
+const fetchBlacklist = async (model, username, pollId) => {
+  try {
+    const result = await model.findOne({
+      username,
+      [`polls.id`]: +pollId,
+    }).select('polls.casters -_id');
+    return result.polls[0].casters;
+  } catch (e) {
+    console.log(e, 'Failed to add new choices');
+    return 1;
+  }
+}
+
 module.exports = {
   connect,
   add,
@@ -162,5 +180,6 @@ module.exports = {
   fetchUserPolls,
   vote,
   fetchRecentPolls,
-  addChoice
+  addChoice,
+  fetchBlacklist,
 };

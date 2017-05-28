@@ -56,7 +56,7 @@ class Dashboard extends Component {
         },
         body: JSON.stringify({
           poll: {
-            id,
+            id: id || 0,
             title,
             description,
             choices: choicesObject,
@@ -66,7 +66,7 @@ class Dashboard extends Component {
       const json = await response.json();
       if (json.successful) {
         this.handleClose();
-        this.props.addPoll(id, 'user', title, description, choices.map(el => el === choices[this.state.value] ? [`${el}`, 1] : [`${el}`, 0]));
+        this.props.addPoll(id, this.props.user, title, description, choices.map(el => el === choices[this.state.value] ? [`${el}`, 1] : [`${el}`, 0]));
       } else {
         this.setState({
           error: 'Something bad happened. Try again later.',
@@ -172,7 +172,7 @@ class Dashboard extends Component {
             {this.props.polls.map((el, index) => (
               <Paper className="poll" zDepth={5} style={paperStyle} key={index}>
                 <div>
-                  <Link to={`/poll/${index}`}>
+                  <Link to={`/poll/${el.user}/${index}`}>
                     <Chart
                       chartType="PieChart"
                       width="100%"

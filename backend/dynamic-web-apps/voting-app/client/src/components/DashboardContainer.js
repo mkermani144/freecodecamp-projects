@@ -4,7 +4,7 @@ import { addPoll } from '../actions/actionCreators';
 
 import Dashboard from './Dashboard';
 
-const mapStateToProps = state => ({ polls: state.polls });
+const mapStateToProps = state => ({ polls: state.polls, user: state.user.user });
 const mapDispatchToProps = dispatch => bindActionCreators({ addPoll }, dispatch);
 
 const DashboardContainer = connect(mapStateToProps, mapDispatchToProps)(Dashboard);
