@@ -102,9 +102,7 @@ class Poll extends React.Component {
       });
       const json = await response.json();
       if (json.successful) {
-        console.log(this.props.polls);
         this.props.vote(currentPoll.id, currentPoll.choices[this.state.value][0]);
-        console.log(this.props.polls);
       }
     } catch (e) {
       console.log(e);
