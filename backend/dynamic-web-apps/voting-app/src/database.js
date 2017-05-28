@@ -65,7 +65,7 @@ const addPoll = async (model, username, poll) => {
             choices,
             id: id | 0,
             time: Date.now(),
-            casters: [],
+            casters: [username],
             owner: username,
           },
         },
@@ -157,10 +157,9 @@ const addChoice = async (model, username, pollId, choices) => {
   }
 };
 
-const fetchBlacklist = async (model, username, pollId) => {
+const fetchBlacklist = async (model, pollId) => {
   try {
     const result = await model.findOne({
-      username,
       [`polls.id`]: +pollId,
     }).select('polls.casters -_id');
     return result.polls[0].casters;

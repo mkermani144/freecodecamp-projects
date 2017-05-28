@@ -28,7 +28,7 @@ router.put('/vote', async (req, res) => {
   } else {
     user = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
   }
-  const casters = await db.fetchBlacklist(User, 'asdfasdf', req.body.pollId);
+  const casters = await db.fetchBlacklist(User, req.body.pollId);
   if (casters.indexOf(user) === -1) {
     const result = await db.vote(User, req.body.pollId, req.body.choice, user);
     res.json({ successful: result === 0});
