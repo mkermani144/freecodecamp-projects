@@ -17,14 +17,6 @@ class App extends Component {
     });
     this.props.logOut();
     localStorage.removeItem('username');
-    const result = await fetch('http://localhost:8000/poll/fetchrecent', {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-    });
-    const json = await result.json();
-    json.forEach(poll => this.props.addPoll(poll.id, poll.owner, poll.title, poll.description, Object.keys(poll.choices).map(key => [key, poll.choices[key]])));
   }
   componentDidMount() {
     (async () => {

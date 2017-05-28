@@ -143,6 +143,7 @@ class Signup extends Component {
   }
 
   handleSubmit = async () => {
+    this.props.logOut();
     const response = await fetch('http://localhost:8000/signup', {
       method: 'POST',
       credentials: 'include',

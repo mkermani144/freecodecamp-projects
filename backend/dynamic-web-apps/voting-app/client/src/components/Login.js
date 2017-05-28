@@ -31,6 +31,7 @@ class Login extends Component {
 
   handleSubmit = async (e) => {
     e.preventDefault();
+    this.props.logOut();
     const response = await fetch('http://localhost:8000/login', {
       method: 'POST',
       credentials: 'include',
